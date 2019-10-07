@@ -1,0 +1,14 @@
+<!--   目的決定のための質問ページ (question.html) -->
+<ons-page id="question">
+	<ons-toolbar>
+	<div class="center">質問</div>
+	</ons-toolbar>
+	<div class="question_box"><!--アキネイターの質問-->
+		<p id="question">あなたはゴリラですか？</p>
+	</div>
+	<div class="answer_box"><!--質問に対する答え-->
+	<ons-button class="answer" id="yes">はい</ons-button>
+	<ons-button class="answer" id="no">いいえ</ons-button>
+	</div>
+
+</ons-page>

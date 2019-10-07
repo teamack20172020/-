@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="js/approutes.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+   <script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    ons.ready(function() {
+      console.log("Onsen UI is ready!");
+    });
+    //アキネイター合計の質問数
+    var akinator_sum=1;
+    //変数目的（例：遊び、観光）
+    var purpose="遊び";
+    //変数目的地（例：香川県、東京）
+    var place="香川県";
+    
+  </script>
+</head>
+<body>
+  <!--読み込み中の画面を表示するやつ-->
+  <ons-modal direction="up" id="modal">
+    <div style="text-align: center">
+      <p>
+        <ons-icon icon="md-spinner" size="28px" spin></ons-icon> 自動生成中...
+      </p>
+    </div>
+  </ons-modal>
+  <!--ナビゲーション（ページを重ねて表示する為の奴）-->
+  <ons-navigator swipeable id="nav" page="home.html"></ons-navigator>
+
+
+  <!-- ホームページ (home.html) -->
+  <template id="home.html">
+    <ons-page id="home">
+      <ons-toolbar>
+        <div class="center">ホーム</div>
+      </ons-toolbar>
+      <ons-button id="new_plan">新規プラン生成</ons-button>
+      <ons-button id="history_plan">過去のプラン</ons-button>
+    </ons-page>
+  </template>
+
+
+
+  <!--   アキネイターによる質問ページ (akinator.html) -->
+  <template id="akinator.html">
+    <ons-page id="akinator">
+      <ons-toolbar>
+        <div class="center"></div>
+      </ons-toolbar>
+      <div id="question"><!--アキネイターの質問--></div>
+      <div><!--質問に対する答え-->
+        <ons-button class="answer" choice="yes">はい</ons-button>
+        <ons-button class="answer" choice="no">いいえ</ons-button>
+      </div>
+      <script>
+        //アキネイターのプログラムメソッド
+        function akinator_program(){
+           //結果が返った時の処理
+          if(akinator_sum>=10){
+            //スケジュール画面へ移動
+            $('#modal').show();
+            document.getElementById("nav").pushPage("schedule.html",{data:{purpose,place}});
+          }else{
+            //次の質問へ移動
+            document.getElementById("nav").pushPage("akinator.html");
+          }
+        }
+        //質問回数の出力
+        $("ons-toolbar .center").text("質問"+akinator_sum);
+        //アキネイターの質問を出力
+        $("#akinator #question").text("関東に行きたいですか");
+        //選択肢をクリックした時の処理
+        $("#akinator .answer").on("click",function(){
+          //選択肢の値を取得
+          var choice=$(this).attr("choice");
+          console.log(choice);
+          akinator_sum++;
+          akinator_program();
+        });
+      </script>
+    </ons-page>
+  </template>
+
+
+  <!-- 目的地、目的入力ページ (destination.html) -->
+  <template id="destination.html">
+    <ons-page id="destination">
+      <ons-toolbar>
+        <div class="center"></div>
+      </ons-toolbar>
+      <div id="title">目的地設定</div>
+      <div id="input_answer"></div>
+      <script>
+        $(function(){
+          ons.getScriptPage().onInit = function() {
+            //目的地入力又は目的入力の判定するための変数
+            var page_type=this.data.page_type;
+            if(page_type == "purpose"){
+              //目的の場合
+              $("#destination #title").text("目的を入力してください");
+              $("#destination #input_answer").html(
+                  '<ons-input id="purpose_input" modifier="underbar" placeholder="例：遊び、観光 など" float></ons-input>'+
+                  ''
+              );
+
+            }else if(page_type == "place"){
+              //目的地の場合
+              $("#destination #title").text("目的地を入力してください");
+              $("#destination #input_answer").html();
+            }
+          }
+        });
+      </script>
+    </ons-page>
+  </template>
+
+
+  <!-- 自動生成したスケジュールを出力するページ (schedule.html) -->
+  <template id="schedule.html">
+    <ons-page id="schedule">
+      <ons-toolbar>
+        <div class="center">スケジュール</div>
+      </ons-toolbar>
+      <div id="sche_purpose"></div>
+      <div id="sche_place"></div>
+      <!--自動生成したプランを入れるdiv-->
+      <div id="sche_plan_list">
+        
+
+      </div>
+      <ons-button>もう一度自動生成する</ons-button>
+      <script>
+        //プラン自動生成メソッド
+        function automatic_plan(purpose,place){
+          /*自動生成APIに繫ぐajax(非同期通信)
+          $.ajax({
+            type:"post",
+            url:"",
+            data:{
+              purpose;purpose,
+              place:place
+            },
+            dataType:"json",
+            timeout:
+          }).done(function(data){
+
+          });
+          */
+          setTimeout(function() {
+            $('#modal').hide();
+          },2000);
+        }
+        //初めて表示されたときの処理
+        ons.getScriptPage().onInit = function() {
+          //自動生成メソッド起動
+          automatic_plan(this.data.purpose,this.data,place);
+          $("#sche_purpose").html("目的："+this.data.purpose);
+          $("#sche_place").html("目的地："+this.data.place);
+        }
+        
+      </script>
+    </ons-page>
+  </template>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <!-- 共通処理 -->
+  <script src="js/ajax.js"></script>
+  <script src="js/placelist.js"></script>
+  <script src="js/objective.js"></script>
+  <script src="js/common.js" defer></script>
+  <!-- ページ遷移関連 -->
+  <script src="js/approutes.js" defer></script>
+  <!-- 旅行プランの自動生成 -->
+  <script src="js/travelplanCreate.js" defer></script>
+  <!-- 質問画面の処理 -->
+  <script src="js/question.js" defer></script>
+  <!-- スケジュール画面の処理 -->
+  <script src="js/generation.js" defer></script>
+  <!-- 履歴画面の処理 -->
+  <script src="js/plan_history.js" defer></script>
+  <!-- 履歴詳細画面の処理 -->
+  <script src="js/plan_check.js" defer></script>
+  <!-- 目的選択画面の処理 -->
+  <script src="js/purpose_input.js" defer></script>
+  <!-- サンプル画面の処理 -->
+  <script src="js/sample_question.js" defer></script>
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+
+  <script>
+    ons.ready(function() {
+      console.log("Onsen UI is ready!");
+    });
+    //アキネイター合計の質問数
+    var akinator_sum=1;
+    //アキネイターのタイプ（0：目的、1：目的地）
+    var akinator_type=0;
+    //変数:目的（例：遊び、観光）
+    var purpose="遊び";
+    //変数:目的地（例：香川県、東京）
+    var place="香川県";
+	//変数:出発地（例：香川県、東京）
+    var departure="香川県";
+
+	var sample_purpose="";
+	var sample_answer="";
+  </script>
+</head>
+<body>
+  <!--読み込み中の画面を表示するやつ-->
+  <ons-modal direction="up" id="modal">
+    <div style="text-align: center">
+      <p>
+        <ons-icon icon="md-spinner" size="28px" spin></ons-icon> 自動生成中...
+      </p>
+    </div>
+  </ons-modal>
+  <!--ナビゲーション（ページを重ねて表示する為の奴）-->
+  <ons-navigator id="main" page="home.html"></ons-navigator>
+
+</body>
+</html>
