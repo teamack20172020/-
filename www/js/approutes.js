@@ -6,8 +6,8 @@ class AppRotes{
     this.rootMap.set("station_choice","station");//出発地選択　→　駅選択
     this.rootMap.set("gps_choice","gps");//出発地選択　→　GPS決定
     this.rootMap.set("complete_gps","purpose");//GPS決定　→　目的選択
-    this.rootMap.set("submit_address","purpose");//住所入力　→　目的選択
-    this.rootMap.set("submit_station","purpose");//駅選択　→　目的選択
+    //this.rootMap.set("submit_address","purpose");//住所入力　→　目的選択
+    //this.rootMap.set("submit_station","purpose");//駅選択　→　目的選択
     this.rootMap.set("yes_purpose","purpose_input");//目的選択　→　目的入力
     this.rootMap.set("no_purpose","question");//目的選択　→　目的質問
     //this.rootMap.set("submit_purpose","generation");//目的入力　→　目的地選択
