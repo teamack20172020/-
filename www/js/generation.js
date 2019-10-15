@@ -1,4 +1,17 @@
 $(function(){
+	//引数（緯度、経度、目的）
+	function generation_ajax(lat,lng,purpose){
+		$.ajax({
+			type: "GET",
+			url: "https://www.autotravelplan.com/" + url,
+			dataType:"json",
+			scriptCharset: "utf-8",
+			timeout: 30000
+		}).done(function(data){
+			var elem="";
+
+		});
+	}
 	document.addEventListener('show', function(event) {
 		var page= event.target;
 		//質問ページの時のみ処理
@@ -6,7 +19,6 @@ $(function(){
 			//スケジュール生成
 			$("#gene_purpose").text("目的："+purpose);
 			$("#gene_place").text("目的地："+place);
-			$("#gene_departure").text("出発地："+departure);
 			$("#gene_plan_list").html(
 				"<ons-list-item>8時30分～9時00分 : 電車○○駅発</ons-list-item>"+
 				"<ons-list-item>9時15分～10時30分 : </ons-list-item>"

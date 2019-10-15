@@ -29,6 +29,10 @@
   <script src="js/sample_question.js" defer></script>
   <!-- GPSの処理 -->
   <script src="js/gps.js" defer></script>
+  <script src="js/yahoomap.js" defer></script>
+  <!--出発地（住所）の処理-->
+  <script src="js/address.js" defer></script>
+  <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPUc2STZsb0Vpa3JobSZzPWNvbnN1bWVyc2VjcmV0Jng9Nzk-"></script>
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
@@ -47,8 +51,10 @@
     var purpose="遊び";
     //変数:目的地（例：香川県、東京）
     var place="香川県";
-	//変数:出発地（例：香川県、東京）
-    var departure="香川県";
+    //出発地緯度（縦）
+    var lat=0;
+    //出発地経度（横）
+    var lng=0;
 
 	var sample_purpose="";
 	var sample_answer="";
@@ -65,6 +71,6 @@
   </ons-modal>
   <!--ナビゲーション（ページを重ねて表示する為の奴）-->
   <ons-navigator id="main" page="home.html"></ons-navigator>
-
+  <div id="rear_script"></div>
 </body>
 </html>

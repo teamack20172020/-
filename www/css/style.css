@@ -1,6 +1,11 @@
 @charset 'utf-8';
-
-
+/*マップ表示のcss*/
+#map {
+   height: 100%;
+   width:100%;
+   border:2px solid #000;
+   border-radius:20px;
+}
 #editor {
     margin: 0;
     position: absolute;
@@ -18,18 +23,18 @@ ons-toolbar .center{
 .question_box{
 	margin-top:30px;
 	text-align: center;
-	width:210px;
+	width:300px;
 	height:250px;
 	margin-left:auto;
 	margin-right:auto;
-	font-size:150%;
+	font-size:130%;
 }
 
 /*選択肢、ボタンが入った要素*/
 .answer_box{
 	margin-top:50px;
 	text-align: center;
-	width:210px;
+	width:300px;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -37,5 +42,24 @@ ons-toolbar .center{
 .answer_box ons-button{
 	margin-top:30px;
 	width:200px;
+	font-size:120%;
+}
+/*入力、選択ボックスの共通CSS*/
+.answer_box input,ons-select{
+	height:40px;
+	width:250px;
+	font-size:120%;
+}
+/*入力ボックスのCSS*/
+.answer_box input{
+	margin-top:30px;
+}
+/*選択ボックスのCSS*/
+.answer_box ons-select{
+	margin-bottom:30px;
+}
+/*サブタイトル*/
+.sub_title{
+	margin-top:10%;
 	font-size:120%;
 }

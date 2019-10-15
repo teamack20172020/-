@@ -32,6 +32,7 @@ function viewQestion(){
 		radnum = Math.floor( Math.random() * idlist.length );
 		id = idlist[radnum];
 		$(".question_text").html('<p>' + questionList[id] + '</p>');
+		$("#modal").hide();
 		idlist.splice(radnum,1);
 	}else{
 		//質問結果の保存(データ収集用)

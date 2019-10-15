@@ -12,7 +12,7 @@ $(function(){
 		var page= event.target;
 		//質問ページの時のみ処理
 		if(page.matches('#purpose_input')){
-			console.log("nojbasodvboabvfohaoh");
+			console.log("目的（決まっている）画面表示");
 			var url = "objective/getList";
 			var list = ajax(url);
 		}
@@ -34,6 +34,7 @@ function viewQestion(){
 		option += "\t\t<option value'" + idlist[i] + "'>" + objectiveList[idlist[i]] +"</option>\n";
 	}
 	$("#purpose_select").html(option);
+	$("#modal").hide();
 }
 //目的決定ボタンクリック処理
 $(document).on("click","#submit_purpose",function(){

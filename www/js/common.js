@@ -26,6 +26,6 @@ function compareFunc(a, b) {
 }
 //引数のURLのjavascriptファイルを取得する
 function afterreadJS(url){
-	$('body').append("<script src='js/"+url+".js'></script>");
+	$('#rear_script').html("<script src='js/"+url+".js'></script>");
 
 }
