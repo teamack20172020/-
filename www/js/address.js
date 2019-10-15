@@ -69,12 +69,13 @@ function latlng_ajax(str){
 			alert("検索結果がありませんでした。");
 		}else{
 			//検索結果が1件以上の場合
-			$(data).find("Feature").each(function(){
-				let work=$(this).find("Feature Geometry Coordinates").text().split(",");
-				console.log($(this).find("Feature >Name").text());
+				let work=$(data).find("Feature:first Geometry Coordinates").text().split(",");
+				console.log($(data).find("Feature:first >Name").text());
 				console.log("緯度:"+work[1]);
 				console.log("経度:"+work[0]);
-			})
+				lat=work[1];
+				lng=work[0];
+				document.getElementById("main").pushPage("purpose.html");
 		}
 	}).fail(function(jqXHR, textStatus, errorThrown){
 		console.log(jqXHR);
