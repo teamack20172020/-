@@ -33,12 +33,6 @@ function viewQestion(){
 	$("#main").html(form);
 
 }
-
-//昇順ソート
-function compareFunc(a, b) {
-	return a - b;
-}
-
 //目的が決定したらプランの自動生成を行う
 $(document).on('click','.answer', function(){
 	if($(this).attr("id") == "yes"){

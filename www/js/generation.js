@@ -1,4 +1,4 @@
-var generation_array=array();
+var generation_array=Array();
 $(function(){
 	//引数（緯度、経度、目的）
 	function generation_ajax(lat,lng,purpose,url){
@@ -15,8 +15,8 @@ $(function(){
 			scriptCharset: "utf-8",
 			timeout: 30000
 		}).done(function(data){
-			generation_array=data;
-			console.log(data);
+			generation_array.push(data);
+			console.log(generation_array);
 			var elem="";
 			for(let i=0;i<data["data"].length;i++){
 				elem+="<ons-list-item>"+data["data"][i]["title"]+"　"
@@ -51,6 +51,8 @@ $(function(){
 	});
 	//「完了」ボタンクリック
 	$(document).on("click","#complete_plan",function(){
+		//ローカルストレージから取得
+		console.log(getLocalStorage("generation"));
 		alert("履歴に登録しました");
 		document.getElementById("main").resetToPage('home.html',{animation:'slide-ios'});
 	});
