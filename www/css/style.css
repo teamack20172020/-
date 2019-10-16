@@ -1,6 +1,5 @@
 @charset 'utf-8';
-/*マップ表示のcss*/
-
+/*ヤフーマップ表示のcss*/
 #map {
    height: 100%;
    width:100%;
@@ -17,9 +16,9 @@
 }
 /*上のツールバー*/
 ons-toolbar .center{
-	color:white;
 	font-size: 150%;
-	background-color: blue;
+	border-bottom: 5px solid blue;
+	border-top: 5px solid blue;
 }
 
 /*質問などが入っている要素*/
@@ -63,7 +62,7 @@ ons-toolbar .center{
 .answer_box ons-select{
 	margin-bottom:30px;
 }
-/*サブタイトル*/
+/*サブタイトル（少し文字を大きくしたい）*/
 .sub_title{
 	margin-top:10px;
 	font-size:120%;
