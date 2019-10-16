@@ -33,7 +33,7 @@ function viewQestion(){
 	for(i = 0; i <= idlist.length -1;i++){
 		option += "\t\t<option value'" + idlist[i] + "'>" + objectiveList[idlist[i]] +"</option>\n";
 	}
-	$("#purpose_select").html(option);
+	$("#purpose_select select").html(option);
 	$("#modal").hide();
 }
 //目的決定ボタンクリック処理
