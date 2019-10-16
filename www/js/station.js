@@ -7,13 +7,12 @@ document.addEventListener('init', function(event) {
 	if(page.matches('#station')){
 		route_ajax("1");
 		$("#sta_prefecture").change(function(){
-				let work=$("#sta_prefecture").val().split(",");
-				address_prefecture=result[0];
-				route_ajax(result[1]);
+			let work=$("#sta_prefecture").val().split(",");
+			route_ajax(work[1]);
 		});
 		$("#sta_route").change(function(){
-				let work=$("#sta_route").val();
-				station_ajax(result);
+			let work=$("#sta_route").val();
+			station_ajax(work);
 		});
 	}
 });
@@ -23,6 +22,7 @@ $(document).on("click","#submit_station",function(){
 	console.log(work);
 	lat=work[0];
 	lng=work[1];
+	document.getElementById("main").pushPage("purpose.html");
 });
 
 //都道府県から駅路線取得API
