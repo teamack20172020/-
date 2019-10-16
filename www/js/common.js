@@ -29,3 +29,11 @@ function afterreadJS(url){
 	$('#rear_script').html("<script src='js/"+url+".js'></script>");
 
 }
+//ローカルストレージへの保存
+function setLocalStorage(key, value) {
+	localStorage.setItem(key, value);
+}
+//ローカルストレージから取得
+function getLocalStorage(key) {
+	return localStorage.getItem(key);
+}
