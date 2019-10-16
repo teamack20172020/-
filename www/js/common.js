@@ -26,6 +26,14 @@ function compareFunc(a, b) {
 }
 //引数のURLのjavascriptファイルを取得する
 function afterreadJS(url){
-	$('body').append("<script src='js/"+url+".js'></script>");
+	$('#rear_script').html("<script src='js/"+url+".js'></script>");
 
+}
+//ローカルストレージへの保存
+function setLocalStorage(key, value) {
+	localStorage.setItem(key, value);
+}
+//ローカルストレージから取得
+function getLocalStorage(key) {
+	return localStorage.getItem(key);
 }

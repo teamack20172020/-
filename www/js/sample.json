@@ -1,0 +1,27 @@
+{
+	"result":true,
+	"data":[
+		{
+			"title":"高松駅",
+			"subtitle":"高松駅",
+			"icon":"station",
+			"place":{
+				"lat":"",
+				"lng":""
+			},
+			"time_before":"10:10",
+			"time_after":"11:10"
+		},
+		{
+			"title":"うどんA",
+			"subtitle":"高松駅",
+			"icon":"food",
+			"place":{
+				"lat":"",
+				"lng":""
+			},
+			"time_before":"11:20",
+			"time_after":"12:00"
+		}
+	]
+}
