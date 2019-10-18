@@ -2,26 +2,45 @@
 	"result":true,
 	"data":[
 		{
-			"title":"高松駅",
-			"subtitle":"高松駅",
-			"icon":"station",
-			"place":{
-				"lat":"",
-				"lng":""
-			},
-			"time_before":"10:10",
-			"time_after":"11:10"
+			"startName":"高松駅",
+			"endName":"こだわり面や",
+			"startAddress":"香川県高松駅の住所",
+			"endAddress":"香川県こだわり面やの住所",
+			"time_ja":"30分",
+			"time_second":""
 		},
 		{
-			"title":"うどんA",
-			"subtitle":"高松駅",
-			"icon":"food",
-			"place":{
-				"lat":"",
-				"lng":""
-			},
-			"time_before":"11:20",
-			"time_after":"12:00"
+			"startName":"こだわり面や",
+			"endName":"県庁食堂",
+			"startAddress":"香川県こだわり面やの住所",
+			"endAddress":"香川県県庁の住所",
+			"time_ja":"5分",
+			"time_second":""
+		},
+		{
+			"startName":"県庁食堂",
+			"endName":"からあげ食堂",
+			"startAddress":"香川県県庁の住所",
+			"endAddress":"からあげ食堂の住所",
+			"time_ja":"10分",
+			"time_second":""
+		},
+		{
+			"startName":"からあげ食堂",
+			"endName":"三匹の子豚",
+			"startAddress":"香川県こだわり面やの住所",
+			"endAddress":"三匹の子豚の住所",
+			"time_ja":"40分",
+			"time_second":""
+		},
+		{
+			"startName":"三匹の子豚",
+			"endName":"高松駅",
+			"startAddress":"香川県こだわり面やの住所",
+			"endAddress":"香川県高松駅の住所",
+			"time_ja":"1時間",
+			"time_second":""
 		}
 	]
+
 }
