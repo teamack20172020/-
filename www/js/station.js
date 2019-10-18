@@ -22,6 +22,7 @@ $(document).on("click","#submit_station",function(){
 	console.log(work);
 	lat=work[0];
 	lng=work[1];
+	departure_type="station";
 	document.getElementById("main").pushPage("purpose.html");
 });
 
