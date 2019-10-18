@@ -75,6 +75,7 @@ function latlng_ajax(str){
 				console.log("経度:"+work[0]);
 				lat=work[1];
 				lng=work[0];
+				departure_type="station";
 				document.getElementById("main").pushPage("purpose.html");
 		}
 	}).fail(function(jqXHR, textStatus, errorThrown){
