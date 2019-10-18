@@ -31,9 +31,11 @@ function afterreadJS(url){
 }
 //ローカルストレージへの保存
 function setLocalStorage(key, value) {
-	localStorage.setItem(key, value);
+	localStorage.setItem(key,JSON.stringify(value));
 }
 //ローカルストレージから取得
 function getLocalStorage(key) {
-	return localStorage.getItem(key);
+	let work=localStorage.getItem(key);
+	work=JSON.parse(work);
+	return work;
 }
