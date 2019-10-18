@@ -7,16 +7,14 @@ var idlist =new Array();
 var objectiveList = [];
 
 //画面ロード直後の処理
-$(function(){
-	document.addEventListener('init', function(event) {
-		var page= event.target;
-		//質問ページの時のみ処理
-		if(page.matches('#purpose_input')){
-			console.log("目的（決まっている）画面表示");
-			var url = "objective/getList";
-			var list = ajax(url);
-		}
-	});
+document.addEventListener('init', function(event) {
+	var page= event.target;
+	//質問ページの時のみ処理
+	if(page.matches('#purpose_input')){
+		console.log("目的（決まっている）画面表示");
+		var url = "objective/getList";
+		var list = ajax(url);
+	}
 });
 
 //ajax通信の結果退避
