@@ -1,18 +1,28 @@
 var station_prefecture="北海道";
-var station_route="";
+//都道府県から駅路線取得APIのURL
+var route_url="http://www.ekidata.jp/api/p/";
+//路線から駅取得APIのURL
+var details_url="http://www.ekidata.jp/api/l/";
+//都道府県から駅路線取得APIの結果を入れる配列
+var route_list=null;
+//路線から駅取得APIの結果を入れる配列
+var details_list=[];
+
 //都道府県セレクトが変更されたら
 document.addEventListener('init', function(event) {
 	var page= event.target;
 	//質問ページの時のみ処理
 	if(page.matches('#station')){
-		route_ajax("1");
+		ajax(route_url+"1.xml","station_route","out","xml");
+		//都道府県セレクトボックスが変更されたとき
 		$("#sta_prefecture").change(function(){
 			let work=$("#sta_prefecture").val().split(",");
-			route_ajax(work[1]);
+			ajax(route_url+work[1]+".xml","station_route","out","xml");
 		});
+		//駅路線セレクトボックスが変更されたとき
 		$("#sta_route").change(function(){
 			let work=$("#sta_route").val();
-			station_ajax(work);
+			ajax(details_url+work+".xml","station_details","out","xml");
 		});
 	}
 });
@@ -22,46 +32,39 @@ $(document).on("click","#submit_station",function(){
 	console.log(work);
 	lat=work[0];
 	lng=work[1];
+	departure_type="station";
 	document.getElementById("main").pushPage("purpose.html");
 });
 
-//都道府県から駅路線取得API
-function route_ajax(num){
-	$.ajax({
-		type: "GET",
-		url: "http://www.ekidata.jp/api/p/"+num+".xml",
-		dataType:"xml",
-		timeout: 30000,
-	}).done(function(data) {
-		console.log(data);
-		var elem="";
-		$(data).find("line").each(function(){
-			console.log($(this).find("line_name").text());
-			elem+="<option value='"+$(this).find("line_cd").text()+"'>"+$(this).find("line_name").text()+"</option>";
-		});
-		$("#sta_route select").html(elem);
-		station_ajax($(data).find("line:first line_cd").text());
-	}).fail(function(jqXHR, textStatus, errorThrown){
-		console.log(jqXHR);
-	});
+//都道府県から駅路線取得ajax通信の結果退避
+function setResSR(data){
+	console.log(data);
+	viewRoute(data);
 }
 
-/*路線から駅取得API*/
-function station_ajax(num){
-	$.ajax({
-		type: "GET",
-		url: "http://www.ekidata.jp/api/l/"+num+".xml",
-		dataType:"xml",
-		timeout: 30000,
-	}).done(function(data) {
-		console.log(data);
-		var elem="";
-		$(data).find("station").each(function(){
-			elem+="<option value='"+$(this).find("lat").text()+","+$(this).find("lon").text()+"'>"
-				+$(this).find("station_name").text()+"</option>";
-		});
-		$("#sta_station select").html(elem);
-	}).fail(function(jqXHR, textStatus, errorThrown){
-		console.log(jqXHR);
+//路線情報をセレクトボックスに表示
+function viewRoute(data){
+	var elem="";
+	$(data).find("line").each(function(){
+		console.log($(this).find("line_name").text());
+		elem+="<option value='"+$(this).find("line_cd").text()+"'>"+$(this).find("line_name").text()+"</option>";
 	});
+	$("#sta_route select").html(elem);
+	ajax(details_url+$(data).find("line:first line_cd").text()+".xml","station_details","out","xml");
+}
+
+//路線から駅取得APIajax通信の結果退避
+function setResSD(data){
+	console.log(data);
+	viewDetails(data);
+}
+
+//駅詳細をセレクトボックスに表示
+function viewDetails(data){
+	var elem="";
+	$(data).find("station").each(function(){
+		elem+="<option value='"+$(this).find("lat").text()+","+$(this).find("lon").text()+"'>"
+			+$(this).find("station_name").text()+"</option>";
+	});
+	$("#sta_station select").html(elem);
 }
