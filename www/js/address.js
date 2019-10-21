@@ -2,8 +2,8 @@ var address_prefecture="北海道";
 var address_city="";
 //市区町村取得APIのURL（この文字列のあとにエリア指定）
 var city_url="http://www.land.mlit.go.jp/webland/api/CitySearch?area=";
-//
-var addresslist=[];
+//市区町村取得結果を入れる配列
+var address_list=[];
 //住所から緯度経度取得APIのURL（この文字列のあとにエリア指定）
 var latlng_url="https://map.yahooapis.jp/geocode/V1/geoCoder?appid=dj00aiZpPUc2STZsb0Vpa3JobSZzPWNvbnN1bWVyc2VjcmV0Jng9Nzk-&query=";
 
@@ -40,15 +40,15 @@ $(document).on("click","#submit_address",function(){
 function setResAC(data){
 	address_city=data['data'][0]['name'];
 	console.log(address_prefecture+address_city);
-	addresslist=data['data'];
+	address_list=data['data'];
 	viewAddress();
 }
 
 //市区町村をセレクトボックスに表示
 function viewAddress(){
 	var elem="";
-	for(var i=0;i<addresslist.length;i++){
-		elem+="<option value='"+addresslist[i]['name']+"'>"+addresslist[i]['name']+"</option>";
+	for(var i=0;i<address_list.length;i++){
+		elem+="<option value='"+address_list[i]['name']+"'>"+address_list[i]['name']+"</option>";
 	}
 	$("#city select").html(elem);
 }
@@ -67,7 +67,7 @@ function setResAL(data){
 		console.log("経度:"+work[0]);
 		lat=work[1];
 		lng=work[0];
-		departure_type="station";
+		departure_type=$(data).find("Feature:first >Name").text();
 		document.getElementById("main").pushPage("purpose.html");
 	}
 }
