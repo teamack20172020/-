@@ -3,21 +3,16 @@ var generation_array=Array();
 //作成したプランを一時的に保存する変数
 var generation_work=Array();
 //引数（緯度、経度、出発地タイプ、目的,目的地,URL）
-function generation_ajax(lat,lng,type,ge_purpose,ge_place,url){
-
-	let latlng=lat+","+lng;
+function generation_ajax(url){
 	$.ajax({
 		type: "GET",
-		url: "js/sample.json",
-		//url: "https://www.autotravelplan.com/" + url,
-		// data:{
-		// 	latlng:latlng,
-		// 	purpose:purpose
-		// },
+		//url: "js/sample.json",
+		url: "https://www.autotravelplan.com/" + url,
 		dataType:"json",
 		scriptCharset: "utf-8",
 		timeout: 30000
 	}).done(function(data){
+		console.log(data);
 		//今日の日付を取得
 		let today=new Date();
 		generation_work=data;
@@ -25,13 +20,13 @@ function generation_ajax(lat,lng,type,ge_purpose,ge_place,url){
 		generation_work["create_time"]=today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 		console.log(generation_work);
 		var elem="";
-		for(let i=0;i<data["data"].length;i++){
-			elem+="<ons-list-item>"+data["data"][i]["startName"]+"～"
-				+data["data"][i]["endName"]+"　　"
-				+data["data"][i]["time_ja"]+"</ons-list-item>";
+		for(let i=0;i<data.length;i++){
+			elem+="<ons-list-item>"+data[i]["startPoint"]["name"]+"～"
+				+data[i]["endPoint"]["name"]+"　　"
+				+data[i]["time_ja"]+"</ons-list-item>";
 		}
 		$("#gene_plan_list").html(elem);
-
+		$('#modal').hide();
 	});
 }
 document.addEventListener('show', function(event) {
@@ -45,12 +40,9 @@ document.addEventListener('show', function(event) {
 			"<ons-list-item>8時30分～9時00分 : 電車○○駅発</ons-list-item>"+
 			"<ons-list-item>9時15分～10時30分 : </ons-list-item>"
 		);
-		//自動生成AJAXへ送信(/travelplan/create/出発地タイプ/緯度経度/目的ID/目的地ID:香川→37)
-		let url="/travelplan/create/"+departure_type+"/"+lat+","+lng+"/"+purpose+"/"+37;
 		//ajax();
-		generation_ajax(lat,lng,departure_type,purpose,37,"");
+		generation_ajax("travelplan/create/"+departure_type+"/"+lat+","+lng+"/"+purpose+"/37");
 		//読み込み中画面を閉じる
-		$('#modal').hide();
 
 	}
 });
