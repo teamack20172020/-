@@ -51,7 +51,6 @@ function viewRoute(data){
 	});
 	$("#sta_route select").html(elem);
 	ajax(details_url+$(data).find("line:first line_cd").text()+".xml","station_details","out","xml");
-
 }
 
 //路線から駅取得APIajax通信の結果退避
