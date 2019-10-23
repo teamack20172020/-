@@ -29,10 +29,11 @@ document.addEventListener('init', function(event) {
 //決定ボタンクリック処理
 $(document).on("click","#submit_station",function(){
 	let work=$("#sta_station").val().split(",");
+	console.log($("#sta_station"));
 	console.log(work);
-	lat=work[0];
-	lng=work[1];
-	departure_type="station";
+	lat=work[1];
+	lng=work[2];
+	departure_type=work[0];
 	document.getElementById("main").pushPage("purpose.html");
 });
 
@@ -63,7 +64,7 @@ function setResSD(data){
 function viewDetails(data){
 	var elem="";
 	$(data).find("station").each(function(){
-		elem+="<option value='"+$(this).find("lat").text()+","+$(this).find("lon").text()+"'>"
+		elem+="<option value='"+$(this).find("station_name").text()+","+$(this).find("lat").text()+","+$(this).find("lon").text()+"'>"
 			+$(this).find("station_name").text()+"</option>";
 	});
 	$("#sta_station select").html(elem);
