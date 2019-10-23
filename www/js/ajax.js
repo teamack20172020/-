@@ -7,7 +7,7 @@
  */
 
 function ajax(url,method_type,ajax_type,datatype){
-	var res;
+	//var res;
 	if(ajax_type == "in"){
 		url="https://www.autotravelplan.com/" + url;
 	}
@@ -18,8 +18,9 @@ function ajax(url,method_type,ajax_type,datatype){
 		scriptCharset: "utf-8",
 		timeout: 30000,
 	}).done(function(data,textStatus,jqXHR) {
+		//method_typeに応じて処理を変更
 		switch(method_type){
-			//質問ページの質問取得ajax通信(purpose_input.js)
+			//目的入力ページの目的取得ajax通信(purpose_input.js)
 			case "purpose":setResP(data);break;
 			//質問ページの質問取得ajax通信(question.js)
 			case "question":setResQ(data);break;
@@ -36,9 +37,9 @@ function ajax(url,method_type,ajax_type,datatype){
 		}
 		console.log(data);
 	}).fail(function(jqXHR, textStatus, errorThrown){
-			$("#p1").text("err:"+jqXHR.status); //例：404
-			$("#p2").text(textStatus); //例：error
-			$("#p3").text(errorThrown); //例：NOT FOUND
+		console.log("err:"+jqXHR.status); //例：404
+		console.log(textStatus); //例：error
+		console.log(errorThrown); //例：NOT FOUND
 	}).always(function(){
 	});
 }
