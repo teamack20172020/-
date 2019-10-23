@@ -10,27 +10,29 @@ var onSuccess = function(position) {
 		// 'Timestamp: '         + position.timestamp                + '\n'
 	);
 	$("#modal").hide();
+	//yahoomapで現在地を表示
 	Ymap(position.coords.latitude,position.coords.longitude);
 };
-
 
 //位置情報取得失敗
 function onError(error) {
 	console.log('code: '    + error.code    + '\n' +
 		'message: ' + error.message + '\n');
 	$("#modal").hide();
+	//yahoomapで固定の場所を表示
 	Ymap(34.34291164999988,134.04532507000008);
 }
 
 document.addEventListener('init', function(event) {
 	var page= event.target;
-	//質問ページの時のみ処理
+	//位置情報取得ページの時のみ処理
 	if(page.matches('#gps')){
 		setTimeout(function () {
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 		}, 100);
 	}
 });
+
 //もう一度位置情報取得ボタンクリック
 $(document).on("click","#again_gps",function(){
 	$('#modal').show();
