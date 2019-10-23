@@ -20,7 +20,7 @@
   <!-- 旅行プランの自動生成 -->
   <script src="js/travelplanCreate.js" defer></script>
   <!-- 質問画面の処理 -->
-  <!--script src="js/question.js" defer></script-->
+  <script src="js/question.js" defer></script>
   <!-- スケジュール画面の処理 -->
   <script src="js/generation.js" defer></script>
   <!-- 履歴画面の処理 -->
@@ -36,25 +36,19 @@
   <script src="js/station.js" defer></script>
   <!--目的入力の処理-->
   <script src="js/purpose_input.js"></script>
-  <!--質問の処理-->
-  <!--script src="js/question.js"></script-->
-  <!--ヤフーAPI用見込み-->
+  <!--ヤフーAPI読み込み-->
   <script type="text/javascript" charset="utf-8"
     src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPUc2STZsb0Vpa3JobSZzPWNvbnN1bWVyc2VjcmV0Jng9Nzk-"></script>
+
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/style.css">
 
-
   <script>
     ons.ready(function () {
       console.log("Onsen UI is ready!");
     });
-    //アキネイター合計の質問数
-    var akinator_sum = 1;
-    //アキネイターのタイプ（0：目的、1：目的地）
-    var akinator_type = 0;
     //変数:目的（例：遊び、観光）
     var purpose = "";
     //変数:目的地（例：香川県、東京）
