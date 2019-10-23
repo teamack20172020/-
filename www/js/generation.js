@@ -4,6 +4,7 @@ var generation_array = new Array();
 var ge_url = "travelplan/create/";
 //作成したプランを一時的に保存する変数
 var g_work = {};
+
 //画面が読み込まれたときの処理
 document.addEventListener('show', function (event) {
 	g_work = {};
