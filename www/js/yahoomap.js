@@ -6,7 +6,7 @@ var marker;
 function Ymap(y,x){
 	lat=y;
 	lng=x;
-	departure_type="gps";
+	departure_type="現在位置";
 	console.log("緯度:"+lat+",経度:"+lng);
 	ymap = new Y.Map("map");
 	ymap.drawMap(new Y.LatLng(y, x), 16, Y.LayerSetId.NORMAL);
