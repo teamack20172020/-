@@ -10,21 +10,26 @@ var latlng_url="https://map.yahooapis.jp/geocode/V1/geoCoder?appid=dj00aiZpPUc2S
 //都道府県セレクトが変更されたら
 document.addEventListener('init', function(event) {
 	var page= event.target;
-	//質問ページの時のみ処理
+	//住所ページの時のみ処理
 	if(page.matches('#address')){
 		ajax(city_url+"01","address_city","out","json");
+
 		$("#add_prefecture").change(function(){
 				var result=$("#add_prefecture").val().split(",");
 				address_prefecture=result[0];
 				ajax(city_url+result[1],"address_city","out","json");
 		});
+
 		$("#city").change(function(){
 				var result=$("#city").val();
 				address_city=result;
 				console.log(address_prefecture+address_city);
 		});
+
 	}
 });
+
+//決定ボタンタップ時処理
 $(document).on("click","#submit_address",function(){
 	var addin=$("#in_address").val();
 	console.log(addin);
@@ -33,7 +38,6 @@ $(document).on("click","#submit_address",function(){
 	}else{
 		ajax(latlng_url+address_prefecture+address_city+addin,"address_lanlng","out","xml");
 	}
-
 });
 
 //市区町村ajax通信の結果退避
