@@ -13,17 +13,19 @@ function ajax(url,method_type,ajax_type,datatype){
 	}).done(function(data,textStatus,jqXHR) {
 	//	if(data.length > 0 ){
 			switch(method_type){
-				//質問ページの質問取得ajax通信
+				//質問ページの質問取得ajax通信(purpose_input.js)
+				case "purpose":setResP(data);break;
+				//質問ページの質問取得ajax通信(question.js)
 				case "question":setResQ(data);break;
-				//住所ページの市区町村取得ajax通信
+				//住所ページの市区町村取得ajax通信(address.js)
 				case "address_city":setResAC(data);break;
-				//住所ページの緯度経度取得ajax通信
+				//住所ページの緯度経度取得ajax通信(address.js)
 				case "address_lanlng":setResAL(data);break;
-				//駅ページの駅路線取得ajax通信
+				//駅ページの駅路線取得ajax通信(station.js)
 				case "station_route":setResSR(data);break;
-				//駅ページの駅詳細ajax通信
+				//駅ページの駅詳細ajax通信(station.js)
 				case "station_details":setResSD(data);break;
-				//スケジュールページの自動生成ajax通信
+				//スケジュールページの自動生成ajax通信(generation.js)
 				case "generation_auto":setResG(data);break;
 	//		}
 			console.log(data);
