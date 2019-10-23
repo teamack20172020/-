@@ -14,10 +14,8 @@ document.addEventListener('show', function (event) {
 		//スケジュール生成
 		$("#gene_purpose").text("目的：" + purpose);
 		$("#gene_departure").text("出発地：" + departure_type);
-		
+		//自動生成APIと通信
 		ajax(ge_url + departure_type + "/" + lat + "," + lng + "/" + purpose + "/37", "generation_auto", "in", "json");
-		//generation_ajax("travelplan/create/" + departure_type + "/" + lat + "," + lng + "/" + purpose + "/37");
-
 	}
 });
 
@@ -26,6 +24,7 @@ function setResG(resg) {
 	console.log(resg);
 	//今日の日付を取得
 	let today = new Date();
+	//生成した日にち、目的などをプラスで保存
 	g_work["data"] = resg;
 	g_work["create_purpose"] = purpose;
 	g_work["create_date"] = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
