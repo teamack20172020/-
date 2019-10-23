@@ -9,7 +9,7 @@ var g_work = {};
 document.addEventListener('show', function (event) {
 	g_work = {};
 	var page = event.target;
-	//質問ページの時のみ処理
+	//プラン生成ページの時のみ処理
 	if (page.matches('#generation')) {
 		//スケジュール生成
 		$("#gene_purpose").text("目的：" + purpose);
@@ -58,6 +58,7 @@ $(document).on("click", "#complete_plan", function () {
 		generation_array = getLocalStorage("generation");
 	}
 	generation_array.push(g_work);
+	//ローカルストレージに生成したプランを保存
 	setLocalStorage("generation", generation_array);
 	console.log(generation_array);
 	alert("履歴に登録しました");
