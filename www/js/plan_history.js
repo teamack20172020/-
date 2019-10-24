@@ -13,7 +13,7 @@ document.addEventListener('init', function (event) {
 			let elem = "";
 			for (let i = 0; i < history_array.length; i++) {
 				elem += "<ons-list-item class='history_item' modifier='chevron' value='" + i + "' tappable>"
-					+ history_array[i]["create_date"] + "</ons-list-item>"
+					+ history_array[i]["create_date"] + "</ons-list-item>";
 			}
 			$("#plan_history_list").html(elem);
 		}else{
@@ -22,7 +22,11 @@ document.addEventListener('init', function (event) {
 	}
 });
 
+<<<<<<< Updated upstream
 //プランのどれかをタップ時
+=======
+//プランクリック時の処理
+>>>>>>> Stashed changes
 $(document).on("click", ".history_item", function () {
 	var history_type = $(this).attr("value");
 	//プラン確認ページに選択したプラン情報を送信し表示
