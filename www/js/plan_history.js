@@ -22,11 +22,7 @@ document.addEventListener('init', function (event) {
 	}
 });
 
-<<<<<<< Updated upstream
 //プランのどれかをタップ時
-=======
-//プランクリック時の処理
->>>>>>> Stashed changes
 $(document).on("click", ".history_item", function () {
 	var history_type = $(this).attr("value");
 	//プラン確認ページに選択したプラン情報を送信し表示
