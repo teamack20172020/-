@@ -1,6 +1,6 @@
 document.addEventListener('init', function (event) {
 	var page = event.target;
-	//質問ページの時のみ処理
+	//プラン確認ページの時のみ処理
 	if (page.matches('#plan_check')) {
 		//データ取得
 		var history_type = page.data.history_type;
