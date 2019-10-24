@@ -1,9 +1,12 @@
 var history_array;
+
 document.addEventListener('init', function (event) {
 	var page = event.target;
-	//質問ページの時のみ処理
+	//プラン履歴ページの時のみ処理
 	if (page.matches('#plan_history')) {
+		//ローカルストレージにプランが保存されているかどうか
 		if (getLocalStorage("generation")!=null){
+			//ローカルストレージから生成済みプラン一覧の取得
 			history_array = getLocalStorage("generation");
 			console.log(history_array);
 			//履歴出力
@@ -15,12 +18,13 @@ document.addEventListener('init', function (event) {
 			$("#plan_history_list").html(elem);
 		}else{
 			$("#plan_history_error").html("履歴はありません");
-
 		}
 	}
 });
-//プランクリックじ
+
+//プランのどれかをタップ時
 $(document).on("click", ".history_item", function () {
 	var history_type = $(this).attr("value");
+	//プラン確認ページに選択したプラン情報を送信し表示
 	document.getElementById('main').pushPage("plan_check.html", { data: { history_type } });
 });
