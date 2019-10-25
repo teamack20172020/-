@@ -5,6 +5,9 @@ var ge_url = "travelplan/create/";
 //作成したプランを一時的に保存する変数
 var g_work = {};
 
+//monacaでブラウザを表示する為の処理
+document.addEventListener("deviceready", onDeviceReady, false);
+
 //画面が読み込まれたときの処理
 document.addEventListener('show', function (event) {
 	g_work = {};
@@ -36,13 +39,27 @@ function setResG(resg) {
 function viewGeneration(viewg) {
 	var elem = "";
 	for (let i = 0; i < viewg.length; i++) {
-		elem += "<ons-list-item>" + viewg[i]["startPoint"]["name"] + "～"
+		elem += "<ons-list-item  modifier='chevron' class='generation_item' value='" + i + "' tappable>" + viewg[i]["startPoint"]["name"] + "～"
 			+ viewg[i]["endPoint"]["name"] + "　　"
 			+ viewg[i]["time_ja"] + "</ons-list-item>";
 	}
 	$("#gene_plan_list").html(elem);
 	//読み込み中画面を閉じる
 	$('#modal').hide();
+}
+
+//monacaでブラウザを表示する為の処理内容
+function onDeviceReady() {
+	console.log("window.open works well");
+	//プランクリック時の処理
+	$(document).on("click", ".generation_item", function () {
+		//チェックされた項目を取得
+		let ge_type = $(this).attr("value");
+		let work_ge = g_work["data"][ge_type];
+		//ブラウザを表示
+		var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["name"] + "/" + work_ge['endPoint']["name"], '_blank', 'location=yes');
+		// document.getElementById('main').pushPage("plan_detail.html", { data: { work_check } });
+	});
 }
 
 //「もう一度自動生成する」ボタンクリック
