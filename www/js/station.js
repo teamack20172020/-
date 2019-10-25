@@ -11,19 +11,22 @@ var details_list = [];
 //都道府県セレクトが変更されたら
 document.addEventListener('init', function (event) {
 	var page = event.target;
-	//質問ページの時のみ処理
+	//駅ページの時のみ処理
 	if (page.matches('#station')) {
 		ajax(route_url + "1.xml", "station_route", "out", "xml");
-		//都道府県セレクトボックスが変更されたとき
+
+		//都道府県セレクトボックスが変更された時
 		$("#sta_prefecture").change(function () {
 			let work = $("#sta_prefecture").val().split(",");
 			ajax(route_url + work[1] + ".xml", "station_route", "out", "xml");
 		});
-		//駅路線セレクトボックスが変更されたとき
+
+		//駅路線セレクトボックスが変更された時
 		$("#sta_route").change(function () {
 			let work = $("#sta_route").val();
 			ajax(details_url + work + ".xml", "station_details", "out", "xml");
 		});
+
 	}
 });
 
