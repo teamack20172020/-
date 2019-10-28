@@ -1,12 +1,15 @@
 <!--   出発地入力選択ページ (departure.html) -->
 <ons-page id="departure">
 	<ons-toolbar>
-	<div class="center">出発地</div>
+		<div class="left">
+			<ons-back-button>戻る</ons-back-button>
+		</div>
+		<div class="center">出発地</div>
 	</ons-toolbar>
-	<div class="question_box"><!--アキネイターの質問-->
+	<div class="question_box">
 		出発地を決定してください。
 	</div>
-	<div class="answer_box"><!--質問に対する答え-->
+	<div class="answer_box">
 		<ons-button class="nextpage" id="gps_choice" onclick="$('#modal').show();">現在位置（GPS）</ons-button>
 		<ons-button class="nextpage" id="address_choice">住所入力</ons-button>
 		<ons-button class="nextpage" id="station_choice">最寄りの駅</ons-button>
