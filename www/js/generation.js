@@ -27,9 +27,16 @@ function setResG(resg) {
 	console.log(resg);
 	//今日の日付を取得
 	let today = new Date();
-	//生成した日にち、目的などをプラスで保存
+	/**「g_work」配列の中身
+	 * data : 生成したプランの詳細データ
+	 * create_purpose : 生成した時の目的
+	 * create_departure : 生成した時の出発地
+	 * create_date : 生成した時のの日にち
+	 * create_time : 生成した時の時間
+	 */
 	g_work["data"] = resg;
 	g_work["create_purpose"] = purpose;
+	g_work["create_departure"] = departure_type;
 	g_work["create_date"] = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 	g_work["create_time"] = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 	viewGeneration(resg);
@@ -56,8 +63,24 @@ function onDeviceReady() {
 		//チェックされた項目を取得
 		let ge_type = $(this).attr("value");
 		let work_ge = g_work["data"][ge_type];
-		//ブラウザを表示
-		var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["name"] + "/" + work_ge['endPoint']["name"], '_blank', 'location=yes');
+		if (work_ge['startPoint']["name"] == "現在位置") {
+			//スタート位置が現在位置の場合
+			//ブラウザを表示
+			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["lat"]
+				+ "," + work_ge['startPoint']["lng"]
+				+ "/" + work_ge['endPoint']["name"], '_blank', 'location=yes');
+		} else if (work_ge['endPoint']["name"] == "現在位置") {
+			//エンド位置が現在位置の場合
+			//ブラウザを表示
+			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["name"]
+				+ "/" + work_ge['endPoint']["lat"]
+				+ "," + work_ge['endPoint']["lng"], '_blank', 'location=yes');
+		} else {
+			//ブラウザを表示
+			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["name"]
+				+ "/" + work_ge['endPoint']["name"], '_blank', 'location=yes');
+		}
+		//plan_detail.htmlを使う場合のpush処理
 		// document.getElementById('main').pushPage("plan_detail.html", { data: { work_check } });
 	});
 }
