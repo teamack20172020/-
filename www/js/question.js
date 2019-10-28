@@ -2,6 +2,7 @@
 var questionList = [];
 var qcount = 0;
 var parray = new Array();
+var res = new Array();
 
 //画面ロード直後の処理
 document.addEventListener('init', function(event) {
@@ -20,13 +21,13 @@ function setResQ(data){
 	});
 	idlist = Object.keys(questionList);
 	qcount = 0;
+	res = new Array();
 	$("#modal").hide();
 	viewQestion();
 }
 
 //質問をランダムに表示
 function viewQestion(){
-	console.log(idlist);
 	//10回質問する処理
 	if(qcount != 10){
 		radnum = Math.floor(Math.random() * idlist.length);
@@ -34,11 +35,18 @@ function viewQestion(){
 		$(".question_text").html('<p>' + questionList[id] + '</p>');
 		idlist.splice(radnum, 1);
 		qcount++;
-	}else{
-		//1~4までの目的idをランダムに指定(デモ用)
-		$('#modal').show();
-		purpose = Math.floor(Math.random() * 4)+1;
-		document.getElementById("main").pushPage("generation.html");
+	} else {
+		//質問結果をもとに目的リストを取得するajax通信
+		res.sort(compareFunc);
+		//パラメータを"q"で区切る処理
+		var param = res.join('q');
+		var qurl = 'url' + param;
+		//ajax(qurl,"test","in","json");
+		//仮データ(ajax通信の返り値)
+		parray = ["1","3","4","6","8"];
+		console.log(param);
+		console.log(qurl);
+		qres(parray);
 	}
 	/* 全件質問する処理
 	if(idlist.length > 0){
@@ -62,10 +70,19 @@ function viewQestion(){
 $(document).on('click','.answer', function(){
 	if($(this).attr("id") == "yes"){
 		//はいを選択時の処理
-		//res.push(('000' + id).slice(-4) + "1");
+		res.push(('000' + id).slice(-4) + "1");
 	}else{
 		//いいえを選択時の処理
-		//res.push(('000' + id).slice(-4) + "0");
+		res.push(('000' + id).slice(-4) + "0");
 	}
 	viewQestion();
 });
+
+//ajax通信で目的リストを取得
+function qres(data){
+	$('#modal').show();
+	//目的リストからランダムに目的を決める処理
+	purpose = data[Math.floor(Math.random() * data.length)];
+	console.log(purpose);
+	document.getElementById("main").pushPage("generation.html");
+}
