@@ -1,6 +1,7 @@
 //変数定義
 var questionList = [];
 var qcount = 0;
+var parray = new Array();
 
 //画面ロード直後の処理
 document.addEventListener('init', function(event) {
@@ -19,6 +20,7 @@ function setResQ(data){
 	});
 	idlist = Object.keys(questionList);
 	qcount = 0;
+	$("#modal").hide();
 	viewQestion();
 }
 
@@ -30,11 +32,11 @@ function viewQestion(){
 		radnum = Math.floor(Math.random() * idlist.length);
 		id = idlist[radnum];
 		$(".question_text").html('<p>' + questionList[id] + '</p>');
-		$("#modal").hide();
 		idlist.splice(radnum, 1);
 		qcount++;
 	}else{
 		//1~4までの目的idをランダムに指定(デモ用)
+		$('#modal').show();
 		purpose = Math.floor(Math.random() * 4)+1;
 		document.getElementById("main").pushPage("generation.html");
 	}
@@ -48,7 +50,7 @@ function viewQestion(){
 	}else{
 		//質問結果の保存(データ収集用)
 		//res.sort(compareFunc);
-		//var param = res.join(',');
+		//var param = res.join('q');
 		//ajax('/Questionparam/save/' + param + '/' + id);
 		//$("#main").html(res);
 		document.getElementById("main").pushPage("generation.html");
@@ -56,7 +58,7 @@ function viewQestion(){
 	*/
 }
 
-//目的が決定したらプランの自動生成を行う(5桁左0詰め)
+//回答時の処理
 $(document).on('click','.answer', function(){
 	if($(this).attr("id") == "yes"){
 		//はいを選択時の処理
