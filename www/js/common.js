@@ -11,6 +11,9 @@ $(function(){
 			document.getElementById("main").pushPage(nextpage + ".html");
 		}
 	});
+	$(document).on("click", ".home_back", function () {
+		document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
+	});
 });
 
 //パラメタソート
