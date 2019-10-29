@@ -24,7 +24,6 @@ document.addEventListener('show', function (event) {
 
 //プランのどれかをタップ時
 $(document).on("click", ".history_item", function () {
-	console.log("ssssssssssss");
 	var history_type = $(this).attr("value");
 	//プラン確認ページに選択したプラン情報を送信し表示
 	document.getElementById('main').pushPage("plan_check.html", { data: { history_type } });

@@ -50,7 +50,6 @@ function onDeviceReady() {
 			var ref = cordova.InAppBrowser.open(googlemapurl + work_check['startPoint']["name"]
 				+ "/" + work_check['endPoint']["name"], '_blank', 'location=yes');
 		}
-		var ref = cordova.InAppBrowser.open(googlemapurl + work_check['startPoint']["name"] + "/" + work_check['endPoint']["name"], '_blank', 'location=yes');
 		// document.getElementById('main').pushPage("plan_detail.html", { data: { work_check } });
 	});
 }
