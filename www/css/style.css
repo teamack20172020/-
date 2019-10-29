@@ -14,11 +14,27 @@
     left: 0;
     right: 0;
 }
+
 /*上のツールバー*/
 ons-toolbar .center{
 	font-size: 150%;
-	border-bottom: 5px solid blue;
-	border-top: 5px solid blue;
+}
+
+/*ツールバーのホームへ戻るボタン*/
+.home_back{
+	background-color:rgba(255,0,0,0);
+	color:#0076ff;
+	vertical-align: top;
+	height:41px;
+	width:100px;
+	margin-bottom:1px;
+	padding-top:6px;
+	padding-left:0px;
+	padding-right:8px;
+}
+.home_back:active{
+	opacity:0.5;
+	background-color: white;
 }
 
 /*質問などが入っている要素*/
