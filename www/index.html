@@ -50,6 +50,9 @@
   <script>
     ons.ready(function () {
       console.log("Onsen UI is ready!");
+      //初期で目的一覧を取得する
+      var purposeurl = "objective/getList";
+      ajax(purposeurl, "purpose", "in", "json");
     });
     //変数:目的（例：遊び、観光）
     var purpose = "1";

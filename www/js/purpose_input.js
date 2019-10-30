@@ -10,8 +10,7 @@ document.addEventListener('init', function(event) {
 	var page= event.target;
 	//目的入力ページの時のみ処理
 	if(page.matches('#purpose_input')){
-		var purposeurl = "objective/getList";
-		ajax(purposeurl,"purpose","in","json");
+		viewPurpose();
 	}
 });
 
@@ -24,7 +23,6 @@ function setResP(resList){
 	});
 	idlist = Object.keys(objectiveList);
 	console.log(idlist);
-	viewPurpose();
 }
 
 //目的セレクトボックスを表示
