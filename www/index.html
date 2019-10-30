@@ -38,6 +38,8 @@
   <script src="js/purpose_input.js"></script>
   <!--プラン詳細の処理-->
   <script src="js/plan_detail.js"></script>
+  <!--アラートディアログの処理-->
+  <script src="js/alert_dialog.js"></script>
   <!--ヤフーAPI読み込み-->
   <script type="text/javascript" charset="utf-8"
     src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPUc2STZsb0Vpa3JobSZzPWNvbnN1bWVyc2VjcmV0Jng9Nzk-"></script>
@@ -76,9 +78,24 @@
       </p>
     </div>
   </ons-modal>
+
   <!--ナビゲーション（ページを重ねて表示する為の奴）-->
   <ons-navigator id="main" page="home.html"></ons-navigator>
-  <div id="rear_script"></div>
+  
+  <!--   alertページ (departure.html) -->
+  <div id="alert-dialog">
+    <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-content">
+        本当にこのファイルを削除しても良いですか?
+        ※二度と同じプランは作成できないかもしれません
+      </div>
+      <div class="alert-dialog-footer">
+        <ons-alert-dialog-button onclick="cancelAlert('my-alert-dialog');">Cancel</ons-alert-dialog-button>
+        <ons-alert-dialog-button onclick="removePlan('my-alert-dialog');">OK</ons-alert-dialog-button>
+      </div>
+    </ons-alert-dialog>
+  </div>
 </body>
 
 </html>
