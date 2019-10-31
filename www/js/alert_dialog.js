@@ -16,3 +16,9 @@ function removePlan(name){
 	//plan_history.jsファイルのメソッド
 	viewHistory(1);
 }
+
+//generation.jsの完了ボタンがクリックされてアラート出た時の処理
+function ge_ok(){
+	$("#generation_ok").hide();
+	document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
+}
