@@ -24,13 +24,20 @@ document.addEventListener('show', function (event) {
 			if(p_count >= p_array.length){
 				p_count = 0;
 			}
+		} else {
+			main_purpose = purpose;
+			sub_purpose = purpose;
 		}
 		//スケジュール生成
 		console.log(objectiveList[idlist[purpose-1]]);
 		$("#gene_purpose").text("目的：" + objectiveList[idlist[purpose-1]]);
 		$("#gene_departure").text("出発地：" + departure_type);
+		//中間発表用 削除予定
+		areaid = 37;
+		main_purpose = 7;
+		sub_purpose = 1;
 		//自動生成APIと通信
-		ajax(ge_url + departure_type + "/" + lat + "," + lng + "/" + purpose + "/37", "generation_auto", "in", "json");
+			ajax(ge_url + departure_type + "/" + lat + "," + lng + "/" + main_purpose + "/" + sub_purpose + "/" + areaid, "generation_auto", "in", "json");
 	}
 });
 
