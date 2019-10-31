@@ -113,11 +113,10 @@ $(document).on("click", "#complete_plan", function () {
 	//ローカルストレージに生成したプランを保存
 	setLocalStorage("generation", generation_array);
 	console.log(generation_array);
-	alert("履歴に登録しました");
 	//目的idリスト関係の初期化処理
 	p_array = new Array();
 	p_count = 0;
-	document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
+	$("#generation_ok").show();
 });
 
 //「キャンセル」ボタンクリック
