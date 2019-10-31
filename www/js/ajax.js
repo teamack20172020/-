@@ -24,6 +24,8 @@ function ajax(url,method_type,ajax_type,datatype){
 			case "purpose":setResP(data);break;
 			//質問ページの質問取得ajax通信(question.js)
 			case "question":setResQ(data);break;
+			//質問ページの回答からの目的取得ajax通信(question.js)
+			case "answer":setResQA(data);break;
 			//住所ページの市区町村取得ajax通信(address.js)
 			case "address_city":setResAC(data);break;
 			//住所ページの緯度経度取得ajax通信(address.js)

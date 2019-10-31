@@ -12,6 +12,7 @@ $(function(){
 		}
 	});
 	$(document).on("click", ".home_back", function () {
+		work_question = [];
 		document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
 	});
 });

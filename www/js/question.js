@@ -10,10 +10,6 @@ var res = new Array();
 var numList = new Array();
 //質問の目的idリスト
 var qpList = new Array();
-//質問の目的idリストのidリスト
-var idlist = new Array();
-//目的id毎の質問id格納用変数
-var work_array = new Array();
 //すべての質問を目的id別に分けた変数
 var work_question = new Array();
 //質問する質問リスト
@@ -27,63 +23,60 @@ document.addEventListener('init', function(event) {
 	//質問ページの時のみ処理
 	if(page.matches('#question')){
 		var questionurl = "question/getList";
-		ajax(questionurl,"question","in","json");
+		ajax(questionurl, "question", "in", "json");
 	}
 });
 
 //ajax通信の結果退避
 function setResQ(data){
-	data.forEach(function( row ) {
-		questionList[row["id"]] = row["detail"];
+	//初期化処理
+	qpList = new Array();
+	work_question = new Array();
+	question = new Array();
+	//qpListにdataの中身を格納
+	data.forEach(function (val){
+		qpList.push({ 
+					'question_id': val['id']
+					, 'objective_id': val['objective_id']
+					, 'detail': val['detail']
+				});
 	});
-	data.forEach(function( row ){
-		qpList[row["id"]] = row["objective_id"];
-	});
-	idlist = Object.keys(qpList);
-	console.log(qpList);
-	console.log(idlist);
+	console.log(qpList);	
 
-	//目的id毎に質問idをwork_questionに格納する処理
-	//o_id 目的id比較用変数(連番でチェック)
-	//条件文は目的idリストのlength+1に変更予定?(目的idを連番にしてから)
-	//TODO 連想配列化でループを減らす
-	for(let o_id=1;o_id<10;o_id++){
-		for(let i=0;i<idlist.length;i++){
-			//目的idが質問の目的idと一致するか
-			if(qpList[idlist[i]]==o_id){
-				work_array.push(idlist[i]);
-			}
+	//目的id毎の質問idをwork_questionに格納する処理
+	for (let i = 0; i < qpList.length;i++){
+		objectiveid = 'obj_' + qpList[i]["objective_id"];
+		if (work_question[objectiveid]){
+			work_question[objectiveid].push(qpList[i]["question_id"]);
+		}else{
+			let newList = new Array();
+			newList.push(qpList[i]["question_id"]);
+			work_question[objectiveid] = newList;
 		}
-		//目的id毎の質問idリストをwork_questionに保存
-		work_question.push(work_array);
-		work_array=new Array();
 	}
-	//目的idが連番になれば不要(今は5番があるから必要)
-	work_question.splice(4,1);
 	console.log(work_question);
 	question_set();
 }
 
 //出題用の質問を配列に退避
 function question_set() {
+	//初期化処理
+	let count = 0;
+	qcount = 0;
+	res = new Array();
 	//質問回数分すべての目的idから最低1回ずつ質問を取得する
-	var count = 0;
-	//質問回数
 	while (count < max_question) {
 		//numListの初期化､設定
-		numList = new Array;
-		for(let i=0;i<work_question.length;i++){
-			numList.push(i);
-		}
+		numList = Object.keys(work_question);
 		//目的idの種類数
-		for(let j=0;j<8;j++){
+		for(let j=0;j<Object.keys(work_question).length;j++){
 			//num numList内の取得位置
-			//o_key work_questionの取得位置
+			//o_key work_questionの取得キー
 			//q_key work_questionの目的id内の取得位置
 			//q_id 取得した質問id
 			let num = Math.floor(Math.random() * numList.length);
 			let o_key = numList[num];
-			let q_key = Math.floor(Math.random() * work_question[o_key].length);
+			let q_key = Math.floor(Math.random() * Object.keys(work_question[o_key]).length);
 			let q_id = work_question[o_key][q_key];
 			numList.splice(num,1);
 			//work_questionから取得した質問を削除
@@ -95,10 +88,7 @@ function question_set() {
 			}
 		}
 	}
-
-	//初期化処理
-	qcount = 0;
-	res = new Array();
+	console.log(question);
 	$("#modal").hide();
 	viewQestion();
 }
@@ -109,21 +99,19 @@ function viewQestion(){
 	if(qcount != max_question){
 		radnum = Math.floor(Math.random() * question.length);
 		id = question[radnum];
-		$(".question_text").html('<p>' + questionList[id] + '</p>');
+		//qpListから質問idに一致するデータを取得
+		question_details = qpList.find((v) => v.question_id === id);
+		$(".question_text").html('<p>' + question_details['detail'] + '</p>');
 		question.splice(radnum, 1);
 		qcount++;
 	} else {
+		$('#modal').show();
 		//質問結果をもとに目的リストを取得するajax通信
 		res.sort(compareFunc);
 		//パラメータを"q"で区切る処理
 		var param = res.join('q');
-		var qurl = 'url' + param;
-		//ajax(qurl,"test","in","json");
-		//仮データ(ajax通信の返り値)
-		p_array = ["1","3","4","6","8"];
-		console.log(param);
-		console.log(qurl);
-		qres(p_array);
+		var qurl = 'answer-objective/getList/' + param;
+		ajax(qurl,"answer","in","json");
 	}
 }
 
@@ -140,11 +128,10 @@ $(document).on('click','.answer', function(){
 });
 
 //ajax通信で目的リストを取得
-function qres(data){
-	$('#modal').show();
+function setResQA(data){
 	//目的リストからランダムに目的を決める処理
-	p_array = data;
-	purpose = p_array[Math.floor(Math.random() * data.length)];
-	console.log(purpose);
+	for(let i=0;i<data.length;i++){
+		p_array.push(data[i]["objective_id"]);
+	}
 	document.getElementById("main").pushPage("generation.html");
 }

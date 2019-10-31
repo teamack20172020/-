@@ -4,6 +4,8 @@ var generation_array = new Array();
 var ge_url = "travelplan/create/";
 //作成したプランを一時的に保存する変数
 var g_work = {};
+//目的idリストの取得位置
+var p_count = 0;
 
 //monacaでブラウザを表示する為の処理
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -14,8 +16,18 @@ document.addEventListener('show', function (event) {
 	var page = event.target;
 	//プラン生成ページの時のみ処理
 	if (page.matches('#generation')) {
+		//目的idリストが存在する時(質問で目的を決める場合)
+		if(p_array.length>0){
+			purpose = p_array[p_count];
+			p_count++;
+			//目的idリストを1週した場合､最初に戻す
+			if(p_count >= p_array.length){
+				p_count = 0;
+			}
+		}
 		//スケジュール生成
-		$("#gene_purpose").text("目的：" + purpose);
+		console.log(objectiveList[idlist[purpose-1]]);
+		$("#gene_purpose").text("目的：" + objectiveList[idlist[purpose-1]]);
 		$("#gene_departure").text("出発地：" + departure_type);
 		//自動生成APIと通信
 		ajax(ge_url + departure_type + "/" + lat + "," + lng + "/" + purpose + "/37", "generation_auto", "in", "json");
@@ -102,10 +114,16 @@ $(document).on("click", "#complete_plan", function () {
 	setLocalStorage("generation", generation_array);
 	console.log(generation_array);
 	alert("履歴に登録しました");
+	//目的idリスト関係の初期化処理
+	p_array = new Array();
+	p_count = 0;
 	document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
 });
 
 //「キャンセル」ボタンクリック
 $(document).on("click", "#cancel_plan", function () {
+	//目的idリスト関係の初期化処理
+	p_array = new Array();
+	p_count = 0;
 	document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
 });
