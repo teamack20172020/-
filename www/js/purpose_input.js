@@ -4,6 +4,7 @@ var answer;
 var res =new Array();
 var idlist =new Array();
 var objectiveList =new Array();
+var objectiveAboutList=new Array();
 
 //画面ロード直後の処理
 document.addEventListener('init', function(event) {
@@ -19,6 +20,7 @@ function setResP(resList){
 	console.log(resList);
 	resList.forEach(function( row ) {
 		objectiveList[row["id"]] = row["title"];
+		objectiveAboutList[row["id"]] = row["about"];
 		console.log(row["title"]);
 	});
 	idlist = Object.keys(objectiveList);
@@ -29,7 +31,7 @@ function setResP(resList){
 function viewPurpose(){
 	var option = "";
 	for(i = 0; i <= idlist.length -1;i++){
-		option += "\t\t<option value='" + idlist[i] + "'>" + objectiveList[idlist[i]] +"</option>\n";
+		option += "\t\t<option value='" + idlist[i] + "'>" + objectiveAboutList[idlist[i]] +"</option>\n";
 	}
 	console.log(objectiveList[0]);
 	$("#purpose_select select").html(option);
