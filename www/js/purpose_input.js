@@ -33,7 +33,6 @@ function viewPurpose(){
 	for(i = 0; i <= idlist.length -1;i++){
 		option += "\t\t<option value='" + idlist[i] + "'>" + objectiveAboutList[idlist[i]] +"</option>\n";
 	}
-	console.log(objectiveList[0]);
 	$("#purpose_select select").html(option);
 	$("#modal").hide();
 }
