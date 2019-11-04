@@ -3,9 +3,7 @@ $(function(){
 	rotes = new AppRotes();
 	//nextpageクラスをタップした時次のページへ遷移する処理
 	$(document).on("click",".nextpage",function(){
-		console.log($(this).attr("id"));
 		nextpage = rotes.getRote($(this).attr("id"));
-		console.log(nextpage);
 		if(nextpage != ""){
 			//次のページに移動
 			document.getElementById("main").pushPage(nextpage + ".html");
