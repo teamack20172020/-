@@ -54,11 +54,12 @@ function viewHistory(type) {
 	let elem = "";
 	for (let i = history_array.length-1; i >=0 ; i--) {
 		if(type==0){
+			//プラン削除しない画面表示
 			elem += "<ons-list-item class='history_item' modifier='chevron' value='" + i + "' tappable>";
 		}else{
+			//プラン削除する画面表示
 			elem += '<ons-list-item>'
 				+ '<label class="remove_box right">'
-				//+ '<ons-checkbox input-id="check-1" ></ons-checkbox >'
 				+ '<ons-button id="romove_submit" remove_num="' + i + '">削除</ons-button>'
 				+ '</label>';
 		}
