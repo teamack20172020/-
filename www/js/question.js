@@ -110,6 +110,7 @@ function viewQestion(){
 		res.sort(compareFunc);
 		//パラメータを"q"で区切る処理
 		var param = res.join('q');
+		console.log(param);
 		var qurl = 'answer-objective/getList/' + param;
 		ajax(qurl,"answer","in","json");
 	}
