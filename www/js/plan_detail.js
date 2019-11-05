@@ -1,6 +1,5 @@
 document.addEventListener('init', function (event) {
 	var page = event.target;
-	//質問ページの時のみ処理
 	if (page.matches('#plan_detail')) {
 		let check_data = page.data.work_check;
 		let work_time = check_data['time_second']/60;
