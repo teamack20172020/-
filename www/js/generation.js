@@ -18,18 +18,18 @@ document.addEventListener('show', function (event) {
 	//プラン生成ページの時のみ処理
 	if (page.matches('#generation')) {
 		//目的idリストが存在する時(質問で目的を決める場合)
-		if(p_array.length > 0){
+		if (p_array.length > 0) {
 			main_purpose = p_array[p_count];
-			if(main_purpose == p_array[cnt]){
+			if (main_purpose == p_array[cnt]) {
 				cnt++;
 			}
 			sub_purpose = p_array[cnt];
 			cnt++;
-			if(cnt == p_array.length){
+			if (cnt == p_array.length) {
 				cnt = 0;
 				p_count++;
 			}
-			if(p_count == p_array.length-1 && cnt == p_array.length-1){
+			if (p_count == p_array.length - 1 && cnt == p_array.length - 1) {
 				cnt = 0;
 				p_count = 0;
 			}
@@ -40,14 +40,14 @@ document.addEventListener('show', function (event) {
 			sub_purpose = 1;
 		}
 		//スケジュール生成
-		$("#gene_purpose").text("目的：" + objectiveList[idlist[main_purpose-1]]);
+		$("#gene_purpose").text("目的：" + objectiveList[idlist[main_purpose - 1]]);
 		$("#gene_departure").text("出発地：" + departure_type);
 		//中間発表用 削除予定
 		areaid = 37;
 		//main_purpose = 7;
 		//sub_purpose = 1;
 		//自動生成APIと通信
-			ajax(ge_url + departure_type + "/" + lat + "," + lng + "/" + main_purpose + "/" + sub_purpose + "/" + areaid, "generation_auto", "in", "json");
+		ajax(ge_url + departure_type + "/" + lat + "," + lng + "/" + main_purpose + "/" + sub_purpose + "/" + areaid, "generation_auto", "in", "json");
 	}
 });
 
@@ -97,17 +97,17 @@ function onDeviceReady() {
 			//ブラウザを表示
 			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["lat"]
 				+ "," + work_ge['startPoint']["lng"]
-				+ "/" + work_ge['endPoint']["name"], '_blank', 'location=yes');
+				+ "/" + work_ge['endPoint']["name"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		} else if (work_ge['endPoint']["name"] == "現在位置") {
 			//エンド位置が現在位置の場合
 			//ブラウザを表示
 			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["name"]
 				+ "/" + work_ge['endPoint']["lat"]
-				+ "," + work_ge['endPoint']["lng"], '_blank', 'location=yes');
+				+ "," + work_ge['endPoint']["lng"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		} else {
 			//ブラウザを表示
 			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["name"]
-				+ "/" + work_ge['endPoint']["name"], '_blank', 'location=yes');
+				+ "/" + work_ge['endPoint']["name"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		}
 		//plan_detail.htmlを使う場合のpush処理
 		// document.getElementById('main').pushPage("plan_detail.html", { data: { work_check } });
