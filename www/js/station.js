@@ -70,7 +70,6 @@ function viewDetails(data) {
 //決定ボタンクリック処理
 $(document).on("click", "#submit_station", function () {
 	let work = $("#sta_station").val().split(",");
-	console.log($("#sta_station"));
 	console.log(work);
 	lat = work[1];
 	lng = work[2];
