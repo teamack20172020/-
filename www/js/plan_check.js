@@ -38,17 +38,17 @@ function onDeviceReady() {
 			//ブラウザを表示
 			var ref = cordova.InAppBrowser.open(googlemapurl + work_check['startPoint']["lat"]
 				+ "," + work_check['startPoint']["lng"]
-				+ "/" + work_check['endPoint']["name"], '_blank', 'location=yes');
+				+ "/" + work_check['endPoint']["name"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		} else if (work_check['endPoint']["name"] == "現在位置") {
 			//エンド位置が現在位置の場合
 			//ブラウザを表示
 			var ref = cordova.InAppBrowser.open(googlemapurl + work_check['startPoint']["name"]
 				+ "/" + work_check['endPoint']["lat"]
-				+ "," + work_check['endPoint']["lng"], '_blank', 'location=yes');
+				+ "," + work_check['endPoint']["lng"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		} else {
 			//ブラウザを表示
 			var ref = cordova.InAppBrowser.open(googlemapurl + work_check['startPoint']["name"]
-				+ "/" + work_check['endPoint']["name"], '_blank', 'location=yes');
+				+ "/" + work_check['endPoint']["name"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		}
 		// document.getElementById('main').pushPage("plan_detail.html", { data: { work_check } });
 	});
