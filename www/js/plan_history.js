@@ -14,7 +14,7 @@ document.addEventListener('show', function (event) {
 			//履歴出力
 			viewHistory(0);
 		} else {
-			$("#plan_history_error").html("履歴はありません");
+			$("#plan_history_error").html("<div class='sub_title'>履歴がないよ<br>新しく作ろう！</div>");
 		}
 	}
 });
@@ -51,24 +51,29 @@ $(document).on("click", "#romove_submit", function () {
  * 表示するのは生成した日にち、時間
  */
 function viewHistory(type) {
-	let elem = "";
-	for (let i = history_array.length - 1; i >= 0; i--) {
-		let work_date = history_array[i]["create_date"].split("-");
-		let work_time = history_array[i]["create_time"].split(":");
-		if (type == 0) {
-			//プラン削除しない画面表示
-			elem += "<ons-list-item class='history_item' modifier='chevron' value='" + i + "' tappable>";
-		} else {
-			//プラン削除する画面表示
-			elem += '<ons-list-item>'
-				+ '<label class="remove_box right">'
-				+ '<ons-button id="romove_submit" remove_num="' + i + '">削除</ons-button>'
-				+ '</label>';
+	if (history_array.length > 0) {
+		let elem = "";
+		for (let i = history_array.length - 1; i >= 0; i--) {
+			let work_date = history_array[i]["create_date"].split("-");
+			let work_time = history_array[i]["create_time"].split(":");
+			if (type == 0) {
+				//プラン削除しない画面表示
+				elem += "<ons-list-item class='history_item' modifier='chevron' value='" + i + "' tappable>";
+			} else {
+				//プラン削除する画面表示
+				elem += '<ons-list-item>'
+					+ '<label class="remove_box right">'
+					+ '<ons-button id="romove_submit" remove_num="' + i + '">削除</ons-button>'
+					+ '</label>';
+			}
+			elem += work_date[0] + "年" + work_date[1] + "月" + work_date[2] + "日"
+				+ "  "
+				+ work_time[0] + "時" + work_time[1] + "分に生成したプラン"
+				+ "</ons-list-item>";
 		}
-		elem += work_date[0] + "年" + work_date[1] + "月" + work_date[2] + "日"
-			+ "  "
-			+ work_time[0] + "時" + work_time[1] + "分に生成したプラン" 
-			+ "</ons-list-item>";
+		$("#plan_history_list").html(elem);
+	} else {
+		$("#plan_history_error").html("<div class='sub_title'>履歴がないよ<br>新しく作ろう！</div>");
+		$("#plan_history_list").html("");
 	}
-	$("#plan_history_list").html(elem);
 }
