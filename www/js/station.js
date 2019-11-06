@@ -17,12 +17,14 @@ document.addEventListener('init', function (event) {
 
 		//都道府県セレクトボックスが変更された時
 		$("#sta_prefecture").change(function () {
+			$('#modal').show();
 			let work = $("#sta_prefecture").val().split(",");
 			ajax(route_url + work[1] + ".xml", "station_route", "out", "xml");
 		});
 
 		//駅路線セレクトボックスが変更された時
 		$("#sta_route").change(function () {
+			$('#modal').show();
 			let work = $("#sta_route").val();
 			ajax(details_url + work + ".xml", "station_details", "out", "xml");
 		});
@@ -61,6 +63,7 @@ function viewDetails(data) {
 			+ $(this).find("station_name").text() + "</option>";
 	});
 	$("#sta_station select").html(elem);
+	$('#modal').hide();
 }
 
 
