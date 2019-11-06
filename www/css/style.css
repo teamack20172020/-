@@ -16,10 +16,17 @@
     left: 0;
     right: 0;
 }
+
+/*全体のフォント設定したい*/
+ons-toolbar .center,.question_box,.answer_box,.answer_box input,ons-select,.answer_box .button,.list-item__center{
+	font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
 /*アプリ内のすべてのイメージの共通CSS*/
 .travel_image{
 	width:100%;
 }
+
 
 /*questionの質問テキストが入っている要素のCSS*/
 .question_text{
@@ -71,7 +78,7 @@ ons-toolbar .center{
 	height:50%;
 	margin-left:auto;
 	margin-right:auto;
-	font-size:130%;
+	font-size:140%;
 }
 
 /*選択肢、ボタンが入った要素*/
@@ -123,9 +130,9 @@ ons-select{
 	font-size:120%;
 }
 
-/*プラン履歴削除用のcss*/
+/*list-itemのCSS*/
 .list-item__center{
-	height:50px;
+	height:60px;
 }
 
 /*削除、解除ボタンが入るツールバーの右側*/
@@ -144,7 +151,7 @@ ons-select{
 	color: #FFF;
 	border-bottom: solid 4px #435885;
 	border-radius: 10px;
-	font-family: 'M PLUS Rounded 1c', sans-serif;
+	font-size:150%;
 }
 
 /*アンサーボックス内にあるボタンを押したときのCSS*/
