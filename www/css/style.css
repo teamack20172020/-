@@ -21,7 +21,9 @@
 ons-toolbar .center,.question_box,.answer_box,.answer_box input,ons-select,.answer_box .button,.list-item__center{
 	font-family: 'M PLUS Rounded 1c', sans-serif;
 }
-
+p{
+	font-size:150%;
+}
 /*アプリ内のすべてのイメージの共通CSS*/
 .travel_image{
 	width:100%;
