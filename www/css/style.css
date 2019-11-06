@@ -21,7 +21,7 @@
 ons-toolbar .center,.question_box,.answer_box,.answer_box input,ons-select,.answer_box .button,.list-item__center{
 	font-family: 'M PLUS Rounded 1c', sans-serif;
 }
-p{
+#load_text{
 	font-size:150%;
 }
 /*アプリ内のすべてのイメージの共通CSS*/
@@ -33,7 +33,7 @@ p{
 /*questionの質問テキストが入っている要素のCSS*/
 .question_text{
 	position: absolute;
-	top:30px;
+	top:10px;
 	left:10%;
 	width:80%;
 	z-index: 10;	
