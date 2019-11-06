@@ -58,13 +58,13 @@ function setResG(resg) {
 	let today = new Date();
 	/**「g_work」配列の中身
 	 * data : 生成したプランの詳細データ
-	 * create_purpose : 生成した時の目的
+	 * create_purpose : 生成した時のメイン目的
 	 * create_departure : 生成した時の出発地
 	 * create_date : 生成した時のの日にち
 	 * create_time : 生成した時の時間
 	 */
 	g_work["data"] = resg;
-	g_work["create_purpose"] = purpose;
+	g_work["create_purpose"] = main_purpose;
 	g_work["create_departure"] = departure_type;
 	g_work["create_date"] = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 	g_work["create_time"] = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
