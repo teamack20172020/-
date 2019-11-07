@@ -1,5 +1,5 @@
 //ローカルストレージから取得したプラン履歴
-var history_array;
+var history_array=new Array();
 //削除する配列の添字
 var history_remove_num;
 document.addEventListener('show', function (event) {
