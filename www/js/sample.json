@@ -1,96 +1,26 @@
 {
-	"result":true,
 	"data":[
 		{
-			"startName":"高松駅",
-			"endName":"こだわり面や",
-			"startPoint":{
-				"address":"香川県高松駅の住所",
-				"name":"高松駅",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"endPoint":{
-				"address":"香川県こだわり面やの住所",
-				"name":"こだわり面や",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"time_ja":"30分",
+			"name":"出発地",
+			"address":"出発地住所",
+			"time_ja":"○○分",
 			"time_second":""
 		},
 		{
-			"startName":"こだわり面や",
-			"endName":"県庁食堂",
-			"startPoint":{
-				"address":"香川県こだわり面やの住所",
-				"name":"こだわり面や",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"endPoint":{
-				"address":"香川県県庁食堂の住所",
-				"name":"県庁食堂",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"time_ja":"5分",
-			"time_second":""
+			"name": "施設1",
+			"address": "住所1",
+			"tel": "000-0000-0000",
+			"time_ja": "○○分",
+			"time_second": ""
 		},
 		{
-			"startName":"県庁食堂",
-			"endName":"からあげ食堂",
-			"startPoint":{
-				"address":"香川県県庁食堂の住所",
-				"name":"県庁食堂",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"endPoint":{
-				"address":"香川県からあげ食堂の住所",
-				"name":"からあげ食堂",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"time_ja":"10分",
-			"time_second":""
-		},
-		{
-			"startName":"からあげ食堂",
-			"endName":"3匹の子豚",
-			"startPoint":{
-				"address":"香川県からあげ食堂の住所",
-				"name":"からあげ食堂",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"endPoint":{
-				"address":"香川県3匹の子豚の住所",
-				"name":"3匹の子豚",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"time_ja":"40分",
-			"time_second":""
-		},
-		{
-			"startName":"三匹の子豚",
-			"endName":"高松駅",
-			"startPoint":{
-				"address":"香川県3匹の子豚の住所",
-				"name":"3匹の子豚",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"endPoint":{
-				"address":"香川県高松駅の住所",
-				"name":"高松駅",
-				"lat":"130.1215452141",
-				"lng":"30.1215452141"
-			},
-			"time_ja":"1時間",
-			"time_second":""
+			"name": "施設2",
+			"address": "住所2",
+			"tel": "000-0000-0000",
+			"time_ja": "○○分",
+			"time_second": ""
 		}
+		
 	]
 
 }
