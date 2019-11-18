@@ -24,7 +24,8 @@ document.addEventListener('init', function (event) {
 		$("#city").change(function () {
 			var result = $("#city").val();
 			address_city = result;
-			console.log(address_prefecture + address_city);
+			//アドレスを合体させた結果を出すコンソール
+			//console.log(address_prefecture + address_city);
 		});
 
 	}
@@ -33,19 +34,21 @@ document.addEventListener('init', function (event) {
 //決定ボタンタップ時処理
 $(document).on("click", "#submit_address", function () {
 	var addin = $("#in_address").val();
-	console.log(addin);
+	//住所入力欄のvalue値を出すコンソール
+	//console.log("address::::"+addin);
 	if (addin == "" || addin == null) {
 		alert("住所が入力されていません");
 	} else {
+		//住所の緯度経度を取得するajax通信
 		ajax(latlng_url + address_prefecture + address_city + addin, "address_lanlng", "out", "xml");
 	}
 });
 
 //市区町村ajax通信の結果退避
 function setResAC(data) {
-	console.log(data);
 	address_city = data['data'][0]['name'];
-	console.log(address_prefecture + address_city);
+	//アドレスを合体させた結果をだすコンソール
+	//console.log(address_prefecture + address_city);
 	address_list = data['data'];
 	viewAddress();
 }
@@ -69,9 +72,10 @@ function setResAL(data) {
 	} else {
 		//検索結果が1件以上の場合
 		let work = $(data).find("Feature:first Geometry Coordinates").text().split(",");
-		console.log($(data).find("Feature:first >Name").text());
-		console.log("緯度:" + work[1]);
-		console.log("経度:" + work[0]);
+		//緯度、経度、住所名をだすコンソール
+		//console.log("住所名:"+$(data).find("Feature:first >Name").text());
+		//console.log("緯度:" + work[1]);
+		//console.log("経度:" + work[0]);
 		lat = work[1];
 		lng = work[0];
 		departure_type = $(data).find("Feature:first >Name").text();
