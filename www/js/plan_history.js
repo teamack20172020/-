@@ -10,7 +10,8 @@ document.addEventListener('show', function (event) {
 		if (getLocalStorage("generation") != null) {
 			//ローカルストレージから生成済みプラン一覧の取得
 			history_array = getLocalStorage("generation");
-			console.log(history_array);
+			//ローカルストレージに保存されている配列を出すコンソール
+			//console.log(history_array);
 			//履歴出力
 			viewHistory(0);
 		} else {
