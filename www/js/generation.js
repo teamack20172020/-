@@ -35,8 +35,9 @@ document.addEventListener('show', function (event) {
 				cnt = 0;
 				p_count = 0;
 			}
-			console.log(main_purpose);
-			console.log(sub_purpose);
+			//メイン目的、サブ目的を出すコンソール
+			//console.log("メイン目的:"+main_purpose);
+			//console.log("サブ目的:"+sub_purpose);
 		} else {
 			main_purpose = purpose;
 			sub_purpose = 1;
@@ -55,11 +56,8 @@ document.addEventListener('show', function (event) {
 
 //プラン自動生成ajax通信の結果退避
 function setResG(resg) {
-	console.log(resg);
 	//今日の日付を取得
 	let today = new Date();
-
-	console.log(resg.length);
 	/*取得した配列からクライアント側で使う配列に変換（APIからの返り値が変わるため削除予定）*/
 	/**「g_work」配列の中身
 	 * data : 生成したプランの詳細データ
@@ -99,7 +97,7 @@ function viewGeneration(viewg) {
 
 //monacaでブラウザを表示する為の処理内容
 function onDeviceReady() {
-	console.log("window.open works well");
+	//console.log("window.open works well");
 	//プランクリック時の処理
 	$(document).on("click", ".generation_item", function () {
 		//チェックされた項目を取得
@@ -134,7 +132,8 @@ $(document).on("click", "#complete_plan", function () {
 	generation_array.push(g_work);
 	//ローカルストレージに生成したプランを保存
 	setLocalStorage("generation", generation_array);
-	console.log(generation_array);
+	//ローカルストレージに保存した配列を出すコンソール
+	//console.log(generation_array);
 	//目的idリスト関係の初期化処理
 	p_array = new Array();
 	p_count = 0;
