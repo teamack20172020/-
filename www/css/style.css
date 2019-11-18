@@ -56,7 +56,7 @@ ons-toolbar .center{
 
 
 /*ツールバーのホームへ戻るボタン*/
-.home_back,#remove_plan,#release_plan{
+.home_back,#remove_plan,#release_plan,#edit_plan{
 	background-color:rgba(255,0,0,0);
 	color:#0076ff;
 	vertical-align: top;
@@ -134,8 +134,37 @@ ons-select{
 
 /*list-itemのCSS*/
 .list-item__center{
-	height:60px;
+	height:50px;
+	padding-right:14px;
 }
+
+
+/*プラン履歴のプラン内の名前*/
+.check_plan_name{
+	width:80%;
+	height:100%;
+	border:3px solid #000;
+	border-radius:10px;
+	padding-top:6px;
+	font-size:150%;
+	text-align:center;
+}
+/*プラン履歴のプラン内のボタン*/
+.route_item,.generation_item{
+	height:30px;
+	padding-top:0;
+	padding-bottom:0;
+}
+/*プラン履歴のプラン内の時間表示*/
+.check_plan_time{
+	width:80%;
+	margin-left:20%;
+}
+.text_check{
+	float:left;
+	width:100px;
+}
+
 
 /*削除、解除ボタンが入るツールバーの右側*/
 .remove_box{
@@ -175,3 +204,16 @@ ons-select{
 	margin-top:45px;
 }
 
+/*プラン履歴画面の完了ボタン、キャンセルボタンの共通CSS*/
+#change_completion_plan,#change_cancel_plan{
+	position: absolute;
+	bottom:20px;
+}
+/*プラン履歴画面の完了ボタンCSS*/
+#change_completion_plan{
+	right:20px;
+}
+/*プラン履歴画面の完了ボタン、キャンセルボタンの共通CSS*/
+#change_cancel_plan{
+	left:20px;
+}
