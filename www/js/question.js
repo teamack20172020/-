@@ -41,7 +41,8 @@ function setResQ(data){
 					, 'detail': val['detail']
 				});
 	});
-	console.log(qpList);	
+	//qplistを出すコンソール
+	//console.log(qpList);	
 
 	//目的id毎の質問idをwork_questionに格納する処理
 	for (let i = 0; i < qpList.length;i++){
@@ -54,7 +55,8 @@ function setResQ(data){
 			work_question[objectiveid] = newList;
 		}
 	}
-	console.log(work_question);
+	//目的id毎の質問idを格納した配列(work_question)を出すコンソール
+	//console.log("work_question:"+work_question);
 	question_set();
 }
 
@@ -88,7 +90,8 @@ function question_set() {
 			}
 		}
 	}
-	console.log(question);
+	//質問を出すコンソール
+	//console.log("question:"+question);
 	$("#modal").hide();
 	viewQestion();
 }
@@ -110,7 +113,8 @@ function viewQestion(){
 		res.sort(compareFunc);
 		//パラメータを"q"で区切る処理
 		var param = res.join('q');
-		console.log(param);
+		//paramを出すコンソール
+		//console.log("param:"+param);
 		var qurl = 'answer-objective/getList/' + param;
 		ajax(qurl,"answer","in","json");
 	}
