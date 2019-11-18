@@ -34,7 +34,6 @@ document.addEventListener('init', function (event) {
 
 //都道府県から駅路線取得ajax通信の結果退避
 function setResSR(data) {
-	console.log(data);
 	viewRoute(data);
 }
 
@@ -42,7 +41,6 @@ function setResSR(data) {
 function viewRoute(data) {
 	var elem = "";
 	$(data).find("line").each(function () {
-		console.log($(this).find("line_name").text());
 		elem += "<option value='" + $(this).find("line_cd").text() + "'>" + $(this).find("line_name").text() + "</option>";
 	});
 	$("#sta_route select").html(elem);
@@ -51,7 +49,6 @@ function viewRoute(data) {
 
 //路線から駅取得APIajax通信の結果退避
 function setResSD(data) {
-	console.log(data);
 	viewDetails(data);
 }
 
@@ -70,7 +67,8 @@ function viewDetails(data) {
 //決定ボタンクリック処理
 $(document).on("click", "#submit_station", function () {
 	let work = $("#sta_station").val().split(",");
-	console.log(work);
+	//緯度、経度を出すコンソール
+	//console.log("緯度経度:"+work);
 	lat = work[1];
 	lng = work[2];
 	departure_type = work[0];
