@@ -7,6 +7,8 @@ var g_work = {};
 //目的idリストの取得位置
 var p_count = 0;
 var cnt = 0;
+//距離APIで使うカウント変数
+var count_dis = 0;
 
 //monacaでブラウザを表示する為の処理
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -56,6 +58,9 @@ function setResG(resg) {
 	console.log(resg);
 	//今日の日付を取得
 	let today = new Date();
+
+	console.log(resg.length);
+	/*取得した配列からクライアント側で使う配列に変換（APIからの返り値が変わるため削除予定）*/
 	/**「g_work」配列の中身
 	 * data : 生成したプランの詳細データ
 	 * create_purpose : 生成した時のメイン目的
@@ -68,16 +73,24 @@ function setResG(resg) {
 	g_work["create_departure"] = departure_type;
 	g_work["create_date"] = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 	g_work["create_time"] = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+	//距離APIのURL
 	viewGeneration(resg);
 }
 
 //自動生成したプランを表示する
 function viewGeneration(viewg) {
 	var elem = "";
+	elem += "<ons-list-item>"
+		+ viewg[viewg.length - 1]["name"]
+		+ "</ons-list-item>";
 	for (let i = 0; i < viewg.length; i++) {
-		elem += "<ons-list-item  modifier='chevron' class='generation_item' value='" + i + "' tappable>" + viewg[i]["startPoint"]["name"] + "～"
-			+ viewg[i]["endPoint"]["name"] + "　　"
-			+ viewg[i]["time_ja"] + "</ons-list-item>";
+		elem += "<div class='ge_plan_time'>"
+			//+ "<div class='text_check'>↓" + viewg[0]["time_ja"] + "</div>"
+			+ "↓<ons-button class='generation_item' value='" + i + "'>経路</ons-button>"
+			+ "</div>"
+			+ "<ons-list-item>"
+			+ viewg[i]["name"]
+			+ "</ons-list-item>";
 	}
 	$("#gene_plan_list").html(elem);
 	//読み込み中画面を閉じる
@@ -91,23 +104,15 @@ function onDeviceReady() {
 	$(document).on("click", ".generation_item", function () {
 		//チェックされた項目を取得
 		let ge_type = $(this).attr("value");
-		let work_ge = g_work["data"][ge_type];
-		if (work_ge['startPoint']["name"] == "現在位置") {
-			//スタート位置が現在位置の場合
+		let work_ge = g_work["data"];
+		if (ge_type == 0) {
 			//ブラウザを表示
-			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["lat"]
-				+ "," + work_ge['startPoint']["lng"]
-				+ "/" + work_ge['endPoint']["name"], '_blank', 'location=yes,closebuttoncaption=戻る');
-		} else if (work_ge['endPoint']["name"] == "現在位置") {
-			//エンド位置が現在位置の場合
-			//ブラウザを表示
-			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["name"]
-				+ "/" + work_ge['endPoint']["lat"]
-				+ "," + work_ge['endPoint']["lng"], '_blank', 'location=yes,closebuttoncaption=戻る');
+			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge[work_ge.length - 1]["address"]
+				+ "/" + work_ge[ge_type]["address"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		} else {
 			//ブラウザを表示
-			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge['startPoint']["name"]
-				+ "/" + work_ge['endPoint']["name"], '_blank', 'location=yes,closebuttoncaption=戻る');
+			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge[ge_type-1]["address"]
+				+ "/" + work_ge[ge_type]["address"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		}
 		//plan_detail.htmlを使う場合のpush処理
 		// document.getElementById('main').pushPage("plan_detail.html", { data: { work_check } });
