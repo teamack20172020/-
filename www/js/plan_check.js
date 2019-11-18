@@ -34,7 +34,6 @@ $(document).on("click", "#edit_plan", function () {
 //編集モードでキャンセルボタンクリック時の処理（画面左下にあるボタン）
 $(document).on("click", "#cansel_edit", function () {
 	edit_array = check_data.slice();
-	console.log(edit_array);
 	$('#history_edit').html('<ons-button id="edit_plan">編集</ons-button>');
 	$("#change_completion_plan").html("");
 	$("#change_cancel_plan").html("");
@@ -45,7 +44,8 @@ $(document).on("click", "#cansel_edit", function () {
 $(document).on("click", "#completion_edit", function () {
 	history_array[history_point_type]["data"]=edit_array;
 	check_data=edit_array.slice();
-	console.log(history_array);
+	//ローカルストレージに保存する直前の配列のコンソール
+	//console.log(history_array);
 	setLocalStorage("generation", history_array);
 	$('#history_edit').html('<ons-button id="edit_plan">編集</ons-button>');
 	$("#change_completion_plan").html("");
@@ -56,7 +56,8 @@ $(document).on("click", "#completion_edit", function () {
 //編集モードで削除ボタンクリック時の処理（画面右にあるボタン）
 $(document).on("click", ".check_plan_remove", function () {
 	let rem_point = $(this).attr("remove_point");
-	console.log(rem_point);
+	//削除する配列の添字
+	//console.log(rem_point);
 	edit_array.splice(rem_point, 1);
 	viewcheck(1);
 });
@@ -119,7 +120,6 @@ function onDeviceReady() {
 			var ref = cordova.InAppBrowser.open(googlemapurl + work_check[check_type-1]["address"]
 				+ "/" + work_check[check_type]["address"], '_blank', 'location=yes,closebuttoncaption=戻る');
 		}
-		// document.getElementById('main').pushPage("plan_detail.html", { data: { work_check } });
 	});
 }
 
@@ -139,12 +139,14 @@ function setPlanSort() {
 		start: function (e, ui) {
 			//選択された要素の位置
 			start_edit_plan = ui.item.index();
-			console.log("start:" + start_edit_plan);
+			//選択が開始された位置のコンソール
+			//console.log("start:" + start_edit_plan);
 		},
 		update: function (e, ui) {
 			//交換された位置
 			end_edit_plan = ui.item.index();
-			console.log("update:" + end_edit_plan);
+			//選択が解除された位置のコンソール
+			//console.log("update:" + end_edit_plan);
 			//個々に配列入れ替え処理
 			if(start_edit_plan<end_edit_plan){
 				let work = edit_array[start_edit_plan];
