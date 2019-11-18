@@ -1,5 +1,6 @@
 //位置情報取得成功
 var onSuccess = function(position) {
+	//GPSで取得できた情報を出すコンソール
 	console.log('Latitude: '          + position.coords.latitude          + '\n' +
 		'Longitude: '         + position.coords.longitude         + '\n'
 		// 'Altitude: '          + position.coords.altitude          + '\n' +
@@ -16,10 +17,11 @@ var onSuccess = function(position) {
 
 //位置情報取得失敗
 function onError(error) {
+	//GPS取得に失敗した情報を出すコンソール
 	console.log('code: '    + error.code    + '\n' +
 		'message: ' + error.message + '\n');
 	$("#modal").hide();
-	//yahoomapで固定の場所を表示
+	//yahoomapで固定の場所（穴吹コンピュータカレッジ）を表示
 	Ymap(34.34291164999988,134.04532507000008);
 }
 
