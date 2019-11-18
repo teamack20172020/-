@@ -4,8 +4,16 @@
 		<div class="left">
 			<ons-back-button>戻る</ons-back-button>
 		</div>
+		<div class="right" id="history_edit">
+			<ons-button id="edit_plan">編集</ons-button>
+		</div>
 		<div class="center">プラン詳細</div>
 	</ons-toolbar>
-	<ons-list id="check_plan_list">
-	</ons-list>
+	<!--プランの施設名を入れる要素-->
+	<ons-list id="check_plan_list_head"></ons-list>
+	<ons-list id="check_plan_list"></ons-list>
+	<ons-list id="check_plan_list_foot"></ons-list>
+	<!--完了、キャンセルボタンを入れる要素-->
+	<div id="change_completion_plan"></div>
+	<div id="change_cancel_plan"></div>
 </ons-page>
