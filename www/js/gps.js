@@ -1,15 +1,15 @@
 //位置情報取得成功
 var onSuccess = function(position) {
 	//GPSで取得できた情報を出すコンソール
-	console.log('Latitude: '          + position.coords.latitude          + '\n' +
-		'Longitude: '         + position.coords.longitude         + '\n'
-		// 'Altitude: '          + position.coords.altitude          + '\n' +
-		// 'Accuracy: '          + position.coords.accuracy          + '\n' +
-		// 'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-		// 'Heading: '           + position.coords.heading           + '\n' +
-		// 'Speed: '             + position.coords.speed             + '\n' +
-		// 'Timestamp: '         + position.timestamp                + '\n'
-	);
+	// console.log('Latitude: '          + position.coords.latitude          + '\n' +
+	// 	'Longitude: '         + position.coords.longitude         + '\n'
+	// 	// 'Altitude: '          + position.coords.altitude          + '\n' +
+	// 	// 'Accuracy: '          + position.coords.accuracy          + '\n' +
+	// 	// 'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+	// 	// 'Heading: '           + position.coords.heading           + '\n' +
+	// 	// 'Speed: '             + position.coords.speed             + '\n' +
+	// 	// 'Timestamp: '         + position.timestamp                + '\n'
+	// );
 	$("#modal").hide();
 	//yahoomapで現在地を表示
 	Ymap(position.coords.latitude,position.coords.longitude);
