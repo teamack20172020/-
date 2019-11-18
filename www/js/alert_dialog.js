@@ -9,8 +9,9 @@ function cancelAlert(name){
 function removePlan(name){
 	//要素を削除した後の配列
 	let remove_after = history_array.splice(history_remove_num, 1);
-	console.log(remove_after);
-	console.log(history_array);
+	//プランを削除した後の配列と削除する前の配列を出すコンソール
+	//console.log(remove_after);
+	//console.log(history_array);
 	setLocalStorage("generation", history_array);
 	$("#" + name).hide();
 	//plan_history.jsファイルのメソッド
