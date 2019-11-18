@@ -17,14 +17,13 @@ document.addEventListener('init', function(event) {
 
 //ajax通信の結果退避
 function setResP(resList){
-	console.log(resList);
 	resList.forEach(function( row ) {
 		objectiveList[row["id"]] = row["title"];
 		objectiveAboutList[row["id"]] = row["about"];
-		console.log(row["title"]);
 	});
 	idlist = Object.keys(objectiveList);
-	console.log(idlist);
+	//目的IDを保存した配列を出すコンソール
+	//console.log(idlist);
 }
 
 //目的セレクトボックスを表示
@@ -40,7 +39,8 @@ function viewPurpose(){
 //目的決定ボタンクリック処理
 $(document).on("click","#submit_purpose",function(){
 	purpose=$("#purpose_select").val();
-	console.log(purpose);
+	//目的が決定した際の目的を出すコンソール
+	//console.log("目的:"+purpose);
 	$('#modal').show();
 	document.getElementById("main").pushPage("generation.html");
 });
