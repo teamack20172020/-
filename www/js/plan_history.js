@@ -22,9 +22,11 @@ document.addEventListener('show', function (event) {
 
 //プランのどれかをタップ時
 $(document).on("click", ".history_item", function () {
-	var history_type = $(this).attr("value");
+	let history_type = $(this).attr("value");
+	//plan_checkに送る配列
+	let his_work=history_array[history_type]["data"];
 	//プラン確認ページに選択したプラン情報を送信し表示
-	document.getElementById('main').pushPage("plan_check.html", { data: { history_type } });
+	document.getElementById('main').pushPage("plan_check.html", { data: { his_work,history_type } });
 });
 
 //ツールバーの削除ボタンクリックしたときの処理
