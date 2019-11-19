@@ -26,3 +26,12 @@ function Ymap(y, x) {
 		//console.log("緯度:" + lat + ",経度:" + lng);
 	});
 }
+
+//plan_detail.htmlで使うyahoomap処理
+function pd_Ymap(y, x) {
+	//ヤフーマップに出す真ん中の緯度経度を出すコンソール
+	ymap = new Y.Map("pd_map");
+	ymap.drawMap(new Y.LatLng(y, x), 14, Y.LayerSetId.NORMAL);
+	marker = new Y.Marker(new Y.LatLng(y, x));
+	ymap.addFeature(marker);
+}
