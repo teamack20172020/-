@@ -1,26 +1,69 @@
 {
 	"data":[
 		{
+			"0":{
+				"lat":132.121541154,
+				"lng": 32.12454515421,
+				"time_ja": "○○分"
+			},
 			"name":"出発地",
 			"address":"出発地住所",
-			"time_ja":"○○分",
-			"time_second":""
+			"number":"",
+			"url":"www.http://.com"
 		},
 		{
+			"0":{
+				"lat": 132,
+				"lng": 32,
+				"time_ja": "○○分"
+			},
 			"name": "施設1",
 			"address": "住所1",
-			"tel": "000-0000-0000",
-			"time_ja": "○○分",
-			"time_second": ""
+			"number": "",
+			"url": "www.http://.com"
 		},
 		{
+			"0": {
+				"lat": 132,
+				"lng": 32,
+				"time_ja": "○○分"
+			},
 			"name": "施設2",
 			"address": "住所2",
-			"tel": "000-0000-0000",
-			"time_ja": "○○分",
-			"time_second": ""
+			"number": "",
+			"url": "www.http://.com"
 		}
 		
+	],
+	"data2":[
+		0: {
+			"lat": ,
+			"lng"
+		},
+		1: {
+			"lat": ,
+			"lng"
+		},
+		2: {
+			"lat": ,
+			"lng"
+		},
+		3: {
+			"lat": ,
+			"lng"
+		},
+		4: {
+			"lat": ,
+			"lng"
+		},
+		5: {
+			"lat": ,
+			"lng"
+		},
+		6: {
+			"lat": ,
+			"lng"
+		}
 	]
 
 }
