@@ -19,6 +19,7 @@
 
 /*全体のフォント設定したい*/
 ons-toolbar .center,.question_box,.answer_box,.answer_box input,ons-select,.answer_box .button,.list-item__center{
+	font-display: swap;
 	font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 #load_text{
@@ -138,9 +139,15 @@ ons-select{
 	padding-right:14px;
 }
 
+/*並び替えでのリストの拡大*/
+.big_item{
+	background-color:blue;
+	width:110%;
+	height:110%;
+}
 
 /*プラン履歴のプラン内の名前*/
-.check_plan_name{
+.plan_item_name{
 	width:80%;
 	height:100%;
 	border:3px solid #000;
@@ -216,4 +223,11 @@ ons-select{
 /*プラン履歴画面の完了ボタン、キャンセルボタンの共通CSS*/
 #change_cancel_plan{
 	left:20px;
+}
+
+
+/*詳細画面のURL自動改行*/
+#detail_url{
+	overflow-wrap:break-word;
+	word-break:break-all;
 }
