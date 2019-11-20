@@ -8,15 +8,17 @@ var end_edit_plan = 0;
 //変更された後のプラン情報を入れる配列
 var edit_array = new Array();
 var history_point_type;
-//monacaでブラウザを表示する為の処理
+
 
 document.addEventListener('init', function (event) {
 	var page = event.target;
 	//プラン確認ページの時のみ処理
 	if (page.matches('#plan_check')) {
 		//データ取得
-		history_point_type=page.data.history_type;
+		history_point_type = page.data.history_type;
 		check_data = page.data.his_work;
+		//詳細画面に送るデータ配列
+		send_array = check_data;
 		edit_array = check_data.slice();
 		viewcheck(0);
 	}
@@ -41,8 +43,8 @@ $(document).on("click", "#cansel_edit", function () {
 
 //編集モードで完了ボタンクリック時の処理（画面右下にあるボタン）
 $(document).on("click", "#completion_edit", function () {
-	history_array[history_point_type]["data"]=edit_array;
-	check_data=edit_array.slice();
+	history_array[history_point_type]["data"] = edit_array;
+	check_data = edit_array.slice();
 	//ローカルストレージに保存する直前の配列のコンソール
 	//console.log(history_array);
 	setLocalStorage("generation", history_array);
@@ -61,13 +63,6 @@ $(document).on("click", ".check_plan_remove", function () {
 	viewcheck(1);
 });
 
-//詳細のボタンクリック時の処理
-$(document).on("click", ".detail_item", function () {
-	//チェックされた項目を取得
-	let detail_type = $(this).attr("value");
-	let de_work=check_data[detail_type];
-	document.getElementById('main').pushPage("plan_detail.html", { data: { de_work } });
-});
 
 //プラン履歴画面の表示するメソッド	
 function viewcheck(type) {
@@ -76,17 +71,17 @@ function viewcheck(type) {
 	if (type == 0) {
 		$("#check_plan_list").removeClass("sort_plan");
 		elem += "<ons-list-item modifier='nodivider'>"
-			+ "<div class='plan_item_name'>" + check_data[check_data.length - 1]["name"] + "</div>"
+			+ "<div class='plan_item_name'>" + count_text(check_data[check_data.length - 1]["name"]) + "</div>"
 			+ "</ons-list-item>";
 		for (let i = 0; i < check_data.length; i++) {
-			elem += "<div class='check_plan_time'><div class='text_check'>↓" +check_data[i][0]["time_ja"] + "</div>"
+			elem += "<div class='plan_item_time'><div class='text_check'>↓" + check_data[i][0]["time_ja"] + "</div>"
 				+ "<ons-button class='route_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button>" + "</div>"
-				+"<ons-list-item modifier='nodivider'>"
-				+ "<div class='plan_item_name'>" + check_data[i]["name"] + "</div>";
+				+ "<ons-list-item modifier='nodivider'>"
+				+ "<div class='plan_item_name'>" + count_text(check_data[i]["name"]) + "</div>";
 			if (i != check_data.length - 1) {
 				elem += "<ons-button class='detail_item' value='" + i + "'><i class='fas fa-info-circle'></i></ons-button>";
 			}
-			elem+= "</ons-list-item>";
+			elem += "</ons-list-item>";
 		}
 		$("#check_plan_list_head").html("");
 		$("#check_plan_list_foot").html("");
@@ -95,14 +90,14 @@ function viewcheck(type) {
 		$("#check_plan_list").addClass("sort_plan");
 		setPlanSort();
 		elem = "<ons-list-item modifier='nodivider'>"
-			+ "<div class='plan_item_name'>" + edit_array[edit_array.length - 1]["name"] + "</div>"
+			+ "<div class='plan_item_name'>" + count_text(edit_array[edit_array.length - 1]["name"]) + "</div>"
 			+ "</ons-list-item>";
 		$("#check_plan_list_head").html(elem);
 		$("#check_plan_list_foot").html(elem);
 		elem = "";
 		for (let i = 0; i < edit_array.length - 1; i++) {
 			elem += "<ons-list-item modifier='nodivider'>"
-				+ "<p class='plan_item_name'>" + edit_array[i]["name"]
+				+ "<p class='plan_item_name'>" + count_text(edit_array[i]["name"])
 				+ "</p>"
 				+ "<ons-button remove_point='" + i + "' class='check_plan_remove'>削除</ons-button>"
 				+ "</ons-list-item>";
@@ -119,11 +114,11 @@ $(document).on("click", ".route_item", function () {
 	//ブラウザを表示
 	if (check_type == 0) {
 		//ブラウザを表示
-		var ref = cordova.InAppBrowser.open(googlemapurl + work_check[work_check.length-1]["address"]
+		cordova.InAppBrowser.open(googlemapurl + work_check[work_check.length - 1]["address"]
 			+ "/" + work_check[check_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
 	} else {
 		//ブラウザを表示
-		var ref = cordova.InAppBrowser.open(googlemapurl + work_check[check_type-1]["address"]
+		cordova.InAppBrowser.open(googlemapurl + work_check[check_type - 1]["address"]
 			+ "/" + work_check[check_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
 	}
 });
@@ -155,13 +150,13 @@ function setPlanSort() {
 			//選択が解除された位置のコンソール
 			//console.log("update:" + end_edit_plan);
 			//個々に配列入れ替え処理
-			if(start_edit_plan<end_edit_plan){
+			if (start_edit_plan < end_edit_plan) {
 				let work = edit_array[start_edit_plan];
 				for (let i = start_edit_plan; i < end_edit_plan; i++) {
 					edit_array[i] = edit_array[i + 1];
 				}
 				edit_array[end_edit_plan] = work;
-			}else{
+			} else {
 				let work = edit_array[start_edit_plan];
 				for (let i = start_edit_plan; i > end_edit_plan; i--) {
 					edit_array[i] = edit_array[i - 1];
