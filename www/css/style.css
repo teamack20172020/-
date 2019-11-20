@@ -163,7 +163,7 @@ ons-select{
 	padding-bottom:0;
 }
 /*プラン履歴のプラン内の時間表示*/
-.check_plan_time{
+.plan_item_time{
 	width:80%;
 	margin-left:20%;
 }
@@ -199,6 +199,7 @@ ons-select{
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
 	margin-bottom:4px;
 	border-bottom: none;
+	opacity:1;
 }
 
 /*ホーム画面と出発地選択画面ではquestion_boxのCSS変更*/
