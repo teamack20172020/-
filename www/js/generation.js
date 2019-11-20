@@ -10,11 +10,8 @@ var cnt = 0;
 //距離APIで使うカウント変数
 var count_dis = 0;
 
-//monacaでブラウザを表示する為の処理
-document.addEventListener("deviceready", onDeviceReady, false);
-
 //画面が読み込まれたときの処理
-document.addEventListener('show', function (event) {
+document.addEventListener('init', function (event) {
 	g_work = {};
 	var page = event.target;
 	//プラン生成ページの時のみ処理
@@ -42,9 +39,6 @@ document.addEventListener('show', function (event) {
 			main_purpose = purpose;
 			sub_purpose = 1;
 		}
-		//スケジュール生成
-		$("#gene_purpose").text("目的：" + objectiveList[idlist[main_purpose - 1]]);
-		$("#gene_departure").text("出発地：" + departure_type);
 		//中間発表用 削除予定
 		areaid = 37;
 		//main_purpose = 7;
@@ -71,6 +65,8 @@ function setResG(resg) {
 	g_work["create_departure"] = departure_type;
 	g_work["create_date"] = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 	g_work["create_time"] = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+	//plan_check.jsのsend_array配列に詳細画面で送る配列を保存する
+	send_array = resg;
 	//距離APIのURL
 	viewGeneration(resg);
 }
@@ -79,43 +75,42 @@ function setResG(resg) {
 function viewGeneration(viewg) {
 	var elem = "";
 	elem += "<ons-list-item>"
-		+ viewg[viewg.length - 1]["name"]
+		+ "<div class='plan_item_name'>" + count_text(viewg[viewg.length - 1]["name"]) + "</div>"
 		+ "</ons-list-item>";
 	for (let i = 0; i < viewg.length; i++) {
-		elem += "<div class='ge_plan_time'>"
-			//+ "<div class='text_check'>↓" + viewg[0]["time_ja"] + "</div>"
-			+ "↓<ons-button class='generation_item' value='" + i + "'>経路</ons-button>"
+		elem += "<div class='plan_item_time'>"
+			+ "<div class='text_check'>↓" + viewg[i][0]["time_ja"] + "</div>"
+			+ "<ons-button class='generation_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button>"
 			+ "</div>"
 			+ "<ons-list-item>"
-			+ viewg[i]["name"]
-			+ "</ons-list-item>";
+			+ "<div class='plan_item_name'>" + count_text(viewg[i]["name"]) + "</div>";
+		if (i != viewg.length - 1) {
+			elem += "<ons-button class='detail_item' value='" + i + "'><i class='fas fa-info-circle'></i></ons-button>";
+		}
+		elem += "</ons-list-item>";
 	}
+	$("#gene_purpose").html("目的：" + objectiveList[idlist[main_purpose - 1]]);
+	$("#gene_departure").html("出発地：" + departure_type);
 	$("#gene_plan_list").html(elem);
 	//読み込み中画面を閉じる
 	$('#modal').hide();
 }
 
-//monacaでブラウザを表示する為の処理内容
-function onDeviceReady() {
-	//console.log("window.open works well");
-	//プランクリック時の処理
-	$(document).on("click", ".generation_item", function () {
-		//チェックされた項目を取得
-		let ge_type = $(this).attr("value");
-		let work_ge = g_work["data"];
-		if (ge_type == 0) {
-			//ブラウザを表示
-			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge[work_ge.length - 1]["address"]
-				+ "/" + work_ge[ge_type]["address"], '_blank', 'location=yes,closebuttoncaption=戻る');
-		} else {
-			//ブラウザを表示
-			var ref = cordova.InAppBrowser.open(googlemapurl + work_ge[ge_type-1]["address"]
-				+ "/" + work_ge[ge_type]["address"], '_blank', 'location=yes,closebuttoncaption=戻る');
-		}
-		//plan_detail.htmlを使う場合のpush処理
-		// document.getElementById('main').pushPage("plan_detail.html", { data: { work_check } });
-	});
-}
+//プランクリック時の処理
+$(document).on("click", ".generation_item", function () {
+	//チェックされた項目を取得
+	let ge_type = $(this).attr("value");
+	let work_ge = g_work["data"];
+	if (ge_type == 0) {
+		//ブラウザを表示
+		cordova.InAppBrowser.open(googlemapurl + work_ge[work_ge.length - 1]["address"]
+			+ "/" + work_ge[ge_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+	} else {
+		//ブラウザを表示
+		cordova.InAppBrowser.open(googlemapurl + work_ge[ge_type - 1]["address"]
+			+ "/" + work_ge[ge_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+	}
+});
 
 //「もう一度自動生成する」ボタンクリック
 $(document).on("click", "#again_plan", function () {
