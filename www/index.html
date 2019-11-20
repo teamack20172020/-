@@ -85,8 +85,9 @@
   <!--ナビゲーション（ページを重ねて表示する為の奴）-->
   <ons-navigator id="main" page="home.html"></ons-navigator>
   
-  <!--   alertページ (departure.html) -->
+  <!--   alertページ  -->
   <div id="alert-dialog">
+    <!--プラン履歴一覧画面での削除時のアラート-->
     <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
       <div class="alert-dialog-title">Alert</div>
       <div class="alert-dialog-content">
@@ -99,12 +100,15 @@
       </div>
     </ons-alert-dialog>
 
+    <!--自動生成画面での保存時のアラート-->
     <ons-alert-dialog id="generation_ok" modifier="rowfooter">
+      <div class="alert-dialog-title">プランのタイトルを決定してください</div>
       <div class="alert-dialog-content">
-        プランを履歴に保存しました。
+        <ons-input id="plan_title_in" modifier="underbar" float></ons-input>
+        <br>※空白の場合、日時、時間がタイトルになります。
       </div>
       <div class="alert-dialog-footer">
-        <ons-alert-dialog-button onclick="ge_ok();">OK</ons-alert-dialog-button>
+        <ons-alert-dialog-button onclick="ge_ok();">保存</ons-alert-dialog-button>
       </div>
     </ons-alert-dialog>
   </div>
