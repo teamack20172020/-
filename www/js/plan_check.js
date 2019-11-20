@@ -74,7 +74,7 @@ function viewcheck(type) {
 			+ "<div class='plan_item_name'>" + count_text(check_data[check_data.length - 1]["name"]) + "</div>"
 			+ "</ons-list-item>";
 		for (let i = 0; i < check_data.length; i++) {
-			elem += "<div class='plan_item_time'><div class='text_check'>↓" + check_data[i][0]["time_ja"] + "</div>"
+			elem += "<div class='plan_item_time'><div class='text_check'>↓" + check_data[i]["time_ja"] + "</div>"
 				+ "<ons-button class='route_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button>" + "</div>"
 				+ "<ons-list-item modifier='nodivider'>"
 				+ "<div class='plan_item_name'>" + count_text(check_data[i]["name"]) + "</div>";
@@ -99,7 +99,7 @@ function viewcheck(type) {
 			elem += "<ons-list-item modifier='nodivider'>"
 				+ "<p class='plan_item_name'>" + count_text(edit_array[i]["name"])
 				+ "</p>"
-				+ "<ons-button remove_point='" + i + "' class='check_plan_remove'>削除</ons-button>"
+				+ "<ons-button remove_point='" + i + "' class='check_plan_remove'><i class='fas fa-trash-alt'></i></ons-button>"
 				+ "</ons-list-item>";
 		}
 	}
