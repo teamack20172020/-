@@ -79,7 +79,7 @@ function viewGeneration(viewg) {
 		+ "</ons-list-item>";
 	for (let i = 0; i < viewg.length; i++) {
 		elem += "<div class='plan_item_time'>"
-			+ "<div class='text_check'>↓" + viewg[i][0]["time_ja"] + "</div>"
+			+ "<div class='text_check'>↓" + viewg[i]["time_ja"] + "</div>"
 			+ "<ons-button class='generation_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button>"
 			+ "</div>"
 			+ "<ons-list-item>"
@@ -120,15 +120,6 @@ $(document).on("click", "#again_plan", function () {
 
 //「完了」ボタンクリック
 $(document).on("click", "#complete_plan", function () {
-	//ローカルストレージから取得
-	if (getLocalStorage("generation") != null) {
-		generation_array = getLocalStorage("generation");
-	}
-	generation_array.push(g_work);
-	//ローカルストレージに生成したプランを保存
-	setLocalStorage("generation", generation_array);
-	//ローカルストレージに保存した配列を出すコンソール
-	//console.log(generation_array);
 	//目的idリスト関係の初期化処理
 	p_array = new Array();
 	p_count = 0;
