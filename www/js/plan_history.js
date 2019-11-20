@@ -57,8 +57,6 @@ function viewHistory(type) {
 	if (history_array.length > 0) {
 		let elem = "";
 		for (let i = history_array.length - 1; i >= 0; i--) {
-			let work_date = history_array[i]["create_date"].split("-");
-			let work_time = history_array[i]["create_time"].split(":");
 			if (type == 0) {
 				//プラン削除しない画面表示
 				elem += "<ons-list-item class='history_item' modifier='chevron' value='" + i + "' tappable>";
@@ -66,12 +64,10 @@ function viewHistory(type) {
 				//プラン削除する画面表示
 				elem += '<ons-list-item>'
 					+ '<label class="remove_box right">'
-					+ '<ons-button id="romove_submit" remove_num="' + i + '">削除</ons-button>'
+					+ '<ons-button id="romove_submit" remove_num="' + i + '"><i class="fas fa-trash-alt"></i></ons-button>'
 					+ '</label>';
 			}
-			elem += work_date[0] + "年" + work_date[1] + "月" + work_date[2] + "日"
-				+ "  "
-				+ work_time[0] + "時" + work_time[1] + "分に生成したプラン"
+			elem += history_array[i]["title"]
 				+ "</ons-list-item>";
 		}
 		$("#plan_history_list").html(elem);
