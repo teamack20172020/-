@@ -50,6 +50,7 @@ function count_text(str){
 		work=str.slice(0,8);
 		work+="...";
 	}
-	console.log(work);
+	//変換したworkをコンソールに出す
+	//console.log(work);
 	return work;
 }
