@@ -1,5 +1,7 @@
 //一つのプランが格納される変数
 var check_data;
+//プランのタイトルをいれる変数
+var check_title;
 //ブラウザのgoogle mapを表示する為の変数
 var googlemapurl = "https://www.google.co.jp/maps/dir/";
 //入れ替えに使う位置変数
@@ -16,10 +18,11 @@ document.addEventListener('init', function (event) {
 	if (page.matches('#plan_check')) {
 		//データ取得
 		history_point_type = page.data.history_type;
-		check_data = page.data.his_work;
+		check_data = page.data.his_work["data"];
 		//詳細画面に送るデータ配列
 		send_array = check_data;
 		edit_array = check_data.slice();
+		check_title=page.data.his_work["title"];
 		viewcheck(0);
 	}
 });
@@ -43,7 +46,13 @@ $(document).on("click", "#cansel_edit", function () {
 
 //編集モードで完了ボタンクリック時の処理（画面右下にあるボタン）
 $(document).on("click", "#completion_edit", function () {
+	if ($("#title_input").val().length>0){
+		check_title = $("#title_input").val();
+	}
+	console.log($("#title_input").val());
 	history_array[history_point_type]["data"] = edit_array;
+	history_array[history_point_type]["title"]=check_title;
+	send_array = edit_array.slice();
 	check_data = edit_array.slice();
 	//ローカルストレージに保存する直前の配列のコンソール
 	//console.log(history_array);
@@ -83,6 +92,7 @@ function viewcheck(type) {
 			}
 			elem += "</ons-list-item>";
 		}
+		$("#check_plan_title").html("タイトル:" + check_title +"");
 		$("#check_plan_list_head").html("");
 		$("#check_plan_list_foot").html("");
 	} else {
@@ -102,6 +112,7 @@ function viewcheck(type) {
 				+ "<ons-button remove_point='" + i + "' class='check_plan_remove'><i class='fas fa-trash-alt'></i></ons-button>"
 				+ "</ons-list-item>";
 		}
+		$("#check_plan_title").html("タイトル:<ons-input id='title_input' modifier='transparent' value='" + check_title + "'></ons-input>");
 	}
 	$("#check_plan_list").html(elem);
 }
