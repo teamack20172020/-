@@ -24,7 +24,7 @@ document.addEventListener('show', function (event) {
 $(document).on("click", ".history_item", function () {
 	let history_type = $(this).attr("value");
 	//plan_checkに送る配列
-	let his_work=history_array[history_type]["data"];
+	let his_work=history_array[history_type];
 	//プラン確認ページに選択したプラン情報を送信し表示
 	document.getElementById('main').pushPage("plan_check.html", { data: { his_work,history_type } });
 });
