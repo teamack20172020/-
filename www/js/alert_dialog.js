@@ -29,7 +29,7 @@ function ge_ok(){
 	let nen = g_work["create_date"].split("-");
 	let jikan=g_work["create_time"].split(":");
 	if(p_title.length<=0 || p_title==null){
-		p_title = nen[0] + "年" + nen[1] + "月" + nen[2] + "日 " + jikan[0] + "時" + jikan[1]+"分に生成したプラン";
+		p_title = nen[0] + "年" + nen[1] + "月" + nen[2] + "日　" + jikan[0] + "時" + jikan[1]+"分";
 	}
 	//generation.jsにあるg_workにタイトルを追加してローカルストレージに保存する
 	g_work["title"]=p_title;
