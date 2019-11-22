@@ -124,6 +124,9 @@ $(document).on("click", "#complete_plan", function () {
 	p_array = new Array();
 	p_count = 0;
 	cnt = 0;
+	let nen = g_work["create_date"].split("-");
+	let jikan = g_work["create_time"].split(":");
+	$("#plan_title_in").attr("placeholder", nen[0] + "年" + nen[1] + "月" + nen[2] + "日　" + jikan[0] + "時" + jikan[1] + "分");
 	$("#generation_ok").show();
 });
 
