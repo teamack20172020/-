@@ -72,12 +72,19 @@ function htmlspecialchars(ch) {
 function type_image(str) {
 	let result = "img/";
 	switch (str) {
+		case 1:
 		case "1": result += "icon_sightseeing.png"; break;
+		case 2:
 		case "2": result += "icon_gourmet.png"; break;
+		case 3:
 		case "3": result += "icon_history.png"; break;
+		case 4:
 		case "4": result += "icon_leisure.png"; break;
+		case 5:
 		case "5": result += "icon_art.png"; break;
+		case 6:
 		case "6": result += "icon_nature.png"; break;
+		case 7:
 		case "7": result += "icon_spa.png"; break;
 		default: result += "icon_departure.png";break;
 	}
