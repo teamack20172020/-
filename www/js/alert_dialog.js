@@ -21,7 +21,7 @@ function removePlan(name){
 //generation.jsの完了ボタンがクリックされてアラート出た時の処理
 function ge_ok(){
 	//タイトル情報取得
-	let p_title = $("#plan_title_in").val();
+	let p_title = htmlspecialchars($("#plan_title_in").val());
 	//ローカルストレージから取得
 	if (getLocalStorage("generation") != null) {
 		generation_array = getLocalStorage("generation");
@@ -33,7 +33,8 @@ function ge_ok(){
 	}
 	//generation.jsにあるg_workにタイトルを追加してローカルストレージに保存する
 	g_work["title"]=p_title;
-	console.log(g_work);
+	//タイトルの入ったプランをコンソールに出す
+	//console.log(g_work);
 	generation_array.push(g_work);
 	//ローカルストレージに生成したプランを保存
 	setLocalStorage("generation", generation_array);
