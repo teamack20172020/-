@@ -90,13 +90,12 @@
     <!--プラン履歴一覧画面での削除時のアラート-->
     <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
       <div class="alert-dialog-title">Alert</div>
-      <div class="alert-dialog-content">
-        本当にこのファイルを削除しても良いですか?
-        ※二度と同じプランは作成できないかもしれません
+      <div class="alert-dialog-content" id="plan_alert_text">
+        
       </div>
       <div class="alert-dialog-footer">
-        <ons-alert-dialog-button onclick="cancelAlert('my-alert-dialog');">Cancel</ons-alert-dialog-button>
-        <ons-alert-dialog-button onclick="removePlan('my-alert-dialog');">OK</ons-alert-dialog-button>
+        <ons-alert-dialog-button onclick="cancelAlert('my-alert-dialog');">キャンセル</ons-alert-dialog-button>
+        <ons-alert-dialog-button id="plan_alert_ok" onclick="">削除</ons-alert-dialog-button>
       </div>
     </ons-alert-dialog>
 
@@ -108,6 +107,7 @@
         <br>※空白の場合、日時、時間がタイトルになります。
       </div>
       <div class="alert-dialog-footer">
+        <ons-alert-dialog-button onclick="cancelAlert('generation_ok');">キャンセル</ons-alert-dialog-button>
         <ons-alert-dialog-button onclick="ge_ok();">保存</ons-alert-dialog-button>
       </div>
     </ons-alert-dialog>
