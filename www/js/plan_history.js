@@ -11,7 +11,7 @@ document.addEventListener('show', function (event) {
 			//ローカルストレージから生成済みプラン一覧の取得
 			history_array = getLocalStorage("generation");
 			//ローカルストレージに保存されている配列を出すコンソール
-			//console.log(history_array);
+			console.log(history_array);
 			//履歴出力
 			viewHistory(0);
 		} else {
@@ -44,8 +44,7 @@ $(document).on("click", "#release_plan", function () {
 //リストの削除ボタンを押したときの削除処理
 $(document).on("click", "#romove_submit", function () {
 	history_remove_num = $(this).attr("remove_num");
-	//アラートを表示(alert_dialog.jsに処理は記載)
-	$("#my-alert-dialog").show();
+	viewAlertHIS();
 });
 
 /**リストを表示するメソッド
