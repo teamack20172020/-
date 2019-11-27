@@ -12,7 +12,7 @@ document.addEventListener('init', function (event) {
 		pd_Ymap(latlng_work[0], latlng_work[1]);
 		$("#pd_name").html(de_array["name"]);
 		$("#pd_url").html("<a href='#' id='detail_url'>" + de_array["site-url"]+"</a>");
-		$("#pd_tel").html(de_array["number"]);
+		$("#pd_tel").html("<a href='tel:" + de_array["number"] + "'>" + de_array["number"] +"</a>");
 	}
 });
 
