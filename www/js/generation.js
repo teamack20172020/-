@@ -12,7 +12,6 @@ var count_dis = 0;
 
 //画面が読み込まれたときの処理
 document.addEventListener('init', function (event) {
-	g_work = {};
 	var page = event.target;
 	//プラン生成ページの時のみ処理
 	if (page.matches('#generation')) {
@@ -75,6 +74,7 @@ function setResG(resg) {
 function viewGeneration(viewg) {
 	var elem = "";
 	elem += "<ons-list-item>"
+		+ "<img src='" + type_image("デフォルト") + "' class='purpose_image'>"
 		+ "<div class='plan_item_name'>" + count_text(viewg[viewg.length - 1]["name"]) + "</div>"
 		+ "</ons-list-item>";
 	for (let i = 0; i < viewg.length; i++) {
@@ -82,8 +82,13 @@ function viewGeneration(viewg) {
 			+ "<div class='text_check'>↓" + viewg[i]["time_ja"] + "</div>"
 			+ "<ons-button class='generation_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button>"
 			+ "</div>"
-			+ "<ons-list-item>"
-			+ "<div class='plan_item_name'>" + count_text(viewg[i]["name"]) + "</div>";
+			+ "<ons-list-item>";
+		if (i != viewg.length - 1) {
+			elem += "<img src='" + type_image(viewg[i]["purpose"]) + "' class='purpose_image'>";
+		} else {
+			elem += "<img src='" + type_image("デフォルト") + "' class='purpose_image'>";
+		}
+		elem+= "<div class='plan_item_name'>" + count_text(viewg[i]["name"]) + "</div>";
 		if (i != viewg.length - 1) {
 			elem += "<ons-button class='detail_item' value='" + i + "'><i class='fas fa-info-circle'></i></ons-button>";
 		}
@@ -114,6 +119,7 @@ $(document).on("click", ".generation_item", function () {
 
 //「もう一度自動生成する」ボタンクリック
 $(document).on("click", "#again_plan", function () {
+	g_work = {};
 	$('#modal').show();
 	document.getElementById("main").resetToPage('generation.html', { animation: 'slide-ios' });
 });
