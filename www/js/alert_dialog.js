@@ -1,21 +1,42 @@
-/**アラートディアログのキャンセルボタンの処理
- * @param  {String} name : キャンセルしたいアラートディアログのID名
- */
+//プラン一覧画面で削除するときのアラート表示処理
+function viewAlertHIS(){
+	let view_text = "本当にこのプランを削除しても良いですか?※二度と同じプランは作成できないかもしれません";
+	$("#plan_alert_text").html(view_text);
+	$("#plan_alert_ok").attr("onclick","removePlan('his');");
+	//アラートを表示(alert_dialog.jsに処理は記載)
+	$("#my-alert-dialog").show();
+}
+
+//プラン履歴画面で最後の施設を削除するときに出すアラート表示処理
+function viewAlertCHE(re_num) {
+	let view_text = "施設がなくなるのでプラン毎削除しますがよろしいですか？";
+	$("#plan_alert_text").html(view_text);
+	history_remove_num = re_num;
+	$("#plan_alert_ok").attr("onclick", "removePlan('che');");
+	//アラートを表示(alert_dialog.jsに処理は記載)
+	$("#my-alert-dialog").show();
+}
+
+//アラートディアログのキャンセルボタンの処理
 function cancelAlert(name){
 	$("#"+name).hide();
 }
 
 //plan_historyの履歴を削除するメソッド
-function removePlan(name){
+function removePlan(type){
 	//要素を削除した後の配列
 	let remove_after = history_array.splice(history_remove_num, 1);
 	//プランを削除した後の配列と削除する前の配列を出すコンソール
 	//console.log(remove_after);
 	//console.log(history_array);
 	setLocalStorage("generation", history_array);
-	$("#" + name).hide();
-	//plan_history.jsファイルのメソッド
-	viewHistory(1);
+	$("#my-alert-dialog").hide();
+	if(type=="his"){
+		//plan_history.jsファイルのメソッド
+		viewHistory(1);
+	}else{
+		document.getElementById("main").popPage();
+	}
 }
 
 //generation.jsの完了ボタンがクリックされてアラート出た時の処理
