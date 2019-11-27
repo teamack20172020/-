@@ -22,7 +22,7 @@ document.addEventListener('init', function (event) {
 		//詳細画面に送るデータ配列
 		send_array = check_data;
 		edit_array = check_data.slice();
-		check_title=page.data.his_work["title"];
+		check_title = page.data.his_work["title"];
 		viewcheck(0);
 	}
 });
@@ -46,12 +46,50 @@ $(document).on("click", "#cansel_edit", function () {
 
 //編集モードで完了ボタンクリック時の処理（画面右下にあるボタン）
 $(document).on("click", "#completion_edit", function () {
-	if ($("#title_input").val().length>0){
-		check_title = $("#title_input").val();
+	//編集配列と元の配列が一緒でないならajax通信をする	
+	if (JSON.stringify(edit_array) != JSON.stringify(check_data)){
+		//$("#modal").show();
+		let work_array = "";
+		for (let i = 0; i < check_data.length; i++) {
+			if (i == check_data.length - 1) {
+				work_array += edit_array[i]["address"];
+			} else {
+				work_array += edit_array[i]["latlng"] + ":";
+			}
+		}
+		let url="travelplan/timeset/"+work_array;
+		ajax(url, "plan_edit", "in", "json");
+	}else{
+		$('#history_edit').html('<ons-button id="edit_plan">編集</ons-button>');
+		$("#change_completion_plan").html("");
+		$("#change_cancel_plan").html("");
+		viewcheck(0);
 	}
-	console.log($("#title_input").val());
+});
+
+//編集モードで削除ボタンクリック時の処理（画面右にあるボタン）
+$(document).on("click", ".check_plan_remove", function () {
+	if(edit_array.length>2){
+		let rem_point = $(this).attr("remove_point");
+		//削除する配列の添字
+		//console.log(rem_point);
+		edit_array.splice(rem_point, 1);
+		viewcheck(1);
+	}else{
+		viewAlertCHE(history_point_type);
+	}
+});
+
+//移動時間取得API退避
+function setResPD(res) {
+	if ($("#title_input").val().length > 0) {
+		check_title = $("#title_input").val();
+		check_title = htmlspecialchars(check_title);
+	}
+	//タイトルをコンソールに出す
+	//console.log(htmlspecialchars($("#title_input").val()));
 	history_array[history_point_type]["data"] = edit_array;
-	history_array[history_point_type]["title"]=check_title;
+	history_array[history_point_type]["title"] = check_title;
 	send_array = edit_array.slice();
 	check_data = edit_array.slice();
 	//ローカルストレージに保存する直前の配列のコンソール
@@ -61,17 +99,7 @@ $(document).on("click", "#completion_edit", function () {
 	$("#change_completion_plan").html("");
 	$("#change_cancel_plan").html("");
 	viewcheck(0);
-});
-
-//編集モードで削除ボタンクリック時の処理（画面右にあるボタン）
-$(document).on("click", ".check_plan_remove", function () {
-	let rem_point = $(this).attr("remove_point");
-	//削除する配列の添字
-	//console.log(rem_point);
-	edit_array.splice(rem_point, 1);
-	viewcheck(1);
-});
-
+}
 
 //プラン履歴画面の表示するメソッド	
 function viewcheck(type) {
@@ -79,35 +107,45 @@ function viewcheck(type) {
 	//「type=0」なら閲覧モード画面
 	if (type == 0) {
 		$("#check_plan_list").removeClass("sort_plan");
-		elem += "<ons-list-item modifier='nodivider'>"
+		elem += "<ons-list-item>"
+			+ "<img src='" + type_image("デフォルト") + "' class='purpose_image'>"
 			+ "<div class='plan_item_name'>" + count_text(check_data[check_data.length - 1]["name"]) + "</div>"
 			+ "</ons-list-item>";
 		for (let i = 0; i < check_data.length; i++) {
 			elem += "<div class='plan_item_time'><div class='text_check'>↓" + check_data[i]["time_ja"] + "</div>"
-				+ "<ons-button class='route_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button>" + "</div>"
-				+ "<ons-list-item modifier='nodivider'>"
-				+ "<div class='plan_item_name'>" + count_text(check_data[i]["name"]) + "</div>";
+				+ "<ons-button class='route_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button></div>"
+				+ "<ons-list-item>";
+			if (i != check_data.length - 1) {
+				elem += "<img src='" + type_image(check_data[i]["purpose"]) + "' class='purpose_image'>";
+			} else {
+				elem += "<img src='" + type_image("デフォルト") + "' class='purpose_image'>";
+			}
+			elem += "<div class='plan_item_name'>" + count_text(check_data[i]["name"]) + "</div>";
 			if (i != check_data.length - 1) {
 				elem += "<ons-button class='detail_item' value='" + i + "'><i class='fas fa-info-circle'></i></ons-button>";
 			}
 			elem += "</ons-list-item>";
 		}
-		$("#check_plan_title").html("タイトル:" + check_title +"");
+		$("#check_plan_title").html("タイトル:" + check_title);
 		$("#check_plan_list_head").html("");
 		$("#check_plan_list_foot").html("");
 	} else {
 		//「type!=0」なら編集モード画面
 		$("#check_plan_list").addClass("sort_plan");
 		setPlanSort();
-		elem = "<ons-list-item modifier='nodivider'>"
+		elem = "<ons-list-item>"
+			+ "<img src='" + type_image("デフォルト") + "' class='purpose_image'>"
 			+ "<div class='plan_item_name'>" + count_text(edit_array[edit_array.length - 1]["name"]) + "</div>"
 			+ "</ons-list-item>";
 		$("#check_plan_list_head").html(elem);
 		$("#check_plan_list_foot").html(elem);
 		elem = "";
 		for (let i = 0; i < edit_array.length - 1; i++) {
-			elem += "<ons-list-item modifier='nodivider'>"
-				+ "<p class='plan_item_name'>" + count_text(edit_array[i]["name"])
+			elem += "<ons-list-item>";
+			if (i != edit_array.length - 1) {
+				elem += "<img src='" + type_image(edit_array[i]["purpose"]) + "' class='purpose_image'>";
+			}
+			elem += "<p class='plan_item_name'>" + count_text(edit_array[i]["name"])
 				+ "</p>"
 				+ "<ons-button remove_point='" + i + "' class='check_plan_remove'><i class='fas fa-trash-alt'></i></ons-button>"
 				+ "</ons-list-item>";
