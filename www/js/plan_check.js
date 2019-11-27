@@ -51,8 +51,8 @@ $(document).on("click", "#completion_edit", function () {
 	if (JSON.stringify(edit_array) != JSON.stringify(check_data)) {
 		//$("#modal").show();
 		let work_array = "";
-		for (let i = 0; i < check_data.length; i++) {
-			if (i == check_data.length - 1) {
+		for (let i = 0; i < edit_array.length; i++) {
+			if (i == edit_array.length - 1) {
 				work_array += edit_array[i]["address"];
 			} else {
 				work_array += edit_array[i]["latlng"] + ":";
