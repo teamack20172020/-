@@ -1,7 +1,7 @@
 var address_prefecture = "北海道";
 var address_city = "";
 //市区町村取得APIのURL（この文字列のあとにエリア指定）
-var city_url = "http://www.land.mlit.go.jp/webland/api/CitySearch?area=";
+var city_url = "https://www.land.mlit.go.jp/webland/api/CitySearch?area=";
 //市区町村取得結果を入れる配列
 var address_list = [];
 //住所から緯度経度取得APIのURL（この文字列のあとにエリア指定）
@@ -33,12 +33,13 @@ document.addEventListener('init', function (event) {
 
 //決定ボタンタップ時処理
 $(document).on("click", "#submit_address", function () {
-	var addin = $("#in_address").val();
+	var addin = htmlspecialchars($("#in_address").val());
 	//住所入力欄のvalue値を出すコンソール
 	//console.log("address::::"+addin);
 	if (addin == "" || addin == null) {
 		alert("住所が入力されていません");
 	} else {
+		console.log(latlng_url + address_prefecture + address_city + addin);
 		//住所の緯度経度を取得するajax通信
 		ajax(latlng_url + address_prefecture + address_city + addin, "address_lanlng", "out", "xml");
 	}
