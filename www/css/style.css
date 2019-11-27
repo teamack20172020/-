@@ -148,13 +148,14 @@ ons-select{
 
 /*プラン履歴のプラン内の名前*/
 .plan_item_name{
-	width:85%;
+	width:75%;
 	height:100%;
-	border:3px solid #000;
-	border-radius:10px;
+	/*border:3px solid #000;*/
+	/*border-radius:10px;*/
 	padding-top:6px;
+	padding-bottom:6px;
 	font-size:150%;
-	text-align:center;
+	/*text-align:center;*/
 }
 /*プラン履歴のプラン内のボタン*/
 .route_item,.generation_item{
@@ -245,4 +246,11 @@ ons-select{
 }
 .alert-dialog-content ons-input{
 	width:100%;
+}
+
+/*目的のイメージのCSS*/
+.purpose_image{
+	width:10%;
+	border:1px solid #000;
+	border-radius:20px;
 }
