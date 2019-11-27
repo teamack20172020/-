@@ -58,10 +58,12 @@ function viewHistory(type) {
 		for (let i = history_array.length - 1; i >= 0; i--) {
 			if (type == 0) {
 				//プラン削除しない画面表示
-				elem += "<ons-list-item class='history_item' modifier='chevron' value='" + i + "' tappable>";
+				elem += "<ons-list-item class='history_item' modifier='chevron' value='" + i + "' tappable>"
+					+ "<img src='" + type_image(history_array[i]["create_purpose"]) + "' class='purpose_image'>";
 			} else {
 				//プラン削除する画面表示
 				elem += '<ons-list-item>'
+					+ '<img src="' + type_image(history_array[i]["create_purpose"]) + '" class="purpose_image">'
 					+ '<label class="remove_box right">'
 					+ '<ons-button id="romove_submit" remove_num="' + i + '"><i class="fas fa-trash-alt"></i></ons-button>'
 					+ '</label>';
