@@ -38,6 +38,8 @@ function ajax(url, method_type, ajax_type, datatype) {
 			case "station_details": setResSD(data); break;
 			//スケジュールページの自動生成ajax通信(generation.js)
 			case "generation_auto": setResG(data); break;
+			//プラン履歴画面で編集後に施設間の移動時間を出すajax通信
+			case "plan_edit":setResPD(data);break;
 		}
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		//ajax通信失敗情報を出すコンソール
