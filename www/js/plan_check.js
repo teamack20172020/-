@@ -46,8 +46,9 @@ $(document).on("click", "#cansel_edit", function () {
 
 //編集モードで完了ボタンクリック時の処理（画面右下にあるボタン）
 $(document).on("click", "#completion_edit", function () {
+	$("#modal").show();
 	//編集配列と元の配列が一緒でないならajax通信をする	
-	if (JSON.stringify(edit_array) != JSON.stringify(check_data)){
+	if (JSON.stringify(edit_array) != JSON.stringify(check_data)) {
 		//$("#modal").show();
 		let work_array = "";
 		for (let i = 0; i < check_data.length; i++) {
@@ -57,9 +58,9 @@ $(document).on("click", "#completion_edit", function () {
 				work_array += edit_array[i]["latlng"] + ":";
 			}
 		}
-		let url="travelplan/timeset/"+work_array;
+		let url = "travelplan/timeset/" + work_array;
 		ajax(url, "plan_edit", "in", "json");
-	}else{
+	} else {
 		$('#history_edit').html('<ons-button id="edit_plan">編集</ons-button>');
 		$("#change_completion_plan").html("");
 		$("#change_cancel_plan").html("");
@@ -69,36 +70,49 @@ $(document).on("click", "#completion_edit", function () {
 
 //編集モードで削除ボタンクリック時の処理（画面右にあるボタン）
 $(document).on("click", ".check_plan_remove", function () {
-	if(edit_array.length>2){
+	if (edit_array.length > 2) {
 		let rem_point = $(this).attr("remove_point");
 		//削除する配列の添字
 		//console.log(rem_point);
 		edit_array.splice(rem_point, 1);
 		viewcheck(1);
-	}else{
+	} else {
 		viewAlertCHE(history_point_type);
 	}
 });
 
 //移動時間取得API退避
 function setResPD(res) {
-	if ($("#title_input").val().length > 0) {
-		check_title = $("#title_input").val();
-		check_title = htmlspecialchars(check_title);
+	if (res['error_flg'] == 0) {
+		if ($("#title_input").val().length > 0) {
+			check_title = $("#title_input").val();
+			check_title = htmlspecialchars(check_title);
+		}
+		console.log(edit_array);
+		for(let i=0;i<edit_array.length;i++){
+			edit_array[i]['time_ja']=res[i];
+		}
+		//タイトルをコンソールに出す
+		//console.log(htmlspecialchars($("#title_input").val()));
+		history_array[history_point_type]["data"] = edit_array;
+		history_array[history_point_type]["title"] = check_title;
+		send_array = edit_array.slice();
+		check_data = edit_array.slice();
+		//ローカルストレージに保存する直前の配列のコンソール
+		//console.log(history_array);
+		setLocalStorage("generation", history_array);
+		$('#history_edit').html('<ons-button id="edit_plan">編集</ons-button>');
+		$("#change_completion_plan").html("");
+		$("#change_cancel_plan").html("");
+		viewcheck(0);
+	} else {
+		alert("移動時間の取得に失敗した為並び替えをキャンセルしました。");
+		edit_array = check_data.slice();
+		$('#history_edit').html('<ons-button id="edit_plan">編集</ons-button>');
+		$("#change_completion_plan").html("");
+		$("#change_cancel_plan").html("");
+		viewcheck(0);
 	}
-	//タイトルをコンソールに出す
-	//console.log(htmlspecialchars($("#title_input").val()));
-	history_array[history_point_type]["data"] = edit_array;
-	history_array[history_point_type]["title"] = check_title;
-	send_array = edit_array.slice();
-	check_data = edit_array.slice();
-	//ローカルストレージに保存する直前の配列のコンソール
-	//console.log(history_array);
-	setLocalStorage("generation", history_array);
-	$('#history_edit').html('<ons-button id="edit_plan">編集</ons-button>');
-	$("#change_completion_plan").html("");
-	$("#change_cancel_plan").html("");
-	viewcheck(0);
 }
 
 //プラン履歴画面の表示するメソッド	
@@ -153,6 +167,7 @@ function viewcheck(type) {
 		$("#check_plan_title").html("タイトル:<ons-input id='title_input' modifier='transparent' value='" + check_title + "'></ons-input>");
 	}
 	$("#check_plan_list").html(elem);
+	$("#modal").hide();
 }
 
 //プランクリック時の処理
