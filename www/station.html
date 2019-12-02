@@ -13,7 +13,7 @@
 	<div class="question_box"><!--アキネイターの質問-->
 		出発地を決めてね
 		<div class="sub_title">都道府県</div>
-		<ons-select id="sta_prefecture"  modifier="material">
+		<select id="sta_prefecture" name="sta_prefecture_name">
 			<option value="北海道,1">北海道</option>
 			<option value="青森県,2">青森県</option>
 			<option value="岩手県,3">岩手県</option>
@@ -61,17 +61,17 @@
 			<option value="宮崎県,45">宮崎県</option>
 			<option value="鹿児島県,46">鹿児島県</option>
 			<option value="沖縄県,47">沖縄県</option>
-		</ons-select>
+		</select>
 		<div class="sub_title">路線</div>
-		<ons-select id="sta_route" modifier="material">
-			<select class="select-input">
+		<div id="sta_route_box">
+			<select id="sta_route" name="sta_route_name">
 			</select>
-		</ons-select>
+		</div>
 		<div class="sub_title">駅</div>
-		<ons-select id="sta_station" modifier="material">
-			<select class="select-input">
+		<div id="sta_station_box">
+			<select id="sta_station" name="sta_station_name">
 			</select>
-		</ons-select>
+		</div>
 	</div>
 	<div class="answer_box"><!--質問に対する答え-->
 		<ons-button id="submit_station">決定</ons-button>

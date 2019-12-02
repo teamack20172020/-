@@ -21,15 +21,16 @@ document.addEventListener('init', function (event) {
 			let work = $("#sta_prefecture").val().split(",");
 			ajax(route_url + work[1] + ".xml", "station_route", "out", "xml");
 		});
-
-		//駅路線セレクトボックスが変更された時
-		$("#sta_route").change(function () {
-			$('#modal').show();
-			let work = $("#sta_route").val();
-			ajax(details_url + work + ".xml", "station_details", "out", "xml");
-		});
+		$("#sta_prefecture").selModal();
 
 	}
+});
+
+//駅路線セレクトボックスが変更された時
+$(document).on("change","#sta_route",function () {
+	$('#modal').show();
+	let work = $("#sta_route").val();
+	ajax(details_url + work + ".xml", "station_details", "out", "xml");
 });
 
 //都道府県から駅路線取得ajax通信の結果退避
@@ -39,11 +40,14 @@ function setResSR(data) {
 
 //路線情報をセレクトボックスに表示
 function viewRoute(data) {
-	var elem = "";
+	$("#sta_route_box").empty();
+	var elem = '<select id="sta_route" name="sta_route_name">';
 	$(data).find("line").each(function () {
 		elem += "<option value='" + $(this).find("line_cd").text() + "'>" + $(this).find("line_name").text() + "</option>";
 	});
-	$("#sta_route select").html(elem);
+	elem +="</select>";
+	$("#sta_route_box").html(elem);
+	$("#sta_route").selModal();
 	ajax(details_url + $(data).find("line:first line_cd").text() + ".xml", "station_details", "out", "xml");
 }
 
@@ -54,12 +58,15 @@ function setResSD(data) {
 
 //駅詳細をセレクトボックスに表示
 function viewDetails(data) {
-	var elem = "";
+	$("#sta_station_box").empty();
+	var elem = '<select id="sta_station" name="sta_station_name">';
 	$(data).find("station").each(function () {
 		elem += "<option value='" + $(this).find("station_name").text() + "," + $(this).find("lat").text() + "," + $(this).find("lon").text() + "'>"
 			+ $(this).find("station_name").text() + "</option>";
 	});
-	$("#sta_station select").html(elem);
+	elem +="</select>";
+	$("#sta_station_box").html(elem);
+	$("#sta_station").selModal();
 	$('#modal').hide();
 }
 
