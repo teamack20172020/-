@@ -15,20 +15,21 @@ document.addEventListener('init', function (event) {
 		address_prefecture = "北海道";
 		ajax(city_url + "01", "address_city", "out", "json");
 		$("#add_prefecture").change(function () {
+			$('#modal').show();
 			var result = $("#add_prefecture").val().split(",");
 			address_prefecture = result[0];
 			ajax(city_url + result[1], "address_city", "out", "json");
-			$('#modal').show();
 		});
-
-		$("#city").change(function () {
-			var result = $("#city").val();
-			address_city = result;
-			//アドレスを合体させた結果を出すコンソール
-			//console.log(address_prefecture + address_city);
-		});
-
+		$("#add_prefecture").selModal();
 	}
+});
+
+//市区町村の選択処理
+$(document).on("change","#city",function () {
+	var result = $("#city").val();
+	address_city = result;
+	//アドレスを合体させた結果を出すコンソール
+	console.log("住所:" + address_prefecture + address_city);
 });
 
 //決定ボタンタップ時処理
@@ -56,11 +57,15 @@ function setResAC(data) {
 
 //市区町村をセレクトボックスに表示
 function viewAddress() {
-	var elem = "";
+	$("#city_box").empty();
+	//$("#city_box").html('<ons-select id="city" modifier="material"><select class="select-input"></select ></ons-select>');
+	var elem = '<select id="city" name="city_name">';
 	for (var i = 0; i < address_list.length; i++) {
 		elem += "<option value='" + address_list[i]['name'] + "'>" + address_list[i]['name'] + "</option>";
 	}
-	$("#city select").html(elem);
+	elem +="</select>";
+	$("#city_box").html(elem);
+	$("#city").selModal();
 	$('#modal').hide();
 }
 
