@@ -93,6 +93,7 @@ function type_image(str) {
 
 //半角1、全角2でカウント
 function getLen(str) {
+	let string = htmlspecialchars(str);
 	var result = "";
 	let count=0;
 	let work=str.split("");
