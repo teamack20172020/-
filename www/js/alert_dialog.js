@@ -19,6 +19,7 @@ function viewAlertCHE(re_num) {
 
 //アラートディアログのキャンセルボタンの処理
 function cancelAlert(name){
+	$("#plan_title_in").val("");
 	$("#"+name).hide();
 }
 
@@ -53,6 +54,7 @@ function ge_ok(){
 		p_title = nen[0] + "年" + nen[1] + "月" + nen[2] + "日　" + jikan[0] + "時" + jikan[1]+"分";
 	}
 	//generation.jsにあるg_workにタイトルを追加してローカルストレージに保存する
+	p_title=getLen(p_title);
 	g_work["title"]=p_title;
 	//タイトルの入ったプランをコンソールに出す
 	//console.log(g_work);
@@ -65,3 +67,9 @@ function ge_ok(){
 	$("#generation_ok").hide();
 	document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
 }
+
+$(document).keyup("#plan_title_in",function(){
+	let work=$("#plan_title_in").val();
+	let getwork=getLen(work);
+	$("#plan_title_in").val(getwork);
+});
