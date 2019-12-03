@@ -255,6 +255,6 @@ ons-select{
 	border-radius:20px;
 }
 
-#city_box,#sta_station_box,#sta_route_box{
-	height:50px;
+.select_box{
+	height:40px;
 }
