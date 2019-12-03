@@ -49,8 +49,6 @@ $(document).on("click", "#completion_edit", function () {
 	$("#modal").show();
 	if ($("#title_input").val().length > 0) {
 		check_title = $("#title_input").val();
-		check_title = htmlspecialchars(check_title);
-		check_title = getLen(check_title);
 	}
 	history_array[history_point_type]["title"] = check_title;
 	setLocalStorage("generation", history_array);
@@ -86,6 +84,13 @@ $(document).on("click", ".check_plan_remove", function () {
 	} else {
 		viewAlertCHE(history_point_type);
 	}
+});
+
+//編集モードでの文字入力出来るようにしている
+$(document).keyup("#title_input", function () {
+	let work = $("#title_input").val();
+	let getwork = getLen(work);
+	$("#title_input").val(getwork);
 });
 
 //移動時間取得API退避
