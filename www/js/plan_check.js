@@ -47,6 +47,13 @@ $(document).on("click", "#cansel_edit", function () {
 //編集モードで完了ボタンクリック時の処理（画面右下にあるボタン）
 $(document).on("click", "#completion_edit", function () {
 	$("#modal").show();
+	if ($("#title_input").val().length > 0) {
+		check_title = $("#title_input").val();
+		check_title = htmlspecialchars(check_title);
+		check_title = getLen(check_title);
+	}
+	history_array[history_point_type]["title"] = check_title;
+	setLocalStorage("generation", history_array);
 	//編集配列と元の配列が一緒でないならajax通信をする	
 	if (JSON.stringify(edit_array) != JSON.stringify(check_data)) {
 		//$("#modal").show();
@@ -84,18 +91,13 @@ $(document).on("click", ".check_plan_remove", function () {
 //移動時間取得API退避
 function setResPD(res) {
 	if (res['error_flg'] == 0) {
-		if ($("#title_input").val().length > 0) {
-			check_title = $("#title_input").val();
-			check_title = htmlspecialchars(check_title);
-		}
 		console.log(edit_array);
-		for(let i=0;i<edit_array.length;i++){
-			edit_array[i]['time_ja']=res[i];
+		for (let i = 0; i < edit_array.length; i++) {
+			edit_array[i]['time_ja'] = res[i];
 		}
 		//タイトルをコンソールに出す
 		//console.log(htmlspecialchars($("#title_input").val()));
 		history_array[history_point_type]["data"] = edit_array;
-		history_array[history_point_type]["title"] = check_title;
 		send_array = edit_array.slice();
 		check_data = edit_array.slice();
 		//ローカルストレージに保存する直前の配列のコンソール
