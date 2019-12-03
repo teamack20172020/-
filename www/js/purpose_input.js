@@ -28,11 +28,14 @@ function setResP(resList){
 
 //目的セレクトボックスを表示
 function viewPurpose(){
-	var option = "";
+	$("#purpose_input_box").empty();
+	let elem = '<select id="purpose_select">';
 	for(i = 0; i <= idlist.length -1;i++){
-		option += "\t\t<option value='" + idlist[i] + "'>" + objectiveAboutList[idlist[i]] +"</option>\n";
+		elem += "\t\t<option value='" + idlist[i] + "'>" + objectiveAboutList[idlist[i]] +"</option>\n";
 	}
-	$("#purpose_select select").html(option);
+	elem+="</select>";
+	$("#purpose_input_box").html(elem);
+	$("#purpose_select").selModal();
 	$("#modal").hide();
 }
 
