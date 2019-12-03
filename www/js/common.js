@@ -57,11 +57,11 @@ function count_text(str) {
 
 //クロスサイトスクリプティング対策メソッド
 function htmlspecialchars(ch) {
-	ch = ch.replace(/&/g, "&amp;");
-	ch = ch.replace(/"/g, "&quot;");
-	ch = ch.replace(/'/g, "&#039;");
-	ch = ch.replace(/</g, "&lt;");
-	ch = ch.replace(/>/g, "&gt;");
+	ch = ch.replace(/&/g, "");
+	ch = ch.replace(/"/g, "");
+	ch = ch.replace(/'/g, "");
+	ch = ch.replace(/</g, "");
+	ch = ch.replace(/>/g, "");
 	// ch = ch.replace(" ", "");
 	// ch = ch.replace("　", "");
 	ch = ch.replace("	", "");
@@ -90,3 +90,29 @@ function type_image(str) {
 	}
 	return result;
 }
+
+//半角1、全角2でカウント
+function getLen(str) {
+	var result = "";
+	let count=0;
+	let work=str.split("");
+	for (var i = 0; i < str.length; i++) {
+		var chr = str.charCodeAt(i);
+		if ((chr >= 0x00 && chr < 0x81) ||
+			(chr === 0xf8f0) ||
+			(chr >= 0xff61 && chr < 0xffa0) ||
+			(chr >= 0xf8f1 && chr < 0xf8f4)) {
+			//半角文字の場合は1を加算
+			count += 1;
+		} else {
+			//それ以外の文字の場合は2を加算
+			count += 2;
+		}
+		//24文字以上は排除
+		if (count<25){
+			result+=work[i];
+		}
+	}
+	//結果を返す
+	return result;
+};
