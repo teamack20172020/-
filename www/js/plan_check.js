@@ -49,6 +49,7 @@ $(document).on("click", "#completion_edit", function () {
 	$("#modal").show();
 	if ($("#title_input").val().length > 0) {
 		check_title = $("#title_input").val();
+		check_title=htmlspecialchars(check_title);
 	}
 	history_array[history_point_type]["title"] = check_title;
 	setLocalStorage("generation", history_array);
@@ -86,12 +87,6 @@ $(document).on("click", ".check_plan_remove", function () {
 	}
 });
 
-//編集モードでの文字入力出来るようにしている
-$(document).keyup("#title_input", function () {
-	let work = $("#title_input").val();
-	let getwork = getLen(work);
-	$("#title_input").val(getwork);
-});
 
 //移動時間取得API退避
 function setResPD(res) {
@@ -173,6 +168,12 @@ function viewcheck(type) {
 		}
 		$("#check_plan_title").html("タイトル:<ons-input id='title_input' modifier='transparent' value='" + check_title + "'></ons-input>");
 	}
+	//編集モードでの文字入力出来るようにしている
+	$("#title_input").keyup(function () {
+		let work = $("#title_input").val();
+		let getwork = getLen(work);
+		$("#title_input").val(getwork);
+	});
 	$("#check_plan_list").html(elem);
 	$("#modal").hide();
 }
@@ -182,15 +183,20 @@ $(document).on("click", ".route_item", function () {
 	//チェックされた項目を取得
 	let check_type = $(this).attr("value");
 	let work_check = check_data;
+	console.log(work_check);
 	//ブラウザを表示
 	if (check_type == 0) {
 		//ブラウザを表示
 		cordova.InAppBrowser.open(googlemapurl + work_check[work_check.length - 1]["address"]
+			+ "/" + work_check[check_type]["latlng"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+	} else if(check_type==work_check.length-1){
+		//ブラウザを表示
+		cordova.InAppBrowser.open(googlemapurl + work_check[check_type - 1]["latlng"]
 			+ "/" + work_check[check_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
 	} else {
 		//ブラウザを表示
-		cordova.InAppBrowser.open(googlemapurl + work_check[check_type - 1]["address"]
-			+ "/" + work_check[check_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+		cordova.InAppBrowser.open(googlemapurl + work_check[check_type - 1]["latlng"]
+			+ "/" + work_check[check_type]["latlng"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
 	}
 });
 
