@@ -42,7 +42,7 @@ $(document).on("click", "#release_plan", function () {
 });
 
 //リストの削除ボタンを押したときの削除処理
-$(document).on("click", "#romove_submit", function () {
+$(document).on("click", ".romove_submit", function () {
 	history_remove_num = $(this).attr("remove_num");
 	viewAlertHIS();
 });
@@ -65,10 +65,10 @@ function viewHistory(type) {
 				elem += '<ons-list-item>'
 					+ '<img src="' + type_image(history_array[i]["create_purpose"]) + '" class="purpose_image">'
 					+ '<label class="remove_box right">'
-					+ '<ons-button id="romove_submit" remove_num="' + i + '"><i class="fas fa-trash-alt"></i></ons-button>'
+					+ '<ons-button class="romove_submit" remove_num="' + i + '"><i class="fas fa-trash-alt"></i></ons-button>'
 					+ '</label>';
 			}
-			elem += history_array[i]["title"]
+			elem += "<div class='history_plan_title'>"+history_array[i]["title"]+"</div>"
 				+ "</ons-list-item>";
 		}
 		$("#plan_history_list").html(elem);
