@@ -23,13 +23,13 @@ function setResP(resList){
 	});
 	idlist = Object.keys(objectiveList);
 	//目的IDを保存した配列を出すコンソール
-	//console.log(idlist);
+	console.log(idlist);
 }
 
 //目的セレクトボックスを表示
 function viewPurpose(){
 	$("#purpose_input_box").empty();
-	let elem = '<select id="purpose_select">';
+	let elem = '<select id="purpose_select" name="purpose_input_name">';
 	for(i = 0; i <= idlist.length -1;i++){
 		elem += "\t\t<option value='" + idlist[i] + "'>" + objectiveAboutList[idlist[i]] +"</option>\n";
 	}
@@ -41,9 +41,10 @@ function viewPurpose(){
 
 //目的決定ボタンクリック処理
 $(document).on("click","#submit_purpose",function(){
-	purpose=$("#purpose_select").val();
+	purpose=parseInt($("#purpose_select").val());
+
 	//目的が決定した際の目的を出すコンソール
-	//console.log("目的:"+purpose);
+	console.log("目的:"+purpose);
 	$('#modal').show();
 	document.getElementById("main").pushPage("generation.html");
 });
