@@ -67,10 +67,3 @@ function ge_ok(){
 	$("#generation_ok").hide();
 	document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
 }
-
-//自動生成したプランのタイトル入力を文字数制限する
-$(document).keyup("#plan_title_in",function(){
-	let work=$("#plan_title_in").val();
-	let getwork=getLen(work);
-	$("#plan_title_in").val(getwork);
-});
