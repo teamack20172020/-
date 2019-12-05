@@ -9,7 +9,8 @@ var p_count = 0;
 var cnt = 0;
 //距離APIで使うカウント変数
 var count_dis = 0;
-
+var main_purpose=0;
+var sub_purpose=0;
 //画面が読み込まれたときの処理
 document.addEventListener('init', function (event) {
 	var page = event.target;
@@ -109,11 +110,15 @@ $(document).on("click", ".generation_item", function () {
 	if (ge_type == 0) {
 		//ブラウザを表示
 		cordova.InAppBrowser.open(googlemapurl + work_ge[work_ge.length - 1]["address"]
-			+ "/" + work_ge[ge_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
-	} else {
+			+ "/" + work_ge[ge_type]["latlng"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+	} else if(ge_type==work_ge.length-1){
 		//ブラウザを表示
-		cordova.InAppBrowser.open(googlemapurl + work_ge[ge_type - 1]["address"]
+		cordova.InAppBrowser.open(googlemapurl + work_ge[ge_type - 1]["latlng"]
 			+ "/" + work_ge[ge_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+	}else{
+		//ブラウザを表示
+		cordova.InAppBrowser.open(googlemapurl + work_ge[ge_type - 1]["latlng"]
+			+ "/" + work_ge[ge_type]["latlng"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
 	}
 });
 
@@ -134,6 +139,12 @@ $(document).on("click", "#complete_plan", function () {
 	let jikan = g_work["create_time"].split(":");
 	$("#plan_title_in").attr("placeholder", nen[0] + "年" + nen[1] + "月" + nen[2] + "日　" + jikan[0] + "時" + jikan[1] + "分");
 	$("#generation_ok").show();
+	//自動生成したプランのタイトル入力を文字数制限する
+	$("#plan_title_in").keyup(function () {
+		let work = $("#plan_title_in").val();
+		let getwork = getLen(work);
+		$("#plan_title_in").val(getwork);
+	});
 });
 
 //「キャンセル」ボタンクリック
