@@ -105,6 +105,7 @@ function viewQestion(){
 		//qpListから質問idに一致するデータを取得
 		question_details = qpList.find((v) => v.question_id === id);
 		$(".question_text").html('<p>' + question_details['detail'] + '</p>');
+		$("#question_toolbar_title").html("質問" + (qcount+1)+"/10");
 		question.splice(radnum, 1);
 		qcount++;
 	} else {
