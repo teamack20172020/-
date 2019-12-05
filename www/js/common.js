@@ -57,13 +57,8 @@ function count_text(str) {
 
 //クロスサイトスクリプティング対策メソッド
 function htmlspecialchars(ch) {
-	ch = ch.replace(/&/g, "");
-	ch = ch.replace(/"/g, "");
-	ch = ch.replace(/'/g, "");
-	ch = ch.replace(/</g, "");
-	ch = ch.replace(/>/g, "");
-	// ch = ch.replace(" ", "");
-	// ch = ch.replace("　", "");
+	//特殊文字「$&<>'";:/\」を消す
+	ch = ch.replace(/[=|$&<>'";:\/\\]/g, "");
 	ch = ch.replace("	", "");
 	return ch;
 }
@@ -72,21 +67,14 @@ function htmlspecialchars(ch) {
 function type_image(str) {
 	let result = "img/";
 	switch (str) {
-		case 1:
-		case "1": result += "icon_sightseeing.png"; break;
-		case 2:
-		case "2": result += "icon_gourmet.png"; break;
-		case 3:
-		case "3": result += "icon_history.png"; break;
-		case 4:
-		case "4": result += "icon_leisure.png"; break;
-		case 5:
-		case "5": result += "icon_art.png"; break;
-		case 6:
-		case "6": result += "icon_nature.png"; break;
-		case 7:
-		case "7": result += "icon_spa.png"; break;
-		default: result += "icon_departure.png";break;
+		case 1: result += "icon_sightseeing.png"; break;
+		case 2: result += "icon_gourmet.png"; break;
+		case 3: result += "icon_history.png"; break;
+		case 4: result += "icon_leisure.png"; break;
+		case 5: result += "icon_art.png"; break;
+		case 6: result += "icon_nature.png"; break;
+		case 7: result += "icon_spa.png"; break;
+		default: result += "icon_departure.png"; break;
 	}
 	return result;
 }
@@ -95,10 +83,10 @@ function type_image(str) {
 function getLen(str) {
 	let string = htmlspecialchars(str);
 	var result = "";
-	let count=0;
-	let work=str.split("");
-	for (var i = 0; i < str.length; i++) {
-		var chr = str.charCodeAt(i);
+	let count = 0;
+	let work = string.split("");
+	for (var i = 0; i < string.length; i++) {
+		var chr = string.charCodeAt(i);
 		if ((chr >= 0x00 && chr < 0x81) ||
 			(chr === 0xf8f0) ||
 			(chr >= 0xff61 && chr < 0xffa0) ||
@@ -110,8 +98,8 @@ function getLen(str) {
 			count += 2;
 		}
 		//24文字以上は排除
-		if (count<25){
-			result+=work[i];
+		if (count < 25) {
+			result += work[i];
 		}
 	}
 	//結果を返す
