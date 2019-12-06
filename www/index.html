@@ -90,14 +90,23 @@
   <!--   alertページ  -->
   <div id="alert-dialog">
     <!--プラン履歴一覧画面での削除時のアラート-->
-    <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+    <ons-alert-dialog id="remove-alert-dialog" modifier="rowfooter">
       <div class="alert-dialog-title">Alert</div>
-      <div class="alert-dialog-content" id="plan_alert_text">
+      <div class="alert-dialog-content" id="plan_remove_alert_text">
         
       </div>
       <div class="alert-dialog-footer">
-        <ons-alert-dialog-button onclick="cancelAlert('my-alert-dialog');">キャンセル</ons-alert-dialog-button>
-        <ons-alert-dialog-button id="plan_alert_ok" onclick="">削除</ons-alert-dialog-button>
+        <ons-alert-dialog-button onclick="cancelAlert('remove-alert-dialog');">キャンセル</ons-alert-dialog-button>
+        <ons-alert-dialog-button id="plan_remove_alert_ok" onclick="">削除</ons-alert-dialog-button>
+      </div>
+    </ons-alert-dialog>
+    <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-content" id="alert_text">
+    
+      </div>
+      <div class="alert-dialog-footer">
+        <ons-alert-dialog-button onclick="cancelAlert('my-alert-dialog');">OK</ons-alert-dialog-button>
       </div>
     </ons-alert-dialog>
 
