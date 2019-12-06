@@ -1,10 +1,10 @@
 //プラン一覧画面で削除するときのアラート表示処理
 function viewAlertHIS(){
 	let view_text = "本当にこのプランを削除しても良いですか?※二度と同じプランは作成できないかもしれません";
-	$("#plan_alert_text").html(view_text);
-	$("#plan_alert_ok").attr("onclick","removePlan('his');");
+	$("#plan_remove_alert_text").html(view_text);
+	$("#plan_remove_alert_ok").attr("onclick","removePlan('his');");
 	//アラートを表示(alert_dialog.jsに処理は記載)
-	$("#my-alert-dialog").show();
+	$("#remove-alert-dialog").show();
 }
 
 //プラン履歴画面で最後の施設を削除するときに出すアラート表示処理
@@ -14,6 +14,13 @@ function viewAlertCHE(re_num) {
 	history_remove_num = re_num;
 	$("#plan_alert_ok").attr("onclick", "removePlan('che');");
 	//アラートを表示(alert_dialog.jsに処理は記載)
+	$("#my-alert-dialog").show();
+}
+
+//住所指定の出発地入力画面でアラートを出す処理
+function viewAlertADD(){
+	let view_text = "丁目番地号が入力されていません";
+	$("#alert_text").html(view_text);
 	$("#my-alert-dialog").show();
 }
 
@@ -31,7 +38,7 @@ function removePlan(type){
 	//console.log(remove_after);
 	//console.log(history_array);
 	setLocalStorage("generation", history_array);
-	$("#my-alert-dialog").hide();
+	$("#remove-alert-dialog").hide();
 	if(type=="his"){
 		//plan_history.jsファイルのメソッド
 		viewHistory(1);
