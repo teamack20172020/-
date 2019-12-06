@@ -38,7 +38,7 @@ $(document).on("click", "#submit_address", function () {
 	//住所入力欄のvalue値を出すコンソール
 	//console.log("address::::"+addin);
 	if (addin == "" || addin == null) {
-		alert("住所が入力されていません");
+		viewAlertADD();
 	} else {
 		console.log(latlng_url + address_prefecture + address_city + addin);
 		//住所の緯度経度を取得するajax通信
