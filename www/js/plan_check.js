@@ -16,6 +16,18 @@ document.addEventListener('init', function (event) {
 	var page = event.target;
 	//プラン確認ページの時のみ処理
 	if (page.matches('#plan_check')) {
+		let navi = document.getElementById('main');
+		if (navi.pages[navi.pages.length - 2]['id']=="generation"){
+			console.log(navi.pages);
+
+			while (navi.pages.length>2) {
+				navi.removePage(1);
+				console.log(i);
+			}
+			navi.insertPage(1, "plan_history.html");
+			console.log("gorilla");
+		}
+		console.log(navi.pages);
 		//データ取得
 		history_point_type = page.data.history_type;
 		check_data = page.data.his_work["data"];
@@ -29,6 +41,8 @@ document.addEventListener('init', function (event) {
 
 //ツールバーの編集ボタンクリックしたときの処理(画面右上にあるボタン)
 $(document).on("click", "#edit_plan", function () {
+	console.log(document.getElementById('main').pages);
+
 	$('#history_edit').html('');
 	viewcheck(1);
 	$("#change_completion_plan").html("<ons-button id='completion_edit'>完了</ons-button>");
@@ -123,25 +137,7 @@ function viewcheck(type) {
 	//「type=0」なら閲覧モード画面
 	if (type == 0) {
 		$("#check_plan_list").removeClass("sort_plan");
-		elem += "<ons-list-item>"
-			+ "<img src='" + type_image("デフォルト") + "' class='purpose_image'>"
-			+ "<div class='plan_item_name'>" + count_text(check_data[check_data.length - 1]["name"]) + "</div>"
-			+ "</ons-list-item>";
-		for (let i = 0; i < check_data.length; i++) {
-			elem += "<div class='plan_item_time'><div class='text_check'>↓" + check_data[i]["time_ja"] + "</div>"
-				+ "<ons-button class='route_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button></div>"
-				+ "<ons-list-item>";
-			if (i != check_data.length - 1) {
-				elem += "<img src='" + type_image(check_data[i]["purpose"]) + "' class='purpose_image'>";
-			} else {
-				elem += "<img src='" + type_image("デフォルト") + "' class='purpose_image'>";
-			}
-			elem += "<div class='plan_item_name'>" + count_text(check_data[i]["name"]) + "</div>";
-			if (i != check_data.length - 1) {
-				elem += "<ons-button class='detail_item' value='" + i + "'><i class='fas fa-info-circle'></i></ons-button>";
-			}
-			elem += "</ons-list-item>";
-		}
+		elem+=view_plan(check_data,0);
 		$("#check_plan_title").html("タイトル:" + check_title);
 		$("#check_plan_list_head").html("");
 		$("#check_plan_list_foot").html("");
@@ -149,23 +145,7 @@ function viewcheck(type) {
 		//「type!=0」なら編集モード画面
 		$("#check_plan_list").addClass("sort_plan");
 		setPlanSort();
-		elem = "<ons-list-item>"
-			+ "<img src='" + type_image("デフォルト") + "' class='purpose_image'>"
-			+ "<div class='plan_item_name'>" + count_text(edit_array[edit_array.length - 1]["name"]) + "</div>"
-			+ "</ons-list-item>";
-		$("#check_plan_list_head").html(elem);
-		$("#check_plan_list_foot").html(elem);
-		elem = "";
-		for (let i = 0; i < edit_array.length - 1; i++) {
-			elem += "<ons-list-item>";
-			if (i != edit_array.length - 1) {
-				elem += "<img src='" + type_image(edit_array[i]["purpose"]) + "' class='purpose_image'>";
-			}
-			elem += "<p class='plan_item_name'>" + count_text(edit_array[i]["name"])
-				+ "</p>"
-				+ "<ons-button remove_point='" + i + "' class='check_plan_remove'><i class='fas fa-trash-alt'></i></ons-button>"
-				+ "</ons-list-item>";
-		}
+		elem += view_plan(edit_array,1);
 		$("#check_plan_title").html("タイトル:<ons-input id='title_input' modifier='transparent' value='" + check_title + "'></ons-input>");
 	}
 	//編集モードでの文字入力出来るようにしている
@@ -187,16 +167,16 @@ $(document).on("click", ".route_item", function () {
 	//ブラウザを表示
 	if (check_type == 0) {
 		//ブラウザを表示
-		cordova.InAppBrowser.open(googlemapurl + work_check[work_check.length - 1]["address"]
-			+ "/" + work_check[check_type]["latlng"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+		in_app_browser(googlemapurl + work_check[work_check.length - 1]["address"]
+			+ "/" + work_check[check_type]["latlng"]);
 	} else if(check_type==work_check.length-1){
 		//ブラウザを表示
-		cordova.InAppBrowser.open(googlemapurl + work_check[check_type - 1]["latlng"]
-			+ "/" + work_check[check_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+		in_app_browser(googlemapurl + work_check[check_type - 1]["latlng"]
+			+ "/" + work_check[check_type]["address"]);
 	} else {
 		//ブラウザを表示
-		cordova.InAppBrowser.open(googlemapurl + work_check[check_type - 1]["latlng"]
-			+ "/" + work_check[check_type]["latlng"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+		in_app_browser(googlemapurl + work_check[check_type - 1]["latlng"]
+			+ "/" + work_check[check_type]["latlng"]);
 	}
 });
 
