@@ -63,9 +63,9 @@ function htmlspecialchars(ch) {
 	return ch;
 }
 
-//引数でtypeイメージを返すメソッド
+//引数でtype(目的)イメージを返すメソッド
 function type_image(str) {
-	let result = "img/";
+	let result = "<img src='img/";
 	switch (str) {
 		case 1: result += "icon_sightseeing.png"; break;
 		case 2: result += "icon_gourmet.png"; break;
@@ -73,10 +73,28 @@ function type_image(str) {
 		case 4: result += "icon_leisure.png"; break;
 		case 5: result += "icon_art.png"; break;
 		case 6: result += "icon_nature.png"; break;
-		case 7: result += "icon_spa.png"; break;
+		case 7: result += "icon_spa_white.png"; break;
 		default: result += "icon_departure.png"; break;
 	}
+	result +="' class='purpose_image' />";
 	return result;
+}
+
+//自動生成画面、プラン詳細画面で使うイメージのメソッド
+function check_image(str){
+	let result="<img src='img/";
+	switch(str){
+		case "arrow_down":result+="icon_arrow_down_black.png";break;
+		case "info": result += "icon_info_white.png";break;
+		case "home": result += "icon_home_blue.png";break;
+		case "route":result+="icon_route_white.png";break;
+	}
+	result += "' class='plan_image' />";
+	return result;
+}
+
+function in_app_browser(url){
+	cordova.InAppBrowser.open(url, '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top,enableViewportScale=yes');
 }
 
 //半角1、全角2でカウント
@@ -105,3 +123,55 @@ function getLen(str) {
 	//結果を返す
 	return result;
 };
+
+//プランを表示するメソッド0：通常，1：編集モード
+function view_plan(array,mode){
+	let elem="";
+	if(mode==0){
+		elem += "<ons-list-item>"
+			+ type_image("デフォルト")
+			+ "<div class='plan_item_name'>" + count_text(array[array.length - 1]["name"]) + "</div>"
+			+ "</ons-list-item>";
+		for (let i = 0; i < array.length; i++) {
+			elem += "<div class='plan_item_time'><div class='text_check'>↓" + array[i]["time_ja"] + "</div>"
+				+ "<ons-button class='route_item' value='" + i + "'>"
+				+ check_image("route")
+				+"</ons-button></div>"
+				+ "<ons-list-item>";
+			if (i != array.length - 1) {
+				elem += type_image(array[i]["purpose"]);
+			} else {
+				elem += type_image("デフォルト");
+			}
+			elem += "<div class='plan_item_name'>" + count_text(array[i]["name"]) + "</div>";
+			if (i != array.length - 1) {
+				elem += "<ons-button class='detail_item' value='" + i + "'>"
+					+ check_image("info");
+				"</ons-button>";
+			}
+			elem += "</ons-list-item>";
+		}
+	}else{
+		console.log(array);
+		elem = "<ons-list-item>"
+			+ type_image("デフォルト")
+			+ "<div class='plan_item_name'>" + count_text(array[array.length - 1]["name"]) + "</div>"
+			+ "</ons-list-item>";
+		$("#check_plan_list_head").html(elem);
+		$("#check_plan_list_foot").html(elem);
+		elem = "";
+		for (let i = 0; i < array.length - 1; i++) {
+			elem += "<ons-list-item>";
+			if (i != array.length - 1) {
+				elem += type_image(array[i]["purpose"]);
+			}
+			elem += "<p class='plan_item_name'>" + count_text(array[i]["name"])
+				+ "</p>"
+				+ "<ons-button remove_point='" + i + "' class='check_plan_remove'>"
+				+ "ゴミ"
+				+"</ons-button>"
+				+ "</ons-list-item>";
+		}
+	}
+	return elem;
+}
