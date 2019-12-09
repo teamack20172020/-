@@ -73,28 +73,8 @@ function setResG(resg) {
 
 //自動生成したプランを表示する
 function viewGeneration(viewg) {
-	var elem = "";
-	elem += "<ons-list-item>"
-		+ "<img src='" + type_image("デフォルト") + "' class='purpose_image'>"
-		+ "<div class='plan_item_name'>" + count_text(viewg[viewg.length - 1]["name"]) + "</div>"
-		+ "</ons-list-item>";
-	for (let i = 0; i < viewg.length; i++) {
-		elem += "<div class='plan_item_time'>"
-			+ "<div class='text_check'>↓" + viewg[i]["time_ja"] + "</div>"
-			+ "<ons-button class='generation_item' value='" + i + "'><i class='fas fa-map-marked-alt'></i></ons-button>"
-			+ "</div>"
-			+ "<ons-list-item>";
-		if (i != viewg.length - 1) {
-			elem += "<img src='" + type_image(viewg[i]["purpose"]) + "' class='purpose_image'>";
-		} else {
-			elem += "<img src='" + type_image("デフォルト") + "' class='purpose_image'>";
-		}
-		elem+= "<div class='plan_item_name'>" + count_text(viewg[i]["name"]) + "</div>";
-		if (i != viewg.length - 1) {
-			elem += "<ons-button class='detail_item' value='" + i + "'><i class='fas fa-info-circle'></i></ons-button>";
-		}
-		elem += "</ons-list-item>";
-	}
+	var elem = view_plan(viewg,0);
+	
 	$("#gene_purpose").html("目的：" + objectiveList[idlist[main_purpose - 1]]);
 	$("#gene_departure").html("出発地：" + departure_type);
 	$("#gene_plan_list").html(elem);
@@ -109,16 +89,16 @@ $(document).on("click", ".generation_item", function () {
 	let work_ge = g_work["data"];
 	if (ge_type == 0) {
 		//ブラウザを表示
-		cordova.InAppBrowser.open(googlemapurl + work_ge[work_ge.length - 1]["address"]
-			+ "/" + work_ge[ge_type]["latlng"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+		in_app_browser(googlemapurl + work_ge[work_ge.length - 1]["address"]
+			+ "/" + work_ge[ge_type]["latlng"]);
 	} else if(ge_type==work_ge.length-1){
 		//ブラウザを表示
-		cordova.InAppBrowser.open(googlemapurl + work_ge[ge_type - 1]["latlng"]
-			+ "/" + work_ge[ge_type]["address"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+		in_app_browser(googlemapurl + work_ge[ge_type - 1]["latlng"]
+			+ "/" + work_ge[ge_type]["address"]);
 	}else{
 		//ブラウザを表示
-		cordova.InAppBrowser.open(googlemapurl + work_ge[ge_type - 1]["latlng"]
-			+ "/" + work_ge[ge_type]["latlng"], '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+		in_app_browser(googlemapurl + work_ge[ge_type - 1]["latlng"]
+			+ "/" + work_ge[ge_type]["latlng"]);
 	}
 });
 
