@@ -21,6 +21,5 @@ $(document).on("click","#detail_url",function(){
 	let de_url=$(this).text();
 	//URLをコンソールに出す
 	//console.log(de_url);
-	cordova.InAppBrowser.open(de_url, 
-		'_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top');
+	in_app_browser(de_url);
 });
