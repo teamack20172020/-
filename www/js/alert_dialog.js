@@ -72,5 +72,10 @@ function ge_ok(){
 	//console.log(generation_array);
 	$("#plan_title_in").val("");
 	$("#generation_ok").hide();
-	document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
+	history_array = getLocalStorage("generation");
+	history_type=history_array.length-1;
+	his_work = history_array[history_type];
+	console.log(his_work);
+	document.getElementById('main').pushPage("plan_check.html", { data: { his_work, history_type }, animation: 'slide-ios' });
+	//document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
 }
