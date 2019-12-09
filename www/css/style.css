@@ -21,7 +21,7 @@ ons-toolbar .center{
 /*ツールバーのホームへ戻るボタン*/
 .home_back,#remove_plan,#release_plan,#edit_plan{
 	background-color:rgba(255,0,0,0);
-	color:#0076ff;
+	color:rgb(0, 118, 255);
 	vertical-align: top;
 	height:41px;
 	width:100px;
@@ -30,6 +30,10 @@ ons-toolbar .center{
 	padding-left:0px;
 	padding-right:8px;
 }
+/* .back-button__icon,.back-button{
+	color:hsl(195, 63%, 53%);
+	fill:rgb(58,171,210);
+} */
 /*ツールバーのホームへ戻るボタンクリック時*/
 .home_back:active,#remove_plan:active,#release_plan:active{
 	opacity:0.5;
@@ -49,7 +53,7 @@ ons-toolbar .center{
 /*アンサーボックスの中のボタン*/
 .answer_box ons-button{
 	margin-top:20px;
-	width:200px;
+	width:90%;
 	font-size:120%;
 }
 
@@ -107,25 +111,64 @@ ons-toolbar .center{
 }
 
 /*目的のイメージのCSS*/
-.purpose_image{
-	height:90%;
+/* .purpose_image{
+	height:80%;
 	border:2px solid #000;
 	border-radius:20px;
+} */
+ons-list-item{
+	color: black;
+	position:relative;
+	background: #f1f8ff;/*バーの色*/
+	line-height: 1.5;
+	margin-bottom: 4px;
+	list-style-type: none!important;
 }
 
+/*リスト内の画像のCSS*/
+ons-list-item .purpose_image{
+	background-color:#5aade6;
+	border-color:#5aade6;
+	border-radius:0;
+	padding:5px;
+	margin-left:0;
+	border:0;
+	height:80%;
+	margin-right:5px;
+}
 /*新しいセレクトボックスのCSS*/
 .select_box{
 	height:40px;
 }
 
-/*ons-list-itemの中のイメージのCSS*/
-ons-list-item img{
-	background-color:white;
-	margin:0 7px 0 7px;
+/**/
+.detail_item{
+	height:80%;
+	padding:0 5px 0 5px;
+}
+.detail_item .plan_image{
+	height:80%;
+	margin:10% 0 10% 0 ;
 }
 
+/*プランを表示するイメージのCSS*/
+.plan_image{
+	height:100%;
+}
 
 /*ここまで全てのページ*/
+
+/*始めホームページ*/
+
+/*ホームにあるボタン*/
+#home ons-button{
+	margin-top: 40px;
+    line-height: 250%;
+    width: 90%;
+    font-size: 200%;
+}
+
+/*ここまでホームページ*/
 
 /*始め質問ページ*/
 
@@ -182,7 +225,7 @@ ons-list-item img{
 }
 
 /*プラン詳細の施設詳細表示のボタン*/
-.route_item,.generation_item{
+.route_item{
 	height:30px;
 	padding-top:0;
 	padding-bottom:0;
@@ -228,6 +271,7 @@ ons-list-item img{
 }
 
 
+
 /*ここまでプラン詳細ページ*/
 
 .text_check{
@@ -246,15 +290,22 @@ ons-list-item img{
 
 /**/
 #plan_history ons-list-item{
+	color: black;
+	position:relative;
+	background: #f1f8ff;/*バーの色*/
 	line-height: 1.5;
-	/*padding: 0.5em 0.5em 0.5em 1.7em;*/
+	margin-bottom: 4px;
 	list-style-type: none!important;
-	background: -webkit-linear-gradient(top, skyblue 0%, #5aade6 100%);/*グラデーション*/
-	background: linear-gradient(to bottom, skyblue 0%, #5aade6 100%);/*グラデーション*/
-	color: #fff;
-	margin-bottom:3px;
 }
-
+#plan_history ons-list-item img{
+	background-color:#5aade6;
+	border-color:#5aade6;
+	border-radius:0;
+	padding:5px;
+	margin-left:0;
+	border:0;
+	height:80%;
+}
 #plan_history ons-list-item{
 	padding:0;
 }
@@ -267,8 +318,9 @@ ons-list-item img{
 }
 
 /*ホーム画面と出発地選択画面ではons-buttonのCSS変更*/
-#home .answer_box ons-button,#departure .answer_box ons-button{
-	margin-top:45px;
+#departure .answer_box ons-button{
+	margin-top:40px;
+	line-height: 200%;
 }
 
 /*始め施設詳細ページ*/
@@ -280,6 +332,13 @@ ons-list-item img{
 }
 
 /*ここまで施設詳細ページ*/
+
+/*始め自動生成画面ページ*/
+/*リストの1つのCSS*/
+#generation ons-list-item{
+	padding:0;
+}
+/*ここまで自動生成画面ページ*/
 
 /*アラート画面の入力*/
 .alert-dialog-content ons-input{
