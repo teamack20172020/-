@@ -2,6 +2,9 @@
 var history_array=new Array();
 //削除する配列の添字
 var history_remove_num;
+//plan_checkに送る配列と添え字
+var history_type;
+var his_work;
 document.addEventListener('show', function (event) {
 	var page = event.target;
 	//プラン履歴ページの時のみ処理
@@ -22,9 +25,9 @@ document.addEventListener('show', function (event) {
 
 //プランのどれかをタップ時
 $(document).on("click", ".history_item", function () {
-	let history_type = $(this).attr("value");
+	history_type = $(this).attr("value");
 	//plan_checkに送る配列
-	let his_work=history_array[history_type];
+	his_work=history_array[history_type];
 	//プラン確認ページに選択したプラン情報を送信し表示
 	document.getElementById('main').pushPage("plan_check.html", { data: { his_work,history_type } });
 });
@@ -59,11 +62,11 @@ function viewHistory(type) {
 			if (type == 0) {
 				//プラン削除しない画面表示
 				elem += "<ons-list-item class='history_item' modifier='chevron' value='" + i + "' tappable>"
-					+ "<img src='" + type_image(history_array[i]["create_purpose"]) + "' class='purpose_image'>";
+					+type_image(history_array[i]["create_purpose"]);
 			} else {
 				//プラン削除する画面表示
 				elem += '<ons-list-item>'
-					+ '<img src="' + type_image(history_array[i]["create_purpose"]) + '" class="purpose_image">'
+					+  type_image(history_array[i]["create_purpose"])
 					+ '<label class="remove_box right">'
 					+ '<ons-button class="romove_submit" remove_num="' + i + '"><i class="fas fa-trash-alt"></i></ons-button>'
 					+ '</label>';
