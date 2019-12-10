@@ -178,3 +178,27 @@ function view_plan(array,mode){
 	}
 	return elem;
 }
+
+//ブラウザに送るための配列
+var inapp_array;
+//プランクリック時の処理
+$(document).on("click", ".route_item", function () {
+	//チェックされた項目を取得
+	let check_type = $(this).attr("value");
+	//ブラウザを表示
+	if (check_type == 0) {
+		//ブラウザを表示
+		console.log(googlemapurl + inapp_array[inapp_array.length - 1]["address"]
+			+ "/" + inapp_array[check_type]["latlng"]);
+		in_app_browser(googlemapurl + inapp_array[inapp_array.length - 1]["address"]
+			+ "/" + inapp_array[check_type]["latlng"]);
+	} else if (check_type == inapp_array.length - 1) {
+		//ブラウザを表示
+		in_app_browser(googlemapurl + inapp_array[check_type - 1]["latlng"]
+			+ "/" + inapp_array[check_type]["address"]);
+	} else {
+		//ブラウザを表示
+		in_app_browser(googlemapurl + inapp_array[check_type - 1]["latlng"]
+			+ "/" + inapp_array[check_type]["latlng"]);
+	}
+});
