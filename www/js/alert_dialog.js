@@ -9,7 +9,7 @@ function viewAlertHIS() {
 
 //プラン履歴画面で最後の施設を削除するときに出すアラート表示処理
 function viewAlertCHE(re_num) {
-	let view_text = "施設がなくなるのでプラン毎削除しますがよろしいですか？";
+	let view_text = "施設がなくなるのでプランを削除しますがよろしいですか？";
 	$("#plan_remove_alert_text").html(view_text);
 	history_remove_num = re_num;
 	$("#plan_remove_alert_ok").attr("onclick", "removePlan('che');");
