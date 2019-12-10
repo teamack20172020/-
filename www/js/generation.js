@@ -61,6 +61,7 @@ function setResG(resg) {
 	 * create_time : 生成した時の時間
 	 */
 	g_work["data"] = resg;
+	inapp_array = g_work["data"];
 	g_work["create_purpose"] = main_purpose;
 	g_work["create_departure"] = departure_type;
 	g_work["create_date"] = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
@@ -81,26 +82,6 @@ function viewGeneration(viewg) {
 	//読み込み中画面を閉じる
 	$('#modal').hide();
 }
-
-//プランクリック時の処理
-$(document).on("click", ".generation_item", function () {
-	//チェックされた項目を取得
-	let ge_type = $(this).attr("value");
-	let work_ge = g_work["data"];
-	if (ge_type == 0) {
-		//ブラウザを表示
-		in_app_browser(googlemapurl + work_ge[work_ge.length - 1]["address"]
-			+ "/" + work_ge[ge_type]["latlng"]);
-	} else if(ge_type==work_ge.length-1){
-		//ブラウザを表示
-		in_app_browser(googlemapurl + work_ge[ge_type - 1]["latlng"]
-			+ "/" + work_ge[ge_type]["address"]);
-	}else{
-		//ブラウザを表示
-		in_app_browser(googlemapurl + work_ge[ge_type - 1]["latlng"]
-			+ "/" + work_ge[ge_type]["latlng"]);
-	}
-});
 
 //「もう一度自動生成する」ボタンクリック
 $(document).on("click", "#again_plan", function () {
