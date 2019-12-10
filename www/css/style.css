@@ -141,20 +141,54 @@ ons-list-item .purpose_image{
 	height:40px;
 }
 
-/**/
+/*詳細画面に移動するボタンのCSS*/
 .detail_item{
 	height:80%;
 	padding:0 5px 0 5px;
 }
+
+/*詳細画面に移動するボタンの中のイメージのCSS*/
 .detail_item .plan_image{
 	height:80%;
 	margin:10% 0 10% 0 ;
 }
 
+.plan_item_time > .plan_image{
+	margin-top:10px;
+	height:60%;
+}
+
+.plan_item_time{
+	height:50px;
+	display: block;
+	clear: both;
+	content: "";
+}
+.plan_item_time *{
+	float:left;
+}
 /*プランを表示するイメージのCSS*/
 .plan_image{
 	height:100%;
 }
+
+/*ホームボタンに戻るCSS*/
+.home_back .plan_image{
+	margin-top:5%;
+	height:70%;
+}
+.home_back{
+	float:right;
+	padding-top:10% 0 0 0;
+	margin:0;
+	display: block;
+	clear: both;
+	content: "";
+}
+.home_back *{
+	float:right;
+}
+
 
 /*ここまで全てのページ*/
 
@@ -226,9 +260,10 @@ ons-list-item .purpose_image{
 
 /*プラン詳細の施設詳細表示のボタン*/
 .route_item{
-	height:30px;
-	padding-top:0;
-	padding-bottom:0;
+	margin-top:5px;
+	height:40px;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 
 /*プラン詳細の施設間の時間表示*/
@@ -270,13 +305,17 @@ ons-list-item .purpose_image{
 	padding:0;
 }
 
-
+.check_plan_remove{
+	height:80%;
+}
 
 /*ここまでプラン詳細ページ*/
 
 .text_check{
-	float:left;
-	width:100px;
+	width:50%;
+	font-size:150%;
+	height:100%;
+	line-height: 2;
 }
 
 /*始めプラン履歴のページ*/
