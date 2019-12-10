@@ -72,7 +72,12 @@ function ge_ok() {
 	//console.log(generation_array);
 	$("#plan_title_in").val("");
 	$("#generation_ok").hide();
-
+	//もう一度生成した時用にhome.htmlをスタックの最後に入れる
+	let navi = document.getElementById('main');
+	if(navi.pages.length<=2){
+		navi.insertPage(0, "home.html");
+		console.log(navi.pages);
+	}
 	history_array = getLocalStorage("generation");
 	history_type = history_array.length - 1;
 	his_work = history_array[history_type];
