@@ -188,8 +188,6 @@ $(document).on("click", ".route_item", function () {
 	//ブラウザを表示
 	if (check_type == 0) {
 		//ブラウザを表示
-		console.log(googlemapurl + inapp_array[inapp_array.length - 1]["address"]
-			+ "/" + inapp_array[check_type]["latlng"]);
 		in_app_browser(googlemapurl + inapp_array[inapp_array.length - 1]["address"]
 			+ "/" + inapp_array[check_type]["latlng"]);
 	} else if (check_type == inapp_array.length - 1) {
