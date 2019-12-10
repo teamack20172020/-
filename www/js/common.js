@@ -67,14 +67,14 @@ function htmlspecialchars(ch) {
 function type_image(str) {
 	let result = "<img src='img/";
 	switch (str) {
-		case 1: result += "icon_sightseeing.png"; break;
-		case 2: result += "icon_gourmet.png"; break;
-		case 3: result += "icon_history.png"; break;
-		case 4: result += "icon_leisure.png"; break;
-		case 5: result += "icon_art.png"; break;
-		case 6: result += "icon_nature.png"; break;
+		case 1: result += "icon_sightseeing_white.png"; break;
+		case 2: result += "icon_gourmet_white.png"; break;
+		case 3: result += "icon_history_white.png"; break;
+		case 4: result += "icon_leisure_white.png"; break;
+		case 5: result += "icon_art_white.png"; break;
+		case 6: result += "icon_nature_white.png"; break;
 		case 7: result += "icon_spa_white.png"; break;
-		default: result += "icon_departure.png"; break;
+		default: result += "icon_departure_white.png"; break;
 	}
 	result +="' class='purpose_image' />";
 	return result;
@@ -88,6 +88,7 @@ function check_image(str){
 		case "info": result += "icon_info_white.png";break;
 		case "home": result += "icon_home_blue.png";break;
 		case "route":result+="icon_route_white.png";break;
+		case "trash": result += "icon_trash_white.png"; break;
 	}
 	result += "' class='plan_image' />";
 	return result;
@@ -133,7 +134,9 @@ function view_plan(array,mode){
 			+ "<div class='plan_item_name'>" + count_text(array[array.length - 1]["name"]) + "</div>"
 			+ "</ons-list-item>";
 		for (let i = 0; i < array.length; i++) {
-			elem += "<div class='plan_item_time'><div class='text_check'>↓" + array[i]["time_ja"] + "</div>"
+			elem += "<div class='plan_item_time'>"
+				+ check_image("arrow_down")
+				+"<div class='text_check'>" + array[i]["time_ja"] + "</div>"
 				+ "<ons-button class='route_item' value='" + i + "'>"
 				+ check_image("route")
 				+"</ons-button></div>"
@@ -168,7 +171,7 @@ function view_plan(array,mode){
 			elem += "<p class='plan_item_name'>" + count_text(array[i]["name"])
 				+ "</p>"
 				+ "<ons-button remove_point='" + i + "' class='check_plan_remove'>"
-				+ "ゴミ"
+				+ check_image("trash")
 				+"</ons-button>"
 				+ "</ons-list-item>";
 		}
