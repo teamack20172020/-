@@ -19,10 +19,11 @@ document.addEventListener('init', function (event) {
 		let navi = document.getElementById('main');
 		if (navi.pages[navi.pages.length - 2]['id']=="generation"){
 			console.log(navi.pages);
-
+			
 			while (navi.pages.length>2) {
 				navi.removePage(1);
-				console.log(i);
+				console.log(navi.pages);
+				
 			}
 			navi.insertPage(1, "plan_history.html");
 			console.log("gorilla");
@@ -35,6 +36,7 @@ document.addEventListener('init', function (event) {
 		send_array = check_data;
 		edit_array = check_data.slice();
 		check_title = page.data.his_work["title"];
+		inapp_array = check_data;
 		viewcheck(0);
 	}
 });
@@ -158,27 +160,6 @@ function viewcheck(type) {
 	$("#modal").hide();
 }
 
-//プランクリック時の処理
-$(document).on("click", ".route_item", function () {
-	//チェックされた項目を取得
-	let check_type = $(this).attr("value");
-	let work_check = check_data;
-	console.log(work_check);
-	//ブラウザを表示
-	if (check_type == 0) {
-		//ブラウザを表示
-		in_app_browser(googlemapurl + work_check[work_check.length - 1]["address"]
-			+ "/" + work_check[check_type]["latlng"]);
-	} else if(check_type==work_check.length-1){
-		//ブラウザを表示
-		in_app_browser(googlemapurl + work_check[check_type - 1]["latlng"]
-			+ "/" + work_check[check_type]["address"]);
-	} else {
-		//ブラウザを表示
-		in_app_browser(googlemapurl + work_check[check_type - 1]["latlng"]
-			+ "/" + work_check[check_type]["latlng"]);
-	}
-});
 
 //プラン入れ替え用の設定メソッド
 function setPlanSort() {
