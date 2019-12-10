@@ -10,11 +10,11 @@ function viewAlertHIS() {
 //プラン履歴画面で最後の施設を削除するときに出すアラート表示処理
 function viewAlertCHE(re_num) {
 	let view_text = "施設がなくなるのでプラン毎削除しますがよろしいですか？";
-	$("#plan_alert_text").html(view_text);
+	$("#plan_remove_alert_text").html(view_text);
 	history_remove_num = re_num;
-	$("#plan_alert_ok").attr("onclick", "removePlan('che');");
+	$("#plan_remove_alert_ok").attr("onclick", "removePlan('che');");
 	//アラートを表示(alert_dialog.jsに処理は記載)
-	$("#my-alert-dialog").show();
+	$("#remove-alert-dialog").show();
 }
 
 //住所指定の出発地入力画面でアラートを出す処理
