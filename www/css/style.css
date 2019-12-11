@@ -58,11 +58,12 @@ ons-toolbar .center{
 }
 
 /*入力、選択ボックスの共通CSS*/
-.answer_box input,ons-select{
+.answer_box input,.question_box input,ons-select{
 	height:40px;
 	width:100%;
 	font-size:20px;
 }
+
 
 /*入力ボックスのCSS*/
 .answer_box input{
@@ -414,8 +415,16 @@ ons-list-item .purpose_image{
 }
 
 /*ヤフーマップ表示のcss*/
-#map,#pd_map {
+#pd_map {
     height: 100%;
+    width:100%;
+    border:2px solid #000;
+    border-radius:10px;
+}
+
+/*ヤフーマップ表示のcss*/
+#map{
+    height: 80%;
     width:100%;
     border:2px solid #000;
     border-radius:10px;
@@ -429,3 +438,20 @@ ons-list-item .purpose_image{
     left: 0;
     right: 0;
 }
+
+/*始め住所入力画面*/
+
+/*住所画面のタイトル*/
+#address .sub_title{
+	margin-top:10%;
+}
+
+#address .question_box{
+	height:60%;
+}
+
+#address .answer_box{
+	height:20%;
+}
+
+/*ここまで住所入力画面*/
