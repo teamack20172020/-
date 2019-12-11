@@ -18,17 +18,19 @@ document.addEventListener('init', function (event) {
 	if (page.matches('#plan_check')) {
 		let navi = document.getElementById('main');
 		if (navi.pages[navi.pages.length - 2]['id']=="generation"){
-			console.log(navi.pages);
+			//スタックにあるページ一覧を表示するコンソール
+			//console.log(navi.pages);
 			
 			while (navi.pages.length>2) {
 				navi.removePage(1);
-				console.log(navi.pages);
+				//スタックにあるページ一覧を表示するコンソール
+				//console.log(navi.pages);
 				
 			}
 			navi.insertPage(1, "plan_history.html");
-			console.log("gorilla");
 		}
-		console.log(navi.pages);
+		//スタックにあるページ一覧を表示するコンソール
+		//console.log(navi.pages);
 		//データ取得
 		history_point_type = page.data.history_type;
 		check_data = page.data.his_work["data"];
@@ -43,7 +45,8 @@ document.addEventListener('init', function (event) {
 
 //ツールバーの編集ボタンクリックしたときの処理(画面右上にあるボタン)
 $(document).on("click", "#edit_plan", function () {
-	console.log(document.getElementById('main').pages);
+	//スタックにあるページ一覧を表示するコンソール
+	//console.log(document.getElementById('main').pages);
 
 	$('#history_edit').html('');
 	viewcheck(1);
@@ -107,7 +110,8 @@ $(document).on("click", ".check_plan_remove", function () {
 //移動時間取得API退避
 function setResPD(res) {
 	if (res['error_flg'] == 0) {
-		console.log(edit_array);
+		//編集用配列を表示するコンソール
+		//console.log(edit_array);
 		for (let i = 0; i < edit_array.length; i++) {
 			edit_array[i]['time_ja'] = res[i];
 		}
@@ -149,13 +153,14 @@ function viewcheck(type) {
 		setPlanSort();
 		elem += view_plan(edit_array,1);
 		$("#check_plan_title").html("タイトル:<ons-input id='title_input' modifier='transparent' value='" + check_title + "'></ons-input>");
+		//編集モードでの文字入力出来るようにしている
+		$("#title_input").keyup(function () {
+			let work = $("#title_input").val();
+			let getwork = getLen(work);
+			$("#title_input").val(getwork);
+		});
 	}
-	//編集モードでの文字入力出来るようにしている
-	$("#title_input").keyup(function () {
-		let work = $("#title_input").val();
-		let getwork = getLen(work);
-		$("#title_input").val(getwork);
-	});
+	
 	$("#check_plan_list").html(elem);
 	$("#modal").hide();
 }

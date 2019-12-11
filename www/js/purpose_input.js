@@ -23,7 +23,7 @@ function setResP(resList){
 	});
 	idlist = Object.keys(objectiveList);
 	//目的IDを保存した配列を出すコンソール
-	console.log(idlist);
+	//console.log(idlist);
 }
 
 //目的セレクトボックスを表示
@@ -44,7 +44,7 @@ $(document).on("click","#submit_purpose",function(){
 	purpose=parseInt($("#purpose_select").val());
 
 	//目的が決定した際の目的を出すコンソール
-	console.log("目的:"+purpose);
+	//console.log("目的:"+purpose);
 	$('#modal').show();
 	document.getElementById("main").pushPage("generation.html");
 });

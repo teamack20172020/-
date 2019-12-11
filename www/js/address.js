@@ -29,7 +29,7 @@ $(document).on("change","#city",function () {
 	var result = $("#city").val();
 	address_city = result;
 	//アドレスを合体させた結果を出すコンソール
-	console.log("住所:" + address_prefecture + address_city);
+	//console.log("住所:" + address_prefecture + address_city);
 });
 
 //決定ボタンタップ時処理
@@ -40,7 +40,7 @@ $(document).on("click", "#submit_address", function () {
 	if (addin == "" || addin == null) {
 		viewAlertADD();
 	} else {
-		console.log(latlng_url + address_prefecture + address_city + addin);
+		//console.log(latlng_url + address_prefecture + address_city + addin);
 		//住所の緯度経度を取得するajax通信
 		ajax(latlng_url + address_prefecture + address_city + addin, "address_lanlng", "out", "xml");
 	}

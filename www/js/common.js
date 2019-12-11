@@ -155,7 +155,8 @@ function view_plan(array,mode){
 			elem += "</ons-list-item>";
 		}
 	}else{
-		console.log(array);
+		//送られた配列を表示するコンソール
+		//console.log(array);
 		elem = "<ons-list-item>"
 			+ type_image("デフォルト")
 			+ "<div class='plan_item_name'>" + count_text(array[array.length - 1]["name"]) + "</div>"

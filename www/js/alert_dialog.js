@@ -76,12 +76,14 @@ function ge_ok() {
 	let navi = document.getElementById('main');
 	if(navi.pages.length<=2){
 		navi.insertPage(0, "home.html");
-		console.log(navi.pages);
+		//スタックにあるページ一覧を表示するコンソール
+		//(navi.pages);
 	}
 	history_array = getLocalStorage("generation");
 	history_type = history_array.length - 1;
 	his_work = history_array[history_type];
-	console.log(his_work);
+	//plan_checkに送る配列を表示するコンソール
+	//console.log(his_work);
 	document.getElementById('main').pushPage("plan_check.html", { data: { his_work, history_type }, animation: 'slide-ios' });
 	//document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
 }
