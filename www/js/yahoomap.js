@@ -2,6 +2,9 @@
 var ymap;
 //yahooMAPマーカー
 var marker;
+//プラスマイナスボタン
+var control;
+
 //y:経度（縦）、x:経度（横）
 function Ymap(y, x) {
 	lat = y;
@@ -12,7 +15,9 @@ function Ymap(y, x) {
 	ymap = new Y.Map("map");
 	ymap.drawMap(new Y.LatLng(y, x), 16, Y.LayerSetId.NORMAL);
 	marker = new Y.Marker(new Y.LatLng(y, x));
+	control=new Y.ZoomControl();
 	ymap.addFeature(marker);
+	ymap.addControl(control);
 	//マップ内をクリック時緯度経度の更新処理
 	ymap.bind('click', function (latlng) {
 		var work = latlng.toString().split(",");
