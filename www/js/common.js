@@ -95,6 +95,7 @@ function check_image(str){
 }
 
 function in_app_browser(url){
+//	console.log(url);
 	cordova.InAppBrowser.open(url, '_blank', 'location=no,closebuttoncaption=戻る,toolbarposition=top,enableViewportScale=yes');
 }
 
@@ -121,6 +122,8 @@ function getLen(str) {
 			result += work[i];
 		}
 	}
+
+	//console.log(result);
 	//結果を返す
 	return result;
 };
