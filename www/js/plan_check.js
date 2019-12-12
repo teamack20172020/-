@@ -144,7 +144,7 @@ function viewcheck(type) {
 	if (type == 0) {
 		$("#check_plan_list").removeClass("sort_plan");
 		elem+=view_plan(check_data,0);
-		$("#check_plan_title").html("タイトル:" + check_title);
+		$("#check_plan_title").html(check_title);
 		$("#check_plan_list_head").html("");
 		$("#check_plan_list_foot").html("");
 	} else {
@@ -152,9 +152,14 @@ function viewcheck(type) {
 		$("#check_plan_list").addClass("sort_plan");
 		setPlanSort();
 		elem += view_plan(edit_array,1);
-		$("#check_plan_title").html("タイトル:<ons-input id='title_input' modifier='transparent' value='" + check_title + "'></ons-input>");
+		$("#check_plan_title").html("<ons-input id='title_input' modifier='transparent' value='" + check_title + "'></ons-input>");
 		//編集モードでの文字入力出来るようにしている
 		$("#title_input").keyup(function () {
+			let work = $("#title_input").val();
+			let getwork = getLen(work);
+			$("#title_input").val(getwork);
+		});
+		$("#title_input").change(function () {
 			let work = $("#title_input").val();
 			let getwork = getLen(work);
 			$("#title_input").val(getwork);
@@ -184,6 +189,7 @@ function setPlanSort() {
 			start_edit_plan = ui.item.index();
 			//選択が開始された位置のコンソール
 			//console.log("start:" + start_edit_plan);
+			// ui.placeholder.css("opcity","0.5");
 			ui.placeholder[0].classList.add("big_item");
 		},
 		update: function (e, ui) {

@@ -106,6 +106,11 @@ $(document).on("click", "#complete_plan", function () {
 		let getwork = getLen(work);
 		$("#plan_title_in").val(getwork);
 	});
+	$("#plan_title_in").change(function () {
+		let work = $("#plan_title_in").val();
+		let getwork = getLen(work);
+		$("#plan_title_in").val(getwork);
+	});
 });
 
 //「キャンセル」ボタンクリック
