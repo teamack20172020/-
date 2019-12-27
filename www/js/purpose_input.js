@@ -15,17 +15,6 @@ document.addEventListener('init', function(event) {
 	}
 });
 
-//ajax通信の結果退避
-function setResP(resList){
-	resList.forEach(function( row ) {
-		objectiveList[row["id"]] = row["title"];
-		objectiveAboutList[row["id"]] = row["about"];
-	});
-	idlist = Object.keys(objectiveList);
-	//目的IDを保存した配列を出すコンソール
-	//console.log(idlist);
-}
-
 //目的セレクトボックスを表示
 function viewPurpose(){
 	$("#purpose_input_box").empty();
