@@ -19,7 +19,7 @@ function ajax(url, method_type, ajax_type, datatype) {
 		timeout: 30000,
 	}).done(function (data, textStatus, jqXHR) {
 		//ajax通信の結果を出すコンソール
-		//console.log(data);
+		console.log(data);
 		//method_typeに応じて処理を変更
 		switch (method_type) {
 			//目的入力ページの目的取得ajax通信(purpose_input.js)
@@ -42,10 +42,17 @@ function ajax(url, method_type, ajax_type, datatype) {
 			case "plan_edit":setResPD(data);break;
 		}
 	}).fail(function (jqXHR, textStatus, errorThrown) {
+		$("#modal").hide();
+		$("#load_err_dialog").show();
+		if(method_type=="purpose"){
+			setErrP(); 
+		}
+		
 		//ajax通信失敗情報を出すコンソール
 		console.log("err:" + jqXHR.status); //例：404
 		console.log(textStatus); //例：error
 		console.log(errorThrown); //例：NOT FOUND
+		
 	}).always(function () {
 	});
 }
