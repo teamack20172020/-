@@ -19,6 +19,8 @@
   <script src="js/approutes.js" defer></script>
   <!-- 旅行プランの自動生成 -->
   <!--script src="js/travelplanCreate.js" defer></script-->
+  <!--ホームの処理-->
+  <script src="js/title.js"></script>
   <!-- 質問画面の処理 -->
   <script src="js/question.js" defer></script>
   <!-- スケジュール画面の処理 -->
@@ -57,9 +59,7 @@
     ons.ready(function () {
       //onsen uiが動くかどうかのコンソ-ル
       //console.log("Onsen UI is ready!");
-      //初期で目的一覧を取得する
-      var purposeurl = "objective/getList";
-      ajax(purposeurl, "purpose", "in", "json");
+      
     });
     //変数:目的（例：遊び、観光）
     var purpose = "1";
@@ -85,7 +85,7 @@
   </ons-modal>
 
   <!--ナビゲーション（ページを重ねて表示する為の奴）-->
-  <ons-navigator id="main" page="home.html"></ons-navigator>
+  <ons-navigator id="main" page="title.html"></ons-navigator>
   
   <!--   alertページ  -->
   <div id="alert-dialog">
@@ -100,6 +100,7 @@
         <ons-alert-dialog-button id="plan_remove_alert_ok" onclick="">削除</ons-alert-dialog-button>
       </div>
     </ons-alert-dialog>
+    
     <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
       <div class="alert-dialog-title">Alert</div>
       <div class="alert-dialog-content" id="alert_text">
