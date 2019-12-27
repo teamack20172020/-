@@ -22,7 +22,7 @@ function setResP(resList) {
 	idlist = Object.keys(objectiveList);
 	//目的IDを保存した配列を出すコンソール
 	//console.log(idlist);
-	document.getElementById("main").pushPage('home.html');
+	document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
 }
 
 //ajax通信の失敗時の処理
