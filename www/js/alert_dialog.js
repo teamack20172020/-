@@ -74,10 +74,11 @@ function ge_ok() {
 	$("#generation_ok").hide();
 	//もう一度生成した時用にhome.htmlをスタックの最後に入れる
 	let navi = document.getElementById('main');
-	if(navi.pages.length<=2){
+		//スタックにあるページ一覧を表示するコンソール
+	if(navi.pages.length>2){
 		navi.insertPage(0, "home.html");
 		//スタックにあるページ一覧を表示するコンソール
-		//(navi.pages);
+		//console.log(navi.pages);
 	}
 	history_array = getLocalStorage("generation");
 	history_type = history_array.length - 1;
@@ -86,4 +87,13 @@ function ge_ok() {
 	//console.log(his_work);
 	document.getElementById('main').pushPage("plan_check.html", { data: { his_work, history_type }, animation: 'slide-ios' });
 	//document.getElementById("main").resetToPage('home.html', { animation: 'slide-ios' });
+}
+
+//読み込み（ajax通信など）に失敗したときに出すアラート処理
+function load_err(){
+	$('#load_err_dialog').hide();
+	let navi = document.getElementById('main');
+	if (navi.pages[navi.pages.length-1]["id"]!="title"){
+		document.getElementById("main").resetToPage('title.html', { animation: 'slide-ios' });
+	}
 }
