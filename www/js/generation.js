@@ -77,7 +77,7 @@ function viewGeneration(viewg) {
 	var elem = view_plan(viewg,0);
 	
 	$("#gene_purpose").html("目的：" + objectiveList[idlist[main_purpose - 1]]);
-	$("#gene_departure").html("出発地：" + departure_type);
+	//$("#gene_departure").html("出発地：" + departure_type);
 	$("#gene_plan_list").html(elem);
 	//読み込み中画面を閉じる
 	$('#modal').hide();
