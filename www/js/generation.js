@@ -93,9 +93,6 @@ $(document).on("click", "#again_plan", function () {
 //「完了」ボタンクリック
 $(document).on("click", "#complete_plan", function () {
 	//目的idリスト関係の初期化処理
-	p_array = new Array();
-	p_count = 0;
-	cnt = 0;
 	let nen = g_work["create_date"].split("-");
 	let jikan = g_work["create_time"].split(":");
 	$("#plan_title_in").attr("placeholder", nen[0] + "年" + nen[1] + "月" + nen[2] + "日　" + jikan[0] + "時" + jikan[1] + "分");
