@@ -49,6 +49,9 @@ function removePlan(type) {
 
 //generation.jsの完了ボタンがクリックされてアラート出た時の処理
 function ge_ok() {
+	p_array = new Array();
+	p_count = 0;
+	cnt = 0;
 	//タイトル情報取得
 	let p_title = htmlspecialchars($("#plan_title_in").val());
 	//ローカルストレージから取得
@@ -75,10 +78,11 @@ function ge_ok() {
 	//もう一度生成した時用にhome.htmlをスタックの最後に入れる
 	let navi = document.getElementById('main');
 		//スタックにあるページ一覧を表示するコンソール
-	if(navi.pages.length>2){
+	console.log(navi.pages);
+	if(navi.pages.length>2 || navi.pages.length==1){
 		navi.insertPage(0, "home.html");
 		//スタックにあるページ一覧を表示するコンソール
-		//console.log(navi.pages);
+		console.log(navi.pages);
 	}
 	history_array = getLocalStorage("generation");
 	history_type = history_array.length - 1;
