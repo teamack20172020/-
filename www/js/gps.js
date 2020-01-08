@@ -18,8 +18,9 @@ var onSuccess = function(position) {
 //位置情報取得失敗
 function onError(error) {
 	//GPS取得に失敗した情報を出すコンソール
-	console.log('code: '    + error.code    + '\n' +
-		'message: ' + error.message + '\n');
+	// console.log('code: '    + error.code    + '\n' +
+	// 	'message: ' + error.message + '\n');
+	viewAlertGPS();
 	$("#modal").hide();
 	//yahoomapで固定の場所（穴吹コンピュータカレッジ）を表示
 	Ymap(34.34291164999988,134.04532507000008);
