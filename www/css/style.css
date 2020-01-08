@@ -187,17 +187,17 @@ ons-list-item .purpose_image{
 .home_back *{
 	float:right;
 }
-	/*見出しのCSS*/
-																h1 {
-																	background: #5aade6;
-																	box-shadow: 0px 0px 0px 5px #5aade6;
-																	border-radius:10px;
-																	border: dashed 2px white;
-																	padding: 0.2em 0.5em;
-																	/* color: #454545; */
-																	color:white;
-																	text-align:center;
-																}															
+/*見出しのCSS*/
+h1 {
+	background: #5aade6;
+	box-shadow: 0px 0px 0px 5px #5aade6;
+	border-radius:10px;
+	border: dashed 2px white;
+	padding: 0.2em 0.5em;
+	/* color: #454545; */
+	color:white;
+	text-align:center;
+}															
 
 
 /**/
@@ -480,3 +480,11 @@ ons-list-item .purpose_image{
 }
 
 /*ここまで住所入力画面*/
+
+/*始めタイトル画面*/
+
+#title .question_box img{
+	margin-top:50%;
+}
+
+/*ここまでタイトル画面*/
