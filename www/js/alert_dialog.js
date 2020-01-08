@@ -18,11 +18,23 @@ function viewAlertCHE(re_num) {
 }
 
 //住所指定の出発地入力画面でアラートを出す処理
-function viewAlertADD() {
-	let view_text = "丁目番地号が入力されていません";
+function viewAlertADD(num) {
+	let view_text;
+	if(num==0){
+		view_text = "丁目番地号が入力されていません";
+	}else{
+		view_text = "検索結果がありませんでした";
+	}
 	$("#alert_text").html(view_text);
 	$("#my-alert-dialog").show();
 }
+
+//GPS取得失敗時のアラートを出す処理
+function viewAlertGPS(){
+	let view_text="GPS取得に失敗した為、高松駅に設定しました";
+	$("#alert_text").html(view_text);
+	$("#my-alert-dialog").show();
+} 
 
 //アラートディアログのキャンセルボタンの処理
 function cancelAlert(name) {
@@ -78,7 +90,7 @@ function ge_ok() {
 	//もう一度生成した時用にhome.htmlをスタックの最後に入れる
 	let navi = document.getElementById('main');
 		//スタックにあるページ一覧を表示するコンソール
-	console.log(navi.pages);
+	//console.log(navi.pages);
 	if(navi.pages.length>2 || navi.pages.length==1){
 		navi.insertPage(0, "home.html");
 		//スタックにあるページ一覧を表示するコンソール
