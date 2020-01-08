@@ -38,7 +38,7 @@ $(document).on("click", "#submit_address", function () {
 	//住所入力欄のvalue値を出すコンソール
 	//console.log("address::::"+addin);
 	if (addin == "" || addin == null) {
-		viewAlertADD();
+		viewAlertADD(0);
 	} else {
 		//console.log(latlng_url + address_prefecture + address_city + addin);
 		//住所の緯度経度を取得するajax通信
@@ -74,7 +74,7 @@ function setResAL(data) {
 	var count = $(data).find("ResultInfo").find("Count").text();
 	if (count == 0) {
 		//検索結果が0件の場合
-		alert("検索結果がありませんでした。");
+		viewAlertADD(1);
 	} else {
 		//検索結果が1件以上の場合
 		let work = $(data).find("Feature:first Geometry Coordinates").text().split(",");
