@@ -31,7 +31,7 @@ function viewAlertADD(num) {
 
 //GPS取得失敗時のアラートを出す処理
 function viewAlertGPS(){
-	let view_text="GPS取得に失敗した為、高松駅に設定しました";
+	let view_text="GPS取得に失敗した為、穴吹コンピュータカレッジに設定しました";
 	$("#alert_text").html(view_text);
 	$("#my-alert-dialog").show();
 } 
