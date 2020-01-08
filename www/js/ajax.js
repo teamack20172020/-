@@ -16,7 +16,7 @@ function ajax(url, method_type, ajax_type, datatype) {
 		url: url,
 		dataType: datatype,
 		scriptCharset: "utf-8",
-		timeout: 30000,
+		timeout: 20000,
 	}).done(function (data, textStatus, jqXHR) {
 		//ajax通信の結果を出すコンソール
 		console.log(data);
