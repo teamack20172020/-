@@ -1,8 +1,8 @@
 var station_prefecture = "北海道";
 //都道府県から駅路線取得APIのURL
-var route_url = "http://www.ekidata.jp/api/p/";
+var route_url = "https://www.ekiapi.net/api/p/";
 //路線から駅取得APIのURL
-var details_url = "http://www.ekidata.jp/api/l/";
+var details_url = "https://www.ekiapi.net/api/l/";
 //都道府県から駅路線取得APIの結果を入れる配列
 var route_list = null;
 //路線から駅取得APIの結果を入れる配列
