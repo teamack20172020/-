@@ -143,6 +143,7 @@ function viewcheck(type) {
 	//「type=0」なら閲覧モード画面
 	if (type == 0) {
 		$("#check_plan_list").removeClass("sort_plan");
+		inapp_array=check_data;
 		elem+=view_plan(check_data,0);
 		$("#check_plan_title").html(check_title);
 		$("#check_plan_list_head").html("");
@@ -151,6 +152,7 @@ function viewcheck(type) {
 		//「type!=0」なら編集モード画面
 		$("#check_plan_list").addClass("sort_plan");
 		setPlanSort();
+		inapp_array = check_data;
 		elem += view_plan(edit_array,1);
 		$("#check_plan_title").html("<ons-input id='title_input' modifier='transparent' value='" + check_title + "'></ons-input>");
 		//編集モードでの文字入力出来るようにしている
@@ -165,7 +167,7 @@ function viewcheck(type) {
 			$("#title_input").val(getwork);
 		});
 	}
-	
+	console.log(elem);
 	$("#check_plan_list").html(elem);
 	$("#modal").hide();
 }
