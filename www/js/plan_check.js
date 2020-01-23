@@ -167,7 +167,7 @@ function viewcheck(type) {
 			$("#title_input").val(getwork);
 		});
 	}
-	console.log(elem);
+	//console.log(elem);
 	$("#check_plan_list").html(elem);
 	$("#modal").hide();
 }
